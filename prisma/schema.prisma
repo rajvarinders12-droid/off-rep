@@ -1,0 +1,92 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  customer
+  admin
+}
+
+enum OrderStatus {
+  pending
+  paid
+  shipped
+  delivered
+  cancelled
+}
+
+model Profile {
+  id        String   @id @db.Uuid // Matches Supabase Auth User ID
+  email     String   @unique
+  fullName  String?
+  avatarUrl String?
+  role      UserRole @default(customer)
+  createdAt DateTime @default(now()) @map("created_at")
+  orders    Order[]
+
+  @@map("profiles")
+}
+
+model Category {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  slug        String    @unique
+  description String?
+  imageUrl    String?   @map("image_url")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          String      @id @default(uuid()) @db.Uuid
+  name        String
+  slug        String      @unique
+  description String?
+  price          Decimal     @db.Decimal(10, 2)
+  wholesalePrice Decimal?    @db.Decimal(10, 2) @map("wholesale_price")
+  moq            Int?        @default(1)
+  images         String[]    @default([])
+  stock       Int         @default(0)
+  isFeatured  Boolean     @default(false) @map("is_featured")
+  categoryId  String      @db.Uuid @map("category_id")
+  category    Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  orderItems  OrderItem[]
+
+  @@map("products")
+}
+
+model Order {
+  id                String      @id @default(uuid()) @db.Uuid
+  userId            String      @db.Uuid @map("user_id")
+  user              Profile     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status            OrderStatus @default(pending)
+  totalPrice        Decimal     @db.Decimal(10, 2) @map("total_price")
+  shippingAddress   Json        @map("shipping_address")
+  razorpayOrderId   String?     @map("razorpay_order_id")
+  razorpayPaymentId String?     @map("razorpay_payment_id")
+  createdAt         DateTime    @default(now()) @map("created_at")
+  orderItems        OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(uuid()) @db.Uuid
+  orderId   String  @db.Uuid @map("order_id")
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String  @db.Uuid @map("product_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  quantity  Int
+  price     Decimal @db.Decimal(10, 2) // Saved historical price at checkout time
+
+  @@map("order_items")
+}
