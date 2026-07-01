@@ -3,13 +3,14 @@ import Razorpay from "razorpay";
 import { db } from "@/lib/db";
 import { createClient } from "@/utils/supabase/server";
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_secret: process.env.RAZORPAY_KEY_SECRET!,
+    });
     // 1. Authenticate user
     const supabase = await createClient();
     const {

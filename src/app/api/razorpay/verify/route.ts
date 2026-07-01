@@ -3,6 +3,8 @@ import crypto from "crypto";
 import { db } from "@/lib/db";
 import { createClient } from "@/utils/supabase/server";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     // 1. Authenticate user
