@@ -22,12 +22,13 @@ export default async function AdminOrdersPage(props: {
       where: whereClause,
       orderBy: {
         createdAt: "desc",
-    },
-    include: {
-      user: true,
-      orderItems: {
-        include: {
-          product: true,
+      },
+      include: {
+        user: true,
+        orderItems: {
+          include: {
+            product: true,
+          },
         },
       },
     }),
