@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request body
     const body = await request.json();
-    const { cartItems, shippingAddress } = body;
+    const { cartItems, shippingAddress, couponCode } = body;
 
     if (!cartItems || cartItems.length === 0) {
       return NextResponse.json(
@@ -91,7 +91,49 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Add shipping (free above ₹999)
+    let discountApplied = 0;
+    let couponId = null;
+
+    if (couponCode) {
+      const coupon = await db.coupon.findUnique({
+        where: { code: couponCode.toUpperCase() },
+      });
+
+      if (coupon && coupon.isActive) {
+        let eligibleSubtotal = 0;
+        let hasEligibleItems = false;
+
+        for (const item of verifiedItems) {
+          // Find original cart item to check wholesale status
+          const cartItem = cartItems.find((c: any) => c.id === item.productId || c.id === `${item.productId}-wholesale`);
+          const isItemWholesale = cartItem?.isWholesale;
+          
+          const isEligible = 
+            (isItemWholesale && coupon.isForWholesale) || 
+            (!isItemWholesale && coupon.isForRetail);
+
+          if (isEligible) {
+            hasEligibleItems = true;
+            eligibleSubtotal += item.price * item.quantity;
+          }
+        }
+
+        if (hasEligibleItems) {
+          couponId = coupon.id;
+          if (coupon.discountType === "fixed") {
+            discountApplied = Number(coupon.discountValue);
+            if (discountApplied > eligibleSubtotal) {
+              discountApplied = eligibleSubtotal;
+            }
+          } else if (coupon.discountType === "percentage") {
+            discountApplied = (eligibleSubtotal * Number(coupon.discountValue)) / 100;
+          }
+          totalPrice = Math.max(0, totalPrice - discountApplied);
+        }
+      }
+    }
+
+    // Add shipping (free above ₹999 after discount)
     const shipping = totalPrice >= 999 ? 0 : 99;
     totalPrice += shipping;
 
@@ -110,6 +152,8 @@ export async function POST(request: NextRequest) {
         totalPrice,
         shippingAddress,
         razorpayOrderId: razorpayOrder.id,
+        couponId: couponId || undefined,
+        discountApplied,
         orderItems: {
           create: verifiedItems.map((item) => ({
             productId: item.productId,

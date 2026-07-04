@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { LayoutDashboard, ShoppingBag, Receipt, Store, LogOut, FolderTree } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Receipt, Store, LogOut, FolderTree, Tag } from "lucide-react";
 import { logout } from "../(auth)/actions";
 import { Button } from "@/components/ui/button";
 
@@ -50,6 +50,13 @@ export default function AdminLayout({
           >
             <Receipt className="h-4 w-4" />
             Orders
+          </Link>
+          <Link
+            href="/admin/coupons"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
+          >
+            <Tag className="h-4 w-4" />
+            Coupons
           </Link>
         </nav>
 

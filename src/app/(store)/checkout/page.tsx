@@ -28,6 +28,11 @@ export default function CheckoutPage() {
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [error, setError] = useState("");
 
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discountAmount: number } | null>(null);
+  const [couponError, setCouponError] = useState("");
+  const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
+
   // Shipping form state
   const [form, setForm] = useState({
     fullName: "",
@@ -39,8 +44,41 @@ export default function CheckoutPage() {
     pincode: "",
   });
 
+  const discountAmount = appliedCoupon ? appliedCoupon.discountAmount : 0;
   const shipping = cartTotal >= 999 ? 0 : 99;
-  const finalTotal = cartTotal + shipping;
+  const finalTotal = Math.max(0, cartTotal - discountAmount) + shipping;
+
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) return;
+    setIsValidatingCoupon(true);
+    setCouponError("");
+    
+    try {
+      const res = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: couponCode, cart }),
+      });
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
+        setAppliedCoupon({ code: data.code, discountAmount: data.discountAmount });
+        setCouponCode("");
+      } else {
+        setCouponError(data.error || "Invalid coupon");
+      }
+    } catch {
+      setCouponError("Failed to apply coupon");
+    } finally {
+      setIsValidatingCoupon(false);
+    }
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode("");
+    setCouponError("");
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -96,6 +134,7 @@ export default function CheckoutPage() {
             isWholesale: item.isWholesale || false,
           })),
           shippingAddress: form,
+          couponCode: appliedCoupon?.code,
         }),
       });
 
@@ -437,6 +476,54 @@ export default function CheckoutPage() {
               ))}
             </div>
 
+            {/* Coupon Code Section */}
+            <div className="mt-6 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+              {appliedCoupon ? (
+                <div className="flex items-center justify-between rounded-lg bg-emerald-50 px-4 py-3 dark:bg-emerald-950/30">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-emerald-800 dark:text-emerald-400">
+                      Code applied: {appliedCoupon.code}
+                    </span>
+                    <span className="text-xs text-emerald-600 dark:text-emerald-500">
+                      -₹{appliedCoupon.discountAmount.toLocaleString("en-IN")}
+                    </span>
+                  </div>
+                  <button
+                    onClick={removeCoupon}
+                    className="text-xs font-medium text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={couponCode}
+                      onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                      placeholder="Enter coupon code"
+                      className="w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm uppercase text-zinc-900 placeholder:normal-case placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:placeholder:text-zinc-500"
+                    />
+                    <button
+                      onClick={handleApplyCoupon}
+                      disabled={isValidatingCoupon || !couponCode.trim()}
+                      className="shrink-0 rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                    >
+                      {isValidatingCoupon ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        "Apply"
+                      )}
+                    </button>
+                  </div>
+                  {couponError && (
+                    <p className="text-xs text-red-600 dark:text-red-400">{couponError}</p>
+                  )}
+                </div>
+              )}
+            </div>
+
             <div className="mt-6 space-y-3 border-t border-zinc-100 pt-4 dark:border-zinc-800">
               <div className="flex justify-between text-sm">
                 <span className="text-zinc-500 dark:text-zinc-400">
@@ -446,6 +533,14 @@ export default function CheckoutPage() {
                   ₹{cartTotal.toLocaleString("en-IN")}
                 </span>
               </div>
+              {appliedCoupon && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-zinc-500 dark:text-zinc-400">Discount</span>
+                  <span className="font-medium text-emerald-600 dark:text-emerald-400">
+                    -₹{appliedCoupon.discountAmount.toLocaleString("en-IN")}
+                  </span>
+                </div>
+              )}
               <div className="flex justify-between text-sm">
                 <span className="text-zinc-500 dark:text-zinc-400">
                   Shipping

@@ -59,21 +59,12 @@ export default async function StoreLayout({
           {/* Right Side Actions */}
           <div className="flex items-center gap-1">
             <NavbarCart />
-            {user ? (
-              <Link
-                href="/admin/dashboard"
-                className="rounded-full p-2.5 text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
-              >
-                <User className="h-5 w-5" />
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="ml-2 rounded-full bg-zinc-900 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
-              >
-                Sign In
-              </Link>
-            )}
+            <Link
+              href={user ? "/profile" : "/login"}
+              className="rounded-full p-2.5 text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+            >
+              <User className="h-5 w-5" />
+            </Link>
           </div>
         </div>
       </header>
