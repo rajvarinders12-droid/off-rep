@@ -2,14 +2,26 @@ import React from "react";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import StatusSelect from "./status-select";
-import { Receipt, Package } from "lucide-react";
+import CouponFilter from "./coupon-filter";
+import { Receipt, Package, Ticket } from "lucide-react";
 
 export const revalidate = 0; // Real-time order tracking
 
-export default async function AdminOrdersPage() {
-  const orders = await db.order.findMany({
-    orderBy: {
-      createdAt: "desc",
+export default async function AdminOrdersPage(props: {
+  searchParams: Promise<{ coupon?: string }>;
+}) {
+  const searchParams = await props.searchParams;
+  const couponFilter = searchParams?.coupon;
+
+  const whereClause = couponFilter && couponFilter !== "all" 
+    ? { couponId: couponFilter } 
+    : {};
+
+  const [orders, coupons] = await Promise.all([
+    db.order.findMany({
+      where: whereClause,
+      orderBy: {
+        createdAt: "desc",
     },
     include: {
       user: true,
@@ -18,16 +30,23 @@ export default async function AdminOrdersPage() {
           product: true,
         },
       },
-    },
-  });
+    }),
+    db.coupon.findMany({
+      select: { id: true, code: true },
+      orderBy: { createdAt: "desc" },
+    })
+  ]);
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Orders</h1>
-        <p className="text-zinc-500 dark:text-zinc-400">
-          Monitor customer checkouts, payments, and update delivery fulfillment status
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2">
+          <p className="text-zinc-500 dark:text-zinc-400">
+            Monitor customer checkouts, payments, and update delivery fulfillment status
+          </p>
+          <CouponFilter coupons={coupons} currentCoupon={couponFilter} />
+        </div>
       </div>
 
       <div className="rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
@@ -80,6 +99,12 @@ export default async function AdminOrdersPage() {
                           </div>
                         ))}
                       </div>
+                      {order.couponId && (
+                        <div className="mt-2 inline-flex items-center gap-1 rounded bg-indigo-50 px-2 py-0.5 text-[10px] font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-400">
+                          <Ticket className="h-3 w-3" />
+                          Coupon Applied
+                        </div>
+                      )}
                     </td>
                     <td className="p-4 font-semibold">
                       ₹{Number(order.totalPrice).toFixed(2)}
