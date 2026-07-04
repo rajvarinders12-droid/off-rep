@@ -66,6 +66,7 @@ model Product {
   createdAt   DateTime    @default(now()) @map("created_at")
   orderItems  OrderItem[]
 
+  @@index([categoryId])
   @@map("products")
 }
 
@@ -84,6 +85,8 @@ model Order {
   coupon            Coupon?     @relation(fields: [couponId], references: [id], onDelete: SetNull)
   discountApplied   Decimal?    @db.Decimal(10, 2) @default(0) @map("discount_applied")
 
+  @@index([userId])
+  @@index([couponId])
   @@map("orders")
 }
 
@@ -96,6 +99,8 @@ model OrderItem {
   quantity  Int
   price     Decimal @db.Decimal(10, 2) // Saved historical price at checkout time
 
+  @@index([orderId])
+  @@index([productId])
   @@map("order_items")
 }
 

@@ -17,25 +17,26 @@ export default async function ProfilePage() {
     redirect("/login");
   }
 
-  const profile = await db.profile.findUnique({
-    where: { id: user.id },
-  });
+  const [profile, orders] = await Promise.all([
+    db.profile.findUnique({
+      where: { id: user.id },
+    }),
+    db.order.findMany({
+      where: { userId: user.id },
+      orderBy: { createdAt: "desc" },
+      include: {
+        orderItems: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    })
+  ]);
 
   if (!profile) {
     redirect("/login");
   }
-
-  const orders = await db.order.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "desc" },
-    include: {
-      orderItems: {
-        include: {
-          product: true,
-        },
-      },
-    },
-  });
 
   let addressString = "Not provided yet";
   if (orders.length > 0 && orders[0].shippingAddress) {
