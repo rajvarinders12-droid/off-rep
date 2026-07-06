@@ -10,9 +10,9 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-zinc-100 dark:bg-zinc-950">
+    <div className="flex min-h-screen bg-zinc-100 dark:bg-zinc-950 print:bg-white print:dark:bg-white">
       {/* Sidebar Navigation */}
-      <aside className="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-zinc-200 bg-white px-4 py-6 dark:border-zinc-800 dark:bg-zinc-900">
+      <aside className="fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-zinc-200 bg-white px-4 py-6 dark:border-zinc-800 dark:bg-zinc-900 print:hidden">
         <div className="mb-8 px-2">
           <Link href="/admin/dashboard" className="flex items-center gap-2">
             <ShoppingBag className="h-6 w-6 text-zinc-900 dark:text-zinc-50" />
@@ -82,9 +82,9 @@ export default function AdminLayout({
       </aside>
 
       {/* Main Content Area */}
-      <div className="pl-64 flex-1 flex flex-col min-h-screen">
+      <div className="pl-64 flex-1 flex flex-col min-h-screen print:pl-0">
         {/* Top Navbar */}
-        <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-zinc-200 bg-white px-8 dark:border-zinc-800 dark:bg-zinc-900">
+        <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-zinc-200 bg-white px-8 dark:border-zinc-800 dark:bg-zinc-900 print:hidden">
           <div className="flex items-center gap-2">
             <span className="rounded-full bg-zinc-150 px-2.5 py-0.5 text-xs font-semibold text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">
               Dev Mode
@@ -93,7 +93,7 @@ export default function AdminLayout({
         </header>
 
         {/* Content Box */}
-        <main className="flex-1 p-8">{children}</main>
+        <main className="flex-1 p-8 print:p-0">{children}</main>
       </div>
     </div>
   );
