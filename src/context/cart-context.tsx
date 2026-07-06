@@ -3,8 +3,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface CartItem {
-  id: string; // Unique cart item ID (productId or `${productId}-wholesale`)
-  productId: string; // Database product ID
+  id: string; // Unique cart item ID
+  productId: string;
   name: string;
   price: number;
   image: string;
@@ -12,6 +12,8 @@ export interface CartItem {
   stock: number;
   isWholesale?: boolean;
   moq?: number;
+  selectedColor?: { name: string; hex: string } | null;
+  selectedSize?: string | null;
 }
 
 interface CartContextType {
@@ -25,6 +27,8 @@ interface CartContextType {
       stock: number;
       isWholesale?: boolean;
       moq?: number;
+      selectedColor?: { name: string; hex: string } | null;
+      selectedSize?: string | null;
     },
     quantity?: number
   ) => void;
@@ -70,6 +74,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       stock: number;
       isWholesale?: boolean;
       moq?: number;
+      selectedColor?: { name: string; hex: string } | null;
+      selectedSize?: string | null;
     },
     quantity = 1
   ) => {
@@ -95,6 +101,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           stock: product.stock,
           isWholesale: product.isWholesale || false,
           moq: product.moq || 1,
+          selectedColor: product.selectedColor || null,
+          selectedSize: product.selectedSize || null,
         },
       ];
     });

@@ -12,24 +12,36 @@ interface VariantSelectorProps {
   colors: ColorVariant[];
   sizes: string[];
   sizeChartUrl?: string | null;
-  onColorChange?: (images: string[]) => void;
+  // Controlled state from parent (variant-add-to-cart.tsx)
+  selectedColor?: { name: string; hex: string } | null;
+  selectedSize?: string | null;
+  onColorChange?: (color: { name: string; hex: string } | null) => void;
+  onSizeChange?: (size: string | null) => void;
 }
 
 export default function VariantSelector({
   colors,
   sizes,
   sizeChartUrl,
+  selectedColor,
+  selectedSize,
   onColorChange,
+  onSizeChange,
 }: VariantSelectorProps) {
-  const [selectedColor, setSelectedColor] = useState<number | null>(colors.length > 0 ? 0 : null);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showSizeChart, setShowSizeChart] = useState(false);
 
-  const handleColorSelect = (idx: number) => {
-    setSelectedColor(idx);
-    if (onColorChange && colors[idx]) {
-      onColorChange(colors[idx].images);
-    }
+  // Find active color index
+  const activeColorIdx = selectedColor
+    ? colors.findIndex((c) => c.name === selectedColor.name && c.hex === selectedColor.hex)
+    : -1;
+
+  const handleColorClick = (idx: number) => {
+    const color = colors[idx];
+    onColorChange?.({ name: color.name, hex: color.hex });
+  };
+
+  const handleSizeClick = (size: string) => {
+    onSizeChange?.(selectedSize === size ? null : size);
   };
 
   if (colors.length === 0 && sizes.length === 0) return null;
@@ -43,10 +55,14 @@ export default function VariantSelector({
             <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-900 dark:text-zinc-50">
               Colour
             </h3>
-            {selectedColor !== null && (
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                {colors[selectedColor].name}
-                <span className="ml-2 font-mono text-xs text-zinc-400">{colors[selectedColor].hex}</span>
+            {selectedColor && (
+              <span className="flex items-center gap-1.5 text-sm text-zinc-500 dark:text-zinc-400">
+                <span
+                  className="h-3.5 w-3.5 rounded-full border border-zinc-300"
+                  style={{ backgroundColor: selectedColor.hex }}
+                />
+                {selectedColor.name}
+                <span className="font-mono text-xs text-zinc-400">{selectedColor.hex}</span>
               </span>
             )}
           </div>
@@ -56,9 +72,9 @@ export default function VariantSelector({
                 key={idx}
                 type="button"
                 title={color.name}
-                onClick={() => handleColorSelect(idx)}
+                onClick={() => handleColorClick(idx)}
                 className={`group relative flex items-center gap-2 rounded-full border-2 px-3 py-1.5 transition-all
-                  ${selectedColor === idx
+                  ${activeColorIdx === idx
                     ? "border-zinc-900 dark:border-zinc-50 shadow-md"
                     : "border-zinc-200 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500"
                   }`}
@@ -68,7 +84,7 @@ export default function VariantSelector({
                   style={{ backgroundColor: color.hex }}
                 />
                 <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{color.name}</span>
-                {selectedColor === idx && (
+                {activeColorIdx === idx && (
                   <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-zinc-900 dark:bg-zinc-50 border-2 border-white dark:border-zinc-950" />
                 )}
               </button>
@@ -76,9 +92,9 @@ export default function VariantSelector({
           </div>
 
           {/* Per-color thumbnails */}
-          {selectedColor !== null && colors[selectedColor].images.length > 1 && (
+          {activeColorIdx >= 0 && colors[activeColorIdx].images.length > 1 && (
             <div className="flex gap-2 mt-2 flex-wrap">
-              {colors[selectedColor].images.map((img, i) => (
+              {colors[activeColorIdx].images.map((img, i) => (
                 <div key={i} className="h-14 w-14 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img} alt="" className="h-full w-full object-cover" />
@@ -112,7 +128,7 @@ export default function VariantSelector({
               <button
                 key={size}
                 type="button"
-                onClick={() => setSelectedSize(selectedSize === size ? null : size)}
+                onClick={() => handleSizeClick(size)}
                 className={`rounded-md border px-4 py-2 text-sm font-medium transition-all
                   ${selectedSize === size
                     ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-50 dark:bg-zinc-50 dark:text-zinc-900"
@@ -124,7 +140,6 @@ export default function VariantSelector({
             ))}
           </div>
 
-          {/* Size Chart */}
           {showSizeChart && sizeChartUrl && (
             <div className="mt-3 rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}

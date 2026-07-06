@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Minus, Plus, ShoppingBag, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
 import AddToCartButton from "./add-to-cart-button";
 import ProductGallery from "./product-gallery";
-import VariantSelector from "./variant-selector";
+import VariantAddToCart from "./variant-add-to-cart";
 
 export const revalidate = 0;
 
@@ -135,20 +135,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
 
-            {/* Variants — Color & Size */}
-            {((product.colors as any[])?.length > 0 || (product.sizes as string[])?.length > 0) && (
-              <div className="mt-8">
-                <VariantSelector
-                  colors={(product.colors as any[]) ?? []}
-                  sizes={(product.sizes as string[]) ?? []}
-                  sizeChartUrl={product.sizeChart}
-                />
-              </div>
-            )}
-
-            {/* Add to Cart */}
-            <div className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-800">
-              <AddToCartButton
+            {/* Variants + Add to Cart (unified so color selection feeds into cart) */}
+            <div className="mt-8">
+              <VariantAddToCart
                 product={{
                   id: product.id,
                   name: product.name,
@@ -158,6 +147,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   images: product.images,
                   stock: product.stock,
                 }}
+                colors={(product.colors as any[]) ?? []}
+                sizes={(product.sizes as string[]) ?? []}
+                sizeChartUrl={product.sizeChart}
               />
             </div>
 

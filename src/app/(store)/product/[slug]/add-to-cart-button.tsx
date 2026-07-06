@@ -14,9 +14,11 @@ interface AddToCartButtonProps {
     images: string[];
     stock: number;
   };
+  selectedColor?: { name: string; hex: string } | null;
+  selectedSize?: string | null;
 }
 
-export default function AddToCartButton({ product }: AddToCartButtonProps) {
+export default function AddToCartButton({ product, selectedColor, selectedSize }: AddToCartButtonProps) {
   const { addToCart, cart } = useCart();
   const [isWholesale, setIsWholesale] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -58,6 +60,8 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
         stock: product.stock,
         isWholesale,
         moq: currentMoq,
+        selectedColor: selectedColor || null,
+        selectedSize: selectedSize || null,
       },
       quantity
     );

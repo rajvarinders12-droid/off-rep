@@ -92,13 +92,27 @@ export default function CartPage() {
                       <p className="mt-1 text-sm font-bold text-zinc-900 dark:text-zinc-50">
                         ₹{item.price.toLocaleString("en-IN")}
                       </p>
-                      {item.isWholesale && (
-                        <div className="mt-1 flex flex-wrap gap-1.5">
+                      <div className="mt-1.5 flex flex-wrap gap-1.5">
+                        {item.isWholesale && (
                           <span className="inline-flex items-center rounded bg-amber-50 px-1.5 py-0.5 text-xs font-semibold text-amber-800 dark:bg-amber-950/30 dark:text-amber-400">
                             Wholesale (MOQ: {item.moq})
                           </span>
-                        </div>
-                      )}
+                        )}
+                        {item.selectedColor && (
+                          <span className="inline-flex items-center gap-1 rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                            <span
+                              className="h-2.5 w-2.5 rounded-full border border-zinc-300 dark:border-zinc-600 shrink-0"
+                              style={{ backgroundColor: item.selectedColor.hex }}
+                            />
+                            {item.selectedColor.name}
+                          </span>
+                        )}
+                        {item.selectedSize && (
+                          <span className="inline-flex items-center rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                            Size: {item.selectedSize}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <button
                       onClick={() => removeFromCart(item.id)}
