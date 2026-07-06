@@ -132,6 +132,8 @@ export default function CheckoutPage() {
             quantity: item.quantity,
             price: item.price,
             isWholesale: item.isWholesale || false,
+            selectedColor: item.selectedColor || null,
+            selectedSize: item.selectedSize || null,
           })),
           shippingAddress: form,
           couponCode: appliedCoupon?.code,

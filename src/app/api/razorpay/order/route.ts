@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     });
 
     let totalPrice = 0;
-    const verifiedItems: { productId: string; quantity: number; price: number }[] = [];
+    const verifiedItems: { productId: string; quantity: number; price: number; selectedColor: any; selectedSize: string | null }[] = [];
 
     for (const cartItem of cartItems) {
       const product = products.find((p) => p.id === cartItem.id);
@@ -88,6 +88,8 @@ export async function POST(request: NextRequest) {
         productId: product.id,
         quantity: cartItem.quantity,
         price,
+        selectedColor: cartItem.selectedColor || null,
+        selectedSize: cartItem.selectedSize || null,
       });
     }
 
@@ -159,6 +161,8 @@ export async function POST(request: NextRequest) {
             productId: item.productId,
             quantity: item.quantity,
             price: item.price,
+            variantColor: item.selectedColor || undefined,
+            variantSize: item.selectedSize || undefined,
           })),
         },
       },

@@ -101,6 +101,8 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
   quantity  Int
   price     Decimal @db.Decimal(10, 2) // Saved historical price at checkout time
+  variantColor Json?   @map("variant_color") // { name: string, hex: string }
+  variantSize  String? @map("variant_size")
 
   @@index([orderId])
   @@index([productId])

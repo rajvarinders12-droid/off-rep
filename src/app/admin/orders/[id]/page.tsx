@@ -83,6 +83,23 @@ export default async function OrderDetailsPage({
                   <div className="flex-1">
                     <p className="font-medium text-zinc-900 dark:text-zinc-100">{item.product?.name || "Deleted Product"}</p>
                     <p className="text-sm text-zinc-500">₹{Number(item.price).toLocaleString("en-IN")}</p>
+                    {/* Variant badges */}
+                    <div className="mt-1.5 flex flex-wrap gap-1.5">
+                      {(item as any).variantColor && (
+                        <span className="inline-flex items-center gap-1 rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                          <span
+                            className="h-2.5 w-2.5 rounded-full border border-zinc-300 shrink-0"
+                            style={{ backgroundColor: (item as any).variantColor.hex }}
+                          />
+                          {(item as any).variantColor.name}
+                        </span>
+                      )}
+                      {(item as any).variantSize && (
+                        <span className="inline-flex items-center rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                          Size: {(item as any).variantSize}
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <div className="text-right">
                     <p className="font-medium">x{item.quantity}</p>
