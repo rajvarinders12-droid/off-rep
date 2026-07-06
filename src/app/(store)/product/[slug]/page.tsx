@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Minus, Plus, ShoppingBag, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
 import AddToCartButton from "./add-to-cart-button";
+import ProductGallery from "./product-gallery";
+import VariantSelector from "./variant-selector";
 
 export const revalidate = 0;
 
@@ -72,48 +74,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Product Content */}
       <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          {/* Product Images */}
-          <div className="space-y-4">
-            {/* Main Image */}
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
-              {product.images.length > 0 ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={product.images[0]}
-                  alt={product.name}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-zinc-300 dark:text-zinc-700">
-                  <Sparkles className="h-16 w-16" />
-                </div>
-              )}
-              {product.isFeatured && (
-                <div className="absolute left-4 top-4 rounded-full bg-zinc-900/80 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-sm dark:bg-white/80 dark:text-zinc-900">
-                  Featured
-                </div>
-              )}
-            </div>
-
-            {/* Thumbnail Gallery */}
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
-                {product.images.map((img, i) => (
-                  <div
-                    key={i}
-                    className="aspect-square overflow-hidden rounded-lg border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={img}
-                      alt={`${product.name} view ${i + 1}`}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Images — replaced with interactive gallery */}
+          <ProductGallery
+            initialImages={product.images}
+            colors={(product.colors as any[]) ?? []}
+            productName={product.name}
+            isFeatured={product.isFeatured}
+          />
 
           {/* Product Info */}
           <div className="flex flex-col py-2">
@@ -165,6 +132,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                   {product.description}
                 </p>
+              </div>
+            )}
+
+            {/* Variants — Color & Size */}
+            {((product.colors as any[])?.length > 0 || (product.sizes as string[])?.length > 0) && (
+              <div className="mt-8">
+                <VariantSelector
+                  colors={(product.colors as any[]) ?? []}
+                  sizes={(product.sizes as string[]) ?? []}
+                  sizeChartUrl={product.sizeChart}
+                />
               </div>
             )}
 
