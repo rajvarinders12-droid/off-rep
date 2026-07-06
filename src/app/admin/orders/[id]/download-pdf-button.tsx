@@ -10,7 +10,8 @@ export default function DownloadPdfButton({ orderId }: { orderId: string }) {
     setIsDownloading(true);
     try {
       // Dynamically import html2pdf to avoid SSR window errors
-      const html2pdf = (await import("html2pdf.js")).default;
+      const module = await import("html2pdf.js");
+      const html2pdf = module.default ? module.default : module;
       
       const element = document.getElementById("order-details-container");
       if (!element) {
@@ -28,9 +29,9 @@ export default function DownloadPdfButton({ orderId }: { orderId: string }) {
       };
 
       await html2pdf().set(opt).from(element).save();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to generate PDF:", error);
-      alert("Failed to generate PDF. Please try again.");
+      alert(`Failed to generate PDF: ${error?.message || "Unknown error"}. Try again.`);
     } finally {
       setIsDownloading(false);
     }
