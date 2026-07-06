@@ -4,6 +4,7 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { ArrowLeft, Package, Truck, User, MapPin, Receipt, CreditCard } from "lucide-react";
 import StatusSelect from "../status-select";
+import DownloadPdfButton from "./download-pdf-button";
 
 export default async function OrderDetailsPage({
   params,
@@ -35,21 +36,25 @@ export default async function OrderDetailsPage({
   const subtotal = totalPriceNum - shippingCost;
 
   return (
-    <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center gap-4">
-        <Link
-          href="/admin/orders"
-          className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </Link>
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Order #{order.id.slice(0, 8)}...</h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            Placed on {new Date(order.createdAt).toLocaleString("en-IN")}
-          </p>
+    <div className="space-y-6 max-w-5xl" id="order-details-container">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div className="flex items-center gap-4">
+          <Link
+            href="/admin/orders"
+            className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            data-html2canvas-ignore="true"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Order #{order.id.slice(0, 8)}...</h1>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              Placed on {new Date(order.createdAt).toLocaleString("en-IN")}
+            </p>
+          </div>
         </div>
-        <div className="ml-auto">
+        <div className="sm:ml-auto flex flex-wrap items-center gap-3" data-html2canvas-ignore="true">
+          <DownloadPdfButton orderId={order.id} />
           <StatusSelect orderId={order.id} currentStatus={order.status} />
         </div>
       </div>
