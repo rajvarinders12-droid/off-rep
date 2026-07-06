@@ -17,10 +17,13 @@ export async function createProduct(state: any, formData: FormData) {
   const priceString = formData.get("price") as string;
   const stockString = formData.get("stock") as string;
   const categoryId = formData.get("categoryId") as string;
-  const imagesJson = formData.get("images") as string; // Will be passed as JSON stringified array of URLs
+  const imagesJson = formData.get("images") as string;
   const isFeatured = formData.get("isFeatured") === "true";
   const wholesalePriceString = formData.get("wholesalePrice") as string;
   const moqString = formData.get("moq") as string;
+  const sizeChart = formData.get("sizeChart") as string;
+  const colorsJson = formData.get("colors") as string;
+  const sizesJson = formData.get("sizes") as string;
 
   if (!name || !priceString || !stockString || !categoryId) {
     return { error: "Name, price, stock, and category are required." };
@@ -45,7 +48,6 @@ export async function createProduct(state: any, formData: FormData) {
     if (isNaN(wholesalePrice) || wholesalePrice <= 0) {
       return { error: "Wholesale price must be a valid positive number." };
     }
-
     moq = moqString ? parseInt(moqString) : 1;
     if (isNaN(moq) || moq < 1) {
       return { error: "Minimum Order Quantity (MOQ) must be at least 1." };
@@ -53,11 +55,13 @@ export async function createProduct(state: any, formData: FormData) {
   }
 
   let images: string[] = [];
-  try {
-    images = JSON.parse(imagesJson || "[]");
-  } catch (e) {
-    images = [];
-  }
+  try { images = JSON.parse(imagesJson || "[]"); } catch (e) { images = []; }
+
+  let colors: any[] = [];
+  try { colors = JSON.parse(colorsJson || "[]"); } catch (e) { colors = []; }
+
+  let sizes: string[] = [];
+  try { sizes = JSON.parse(sizesJson || "[]"); } catch (e) { sizes = []; }
 
   const slug = `${generateSlug(name)}-${Date.now().toString().slice(-4)}`;
 
@@ -74,6 +78,9 @@ export async function createProduct(state: any, formData: FormData) {
         categoryId,
         images,
         isFeatured,
+        sizeChart: sizeChart || null,
+        colors: colors,
+        sizes: sizes,
       },
     });
   } catch (error: any) {

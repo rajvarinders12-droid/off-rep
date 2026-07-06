@@ -59,6 +59,9 @@ model Product {
   wholesalePrice Decimal?    @db.Decimal(10, 2) @map("wholesale_price")
   moq            Int?        @default(1)
   images         String[]    @default([])
+  sizeChart      String?     @map("size_chart")      // URL of the size chart image
+  colors         Json?       @default("[]")          // [{ name: "Red", hex: "#FF0000" }]
+  sizes          String[]    @default([])            // ["XS","S","M","L","XL","XXL"]
   stock       Int         @default(0)
   isFeatured  Boolean     @default(false) @map("is_featured")
   categoryId  String      @db.Uuid @map("category_id")
