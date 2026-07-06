@@ -41,8 +41,7 @@ export default async function OrderDetailsPage({
         <div className="flex items-center gap-4">
           <Link
             href="/admin/orders"
-            className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-            data-html2canvas-ignore="true"
+            className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors print:hidden"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -53,7 +52,7 @@ export default async function OrderDetailsPage({
             </p>
           </div>
         </div>
-        <div className="sm:ml-auto flex flex-wrap items-center gap-3" data-html2canvas-ignore="true">
+        <div className="sm:ml-auto flex flex-wrap items-center gap-3 print:hidden">
           <DownloadPdfButton orderId={order.id} />
           <StatusSelect orderId={order.id} currentStatus={order.status} />
         </div>
