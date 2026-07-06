@@ -283,7 +283,10 @@ function VariantForm({ categories, onBack }: { categories: Category[]; onBack: (
   const allImages = colors.flatMap((c) => c.images);
 
   const addColor = () => {
-    if (!newColorName.trim()) return;
+    if (!newColorName.trim()) {
+      alert("Please enter a colour name (e.g. Black, Red, etc.) before clicking Add Colour.");
+      return;
+    }
     setColors((prev) => [...prev, { name: newColorName.trim(), hex: newColorHex, images: [] }]);
     setNewColorName("");
     setNewColorHex("#000000");
