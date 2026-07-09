@@ -111,7 +111,14 @@ export default async function AdminProductsPage() {
                       )}
                     </td>
                     <td className="p-4 text-right">
-                      <div className="flex items-center justify-end gap-1">
+                      <div className="flex items-center justify-end gap-2">
+                        <Link
+                          href={`/product/${product.slug}`}
+                          target="_blank"
+                          className="inline-flex h-8 items-center justify-center rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
+                        >
+                          View
+                        </Link>
                         <DeleteProductButton id={product.id} />
                       </div>
                     </td>
