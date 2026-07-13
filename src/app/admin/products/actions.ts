@@ -99,14 +99,17 @@ export async function createProduct(state: any, formData: FormData) {
 
 export async function deleteProduct(id: string) {
   try {
-    await db.product.delete({
-      where: { id },
-    });
+    // Delete associated OrderItems first to prevent foreign key constraint failures (Prisma P2003)
+    await db.$transaction([
+      db.orderItem.deleteMany({ where: { productId: id } }),
+      db.product.delete({ where: { id } }),
+    ]);
     revalidatePath("/admin/products");
     revalidatePath("/");
     return { success: true };
   } catch (error: any) {
-    return { error: error.message || "Failed to delete product." };
+    console.error("Delete product error:", error);
+    return { error: "Failed to delete product." };
   }
 }
 
