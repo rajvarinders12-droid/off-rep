@@ -61,7 +61,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       } finally {
         setIsLoading(false);
       }
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [query]);

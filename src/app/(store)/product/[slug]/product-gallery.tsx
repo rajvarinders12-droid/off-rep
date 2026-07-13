@@ -44,6 +44,13 @@ export default function ProductGallery({
 
   return (
     <div className="space-y-4">
+      {/* Preload first image of all color variants so they load instantly when clicked */}
+      <div className="hidden">
+        {colors.map((c) => c.images?.[0] && (
+          <Image key={c.name} src={c.images[0]} alt="preload" priority width={10} height={10} />
+        ))}
+      </div>
+
       {/* Main Image */}
       <div className="relative aspect-square overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
         {mainImage ? (
