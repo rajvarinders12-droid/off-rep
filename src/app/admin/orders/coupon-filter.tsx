@@ -24,7 +24,8 @@ export default function CouponFilter({ coupons, currentCoupon }: CouponFilterPro
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleCouponChange = (value: string) => {
+  const handleCouponChange = (value: string | null) => {
+    if (!value) return;
     const params = new URLSearchParams(searchParams.toString());
     if (value === "all") {
       params.delete("coupon");

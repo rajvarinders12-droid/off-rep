@@ -228,6 +228,11 @@ export default async function StorePage() {
                       Featured
                     </div>
                   )}
+                  {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
+                    <div className="absolute right-3 bottom-3 rounded-full bg-red-600 px-2 py-1 text-[10px] font-bold text-white shadow-sm">
+                      -{Math.round(((Number(product.compareAtPrice) - Number(product.price)) / Number(product.compareAtPrice)) * 100)}%
+                    </div>
+                  )}
                 </div>
 
                 {/* Product Info */}
@@ -238,9 +243,16 @@ export default async function StorePage() {
                   <h3 className="mt-1 line-clamp-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                     {product.name}
                   </h3>
-                  <p className="mt-2 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                    ₹{Number(product.price).toLocaleString("en-IN")}
-                  </p>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <p className="text-base font-bold text-zinc-900 dark:text-zinc-50">
+                      ₹{Number(product.price).toLocaleString("en-IN")}
+                    </p>
+                    {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
+                      <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                        ₹{Number(product.compareAtPrice).toLocaleString("en-IN")}
+                      </del>
+                    )}
+                  </div>
                 </div>
               </Link>
             ))}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import AddToCartButton from "./add-to-cart-button";
 import VariantSelector from "./variant-selector";
 
@@ -31,10 +32,29 @@ export default function VariantAddToCart({
   sizes,
   sizeChartUrl,
 }: VariantAddToCartProps) {
-  const [selectedColor, setSelectedColor] = useState<{ name: string; hex: string } | null>(
-    colors.length > 0 ? { name: colors[0].name, hex: colors[0].hex } : null
-  );
+  const searchParams = useSearchParams();
+  const colorParam = searchParams.get("color");
+
+  const [selectedColor, setSelectedColor] = useState<{ name: string; hex: string } | null>(() => {
+    if (colors.length === 0) return null;
+    if (colorParam) {
+      const match = colors.find((c) => c.name === colorParam);
+      if (match) return { name: match.name, hex: match.hex };
+    }
+    return { name: colors[0].name, hex: colors[0].hex };
+  });
+
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
+  // Keep state in sync if URL changes (e.g., from going back)
+  useEffect(() => {
+    if (colorParam && colors.length > 0) {
+      const match = colors.find((c) => c.name === colorParam);
+      if (match && selectedColor?.name !== match.name) {
+        setSelectedColor({ name: match.name, hex: match.hex });
+      }
+    }
+  }, [colorParam, colors, selectedColor?.name]);
 
   return (
     <div className="space-y-6">
@@ -54,7 +74,12 @@ export default function VariantAddToCart({
       {/* Add to Cart */}
       <div className="border-t border-zinc-100 pt-6 dark:border-zinc-800">
         <AddToCartButton
-          product={product}
+          product={{
+            ...product,
+            images: colors.find((c) => c.name === selectedColor?.name)?.images?.length 
+              ? colors.find((c) => c.name === selectedColor?.name)!.images 
+              : product.images,
+          }}
           selectedColor={selectedColor}
           selectedSize={selectedSize}
         />

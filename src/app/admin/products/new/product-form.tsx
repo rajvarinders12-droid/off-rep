@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useActionState } from "react";
-import { createProduct } from "../actions";
+import React, { useState, useActionState, useEffect } from "react";
+import { createProduct, updateProduct } from "../actions";
 import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,15 +47,19 @@ async function uploadSizeChart(file: File): Promise<string | null> {
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────
-export default function ProductForm({ categories }: { categories: Category[] }) {
+export default function ProductForm({ categories, initialData }: { categories: Category[]; initialData?: any }) {
   // Step 1: pick mode
-  const [mode, setMode] = useState<"pick" | "simple" | "variants">("pick");
+  const [mode, setMode] = useState<"pick" | "simple" | "variants">(
+    initialData 
+      ? (initialData.colors?.length > 0 || initialData.sizes?.length > 0 ? "variants" : "simple")
+      : "pick"
+  );
 
   return (
     <div className="space-y-8">
       {mode === "pick" && <VariantPicker onSelect={setMode} />}
-      {mode === "simple" && <SimpleForm categories={categories} onBack={() => setMode("pick")} />}
-      {mode === "variants" && <VariantForm categories={categories} onBack={() => setMode("pick")} />}
+      {mode === "simple" && <SimpleForm categories={categories} onBack={() => setMode("pick")} initialData={initialData} />}
+      {mode === "variants" && <VariantForm categories={categories} onBack={() => setMode("pick")} initialData={initialData} />}
     </div>
   );
 }
@@ -113,6 +117,7 @@ function InventorySidebar({
   onBack,
   isPending,
   uploading,
+  initialData,
 }: {
   categories: { id: string; name: string }[];
   wholesaleEnabled: boolean;
@@ -120,6 +125,7 @@ function InventorySidebar({
   onBack: () => void;
   isPending: boolean;
   uploading: boolean;
+  initialData?: any;
 }) {
   return (
     <div className="space-y-6">
@@ -127,23 +133,27 @@ function InventorySidebar({
         <CardHeader><CardTitle>Inventory & Status</CardTitle></CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="price">Price (₹)</Label>
-            <Input id="price" name="price" type="number" step="0.01" min="0" placeholder="0.00" required className="border-zinc-200/80 dark:border-zinc-800" />
+            <Label htmlFor="compareAtPrice">Actual Price (MRP) - ₹</Label>
+            <Input id="compareAtPrice" name="compareAtPrice" type="number" step="0.01" min="0" placeholder="0.00" defaultValue={initialData?.compareAtPrice || ""} className="border-zinc-200/80 dark:border-zinc-800" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="price">Discounted Price (Selling Price) - ₹</Label>
+            <Input id="price" name="price" type="number" step="0.01" min="0" placeholder="0.00" defaultValue={initialData?.price || ""} required className="border-zinc-200/80 dark:border-zinc-800" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="stock">Stock Quantity</Label>
-            <Input id="stock" name="stock" type="number" min="0" placeholder="0" required className="border-zinc-200/80 dark:border-zinc-800" />
+            <Input id="stock" name="stock" type="number" min="0" placeholder="0" defaultValue={initialData?.stock || ""} required className="border-zinc-200/80 dark:border-zinc-800" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="categoryId">Category</Label>
-            <select id="categoryId" name="categoryId" required
+            <select id="categoryId" name="categoryId" required defaultValue={initialData?.categoryId || ""}
               className="flex h-9 w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-1 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800">
               <option value="" disabled>Select category...</option>
               {categories.map((cat) => <option key={cat.id} value={cat.id} className="text-zinc-900">{cat.name}</option>)}
             </select>
           </div>
           <div className="flex items-center space-x-2 pt-2">
-            <input type="checkbox" id="isFeatured" name="isFeatured" value="true" className="h-4 w-4 rounded border-zinc-300" />
+            <input type="checkbox" id="isFeatured" name="isFeatured" value="true" defaultChecked={initialData?.isFeatured} className="h-4 w-4 rounded border-zinc-300" />
             <Label htmlFor="isFeatured" className="text-sm font-normal">Feature this product on homepage</Label>
           </div>
         </CardContent>
@@ -161,11 +171,11 @@ function InventorySidebar({
             <div className="space-y-4 border-t pt-4 dark:border-zinc-800">
               <div className="space-y-2">
                 <Label htmlFor="wholesalePrice">Wholesale Price (₹)</Label>
-                <Input id="wholesalePrice" name="wholesalePrice" type="number" step="0.01" min="0" placeholder="0.00" required className="border-zinc-200/80 dark:border-zinc-800" />
+                <Input id="wholesalePrice" name="wholesalePrice" type="number" step="0.01" min="0" placeholder="0.00" defaultValue={initialData?.wholesalePrice || ""} required className="border-zinc-200/80 dark:border-zinc-800" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="moq">Minimum Order Quantity</Label>
-                <Input id="moq" name="moq" type="number" min="1" placeholder="10" required className="border-zinc-200/80 dark:border-zinc-800" />
+                <Input id="moq" name="moq" type="number" min="1" placeholder="10" defaultValue={initialData?.moq || ""} required className="border-zinc-200/80 dark:border-zinc-800" />
               </div>
             </div>
           )}
@@ -187,11 +197,13 @@ function InventorySidebar({
 }
 
 // ─── Simple (no variants) form ────────────────────────────────────────────────
-function SimpleForm({ categories, onBack }: { categories: Category[]; onBack: () => void }) {
-  const [images, setImages] = useState<string[]>([]);
+function SimpleForm({ categories, onBack, initialData }: { categories: Category[]; onBack: () => void; initialData?: any }) {
+  const [images, setImages] = useState<string[]>(initialData?.images || []);
   const [uploading, setUploading] = useState(false);
-  const [wholesaleEnabled, setWholesaleEnabled] = useState(false);
-  const [state, formAction, isPending] = useActionState(createProduct, null);
+  const [wholesaleEnabled, setWholesaleEnabled] = useState(!!initialData?.wholesalePrice);
+  
+  const action = initialData ? updateProduct.bind(null, initialData.id) : createProduct;
+  const [state, formAction, isPending] = useActionState<any, FormData>(action as any, null);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -224,12 +236,17 @@ function SimpleForm({ categories, onBack }: { categories: Category[]; onBack: ()
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Product Name</Label>
-                <Input id="name" name="name" type="text" placeholder="e.g. Classic Cotton T-Shirt" required className="border-zinc-200/80 dark:border-zinc-800" />
+                <Input id="name" name="name" type="text" placeholder="e.g. Classic Cotton T-Shirt" defaultValue={initialData?.name || ""} required className="border-zinc-200/80 dark:border-zinc-800" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <textarea id="description" name="description" rows={5} placeholder="Describe your product..."
+                <textarea id="description" name="description" rows={5} placeholder="Describe your product..." defaultValue={initialData?.description || ""}
                   className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="searchKeywords">Search Keywords</Label>
+                <Input id="searchKeywords" name="searchKeywords" type="text" placeholder="e.g. t-shirt, summer, oversize (comma separated)" defaultValue={initialData?.searchKeywords || ""} className="border-zinc-200/80 dark:border-zinc-800" />
+                <p className="text-xs text-zinc-500">Keywords to help customers find this product in the search bar.</p>
               </div>
             </CardContent>
           </Card>
@@ -261,23 +278,25 @@ function SimpleForm({ categories, onBack }: { categories: Category[]; onBack: ()
         </div>
 
         <InventorySidebar categories={categories} wholesaleEnabled={wholesaleEnabled}
-          setWholesaleEnabled={setWholesaleEnabled} onBack={onBack} isPending={isPending} uploading={uploading} />
+          setWholesaleEnabled={setWholesaleEnabled} onBack={onBack} isPending={isPending} uploading={uploading} initialData={initialData} />
       </div>
     </form>
   );
 }
 
 // ─── Variants form ────────────────────────────────────────────────────────────
-function VariantForm({ categories, onBack }: { categories: Category[]; onBack: () => void }) {
-  const [colors, setColors] = useState<ColorVariant[]>([]);
+function VariantForm({ categories, onBack, initialData }: { categories: Category[]; onBack: () => void; initialData?: any }) {
+  const [colors, setColors] = useState<ColorVariant[]>(initialData?.colors || []);
   const [newColorName, setNewColorName] = useState("");
   const [newColorHex, setNewColorHex] = useState("#000000");
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [sizeChart, setSizeChart] = useState("");
+  const [selectedSizes, setSelectedSizes] = useState<string[]>(initialData?.sizes || []);
+  const [sizeChart, setSizeChart] = useState(initialData?.sizeChart || "");
   const [uploadingSizeChart, setUploadingSizeChart] = useState(false);
   const [uploadingColorIdx, setUploadingColorIdx] = useState<number | null>(null);
-  const [wholesaleEnabled, setWholesaleEnabled] = useState(false);
-  const [state, formAction, isPending] = useActionState(createProduct, null);
+  const [wholesaleEnabled, setWholesaleEnabled] = useState(!!initialData?.wholesalePrice);
+  
+  const action = initialData ? updateProduct.bind(null, initialData.id) : createProduct;
+  const [state, formAction, isPending] = useActionState<any, FormData>(action as any, null);
 
   // Compute images: all images from all colors (first color's first image = cover)
   const allImages = colors.flatMap((c) => c.images);
@@ -347,12 +366,17 @@ function VariantForm({ categories, onBack }: { categories: Category[]; onBack: (
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Product Name</Label>
-                <Input id="name" name="name" type="text" placeholder="e.g. Classic Cotton T-Shirt" required className="border-zinc-200/80 dark:border-zinc-800" />
+                <Input id="name" name="name" type="text" placeholder="e.g. Classic Cotton T-Shirt" defaultValue={initialData?.name || ""} required className="border-zinc-200/80 dark:border-zinc-800" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <textarea id="description" name="description" rows={4} placeholder="Describe your product..."
+                <textarea id="description" name="description" rows={4} placeholder="Describe your product..." defaultValue={initialData?.description || ""}
                   className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="searchKeywords">Search Keywords</Label>
+                <Input id="searchKeywords" name="searchKeywords" type="text" placeholder="e.g. t-shirt, summer, oversize (comma separated)" defaultValue={initialData?.searchKeywords || ""} className="border-zinc-200/80 dark:border-zinc-800" />
+                <p className="text-xs text-zinc-500">Keywords to help customers find this product in the search bar.</p>
               </div>
             </CardContent>
           </Card>
@@ -488,7 +512,7 @@ function VariantForm({ categories, onBack }: { categories: Category[]; onBack: (
         </div>
 
         <InventorySidebar categories={categories} wholesaleEnabled={wholesaleEnabled}
-          setWholesaleEnabled={setWholesaleEnabled} onBack={onBack} isPending={isPending} uploading={isUploading} />
+          setWholesaleEnabled={setWholesaleEnabled} onBack={onBack} isPending={isPending} uploading={isUploading} initialData={initialData} />
       </div>
     </form>
   );

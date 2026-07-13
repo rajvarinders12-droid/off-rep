@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { Sparkles } from "lucide-react";
 
 interface ColorVariant {
@@ -22,27 +24,37 @@ export default function ProductGallery({
   productName,
   isFeatured,
 }: ProductGalleryProps) {
-  const [activeImages, setActiveImages] = useState<string[]>(initialImages);
-  const [activeColor, setActiveColor] = useState<number | null>(colors.length > 0 ? 0 : null);
-  const [mainImage, setMainImage] = useState<string>(initialImages[0] || "");
+  const searchParams = useSearchParams();
+  const colorParam = searchParams.get("color");
 
-  const handleColorSelect = (idx: number) => {
-    setActiveColor(idx);
-    const colorImages = colors[idx]?.images ?? [];
-    setActiveImages(colorImages.length > 0 ? colorImages : initialImages);
-    setMainImage(colorImages[0] || initialImages[0] || "");
-  };
+  const activeColorIdx = colors.findIndex((c) => c.name === colorParam);
+  const resolvedIdx = activeColorIdx !== -1 ? activeColorIdx : 0;
+  
+  const activeImages = colors.length > 0 && colors[resolvedIdx]?.images?.length > 0 
+    ? colors[resolvedIdx].images 
+    : initialImages;
 
-  // Keep main image in sync when activeImages changes
-  const handleThumbClick = (img: string) => setMainImage(img);
+  const [thumbIdx, setThumbIdx] = useState(0);
+
+  useEffect(() => {
+    setThumbIdx(0);
+  }, [colorParam]);
+
+  const mainImage = activeImages[thumbIdx] || "";
 
   return (
     <div className="space-y-4">
       {/* Main Image */}
       <div className="relative aspect-square overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
         {mainImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={mainImage} alt={productName} className="h-full w-full object-cover" />
+          <Image
+            src={mainImage}
+            alt={productName}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
+            priority
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-zinc-300 dark:text-zinc-700">
             <Sparkles className="h-16 w-16" />
@@ -55,31 +67,6 @@ export default function ProductGallery({
         )}
       </div>
 
-      {/* Color swatches (mini, clickable) */}
-      {colors.length > 0 && (
-        <div className="flex flex-wrap gap-2 pt-1">
-          {colors.map((color, idx) => (
-            <button
-              key={idx}
-              type="button"
-              title={color.name}
-              onClick={() => handleColorSelect(idx)}
-              className={`flex items-center gap-1.5 rounded-full border-2 px-2.5 py-1 text-xs font-medium transition-all
-                ${activeColor === idx
-                  ? "border-zinc-900 dark:border-zinc-50 shadow"
-                  : "border-zinc-200 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500"
-                }`}
-            >
-              <span
-                className="h-4 w-4 rounded-full border border-zinc-200 dark:border-zinc-600 shrink-0"
-                style={{ backgroundColor: color.hex }}
-              />
-              <span className="text-zinc-700 dark:text-zinc-300">{color.name}</span>
-            </button>
-          ))}
-        </div>
-      )}
-
       {/* Thumbnail strip */}
       {activeImages.length > 1 && (
         <div className="grid grid-cols-4 gap-3">
@@ -87,12 +74,17 @@ export default function ProductGallery({
             <button
               key={i}
               type="button"
-              onClick={() => handleThumbClick(img)}
-              className={`aspect-square overflow-hidden rounded-lg border-2 transition-all
-                ${mainImage === img ? "border-zinc-900 dark:border-zinc-50" : "border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600"}`}
+              onClick={() => setThumbIdx(i)}
+              className={`relative aspect-square overflow-hidden rounded-lg border-2 transition-all
+                ${thumbIdx === i ? "border-zinc-900 dark:border-zinc-50" : "border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600"}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img} alt={`${productName} view ${i + 1}`} className="h-full w-full object-cover" />
+              <Image
+                src={img}
+                alt={`${productName} view ${i + 1}`}
+                fill
+                sizes="(max-width: 768px) 25vw, 15vw"
+                className="object-cover"
+              />
             </button>
           ))}
         </div>

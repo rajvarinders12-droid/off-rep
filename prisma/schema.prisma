@@ -56,10 +56,12 @@ model Product {
   slug        String      @unique
   description String?
   price          Decimal     @db.Decimal(10, 2)
+  compareAtPrice Decimal?    @db.Decimal(10, 2) @map("compare_at_price")
   wholesalePrice Decimal?    @db.Decimal(10, 2) @map("wholesale_price")
   moq            Int?        @default(1)
   images         String[]    @default([])
   sizeChart      String?     @map("size_chart")      // URL of the size chart image
+  searchKeywords String?     @map("search_keywords") // Comma-separated search keywords
   colors         Json?       @default("[]")          // [{ name: "Red", hex: "#FF0000" }]
   sizes          String[]    @default([])            // ["XS","S","M","L","XL","XXL"]
   stock       Int         @default(0)

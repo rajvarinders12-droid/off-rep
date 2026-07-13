@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { ShoppingBag, User, Menu } from "lucide-react";
-import NavbarCart from "./navbar-cart";
+import { ShoppingBag } from "lucide-react";
+import Navbar from "@/components/ui/navbar";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function StoreLayout({
@@ -24,50 +24,7 @@ export default async function StoreLayout({
       </div>
 
       {/* Main Navbar */}
-      <header className="sticky top-0 z-40 border-b border-zinc-100 bg-white/80 backdrop-blur-xl dark:border-zinc-800/50 dark:bg-zinc-950/80">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <ShoppingBag className="h-6 w-6 text-zinc-900 dark:text-zinc-50" />
-            <span className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-              OFF-REP
-            </span>
-          </Link>
-
-          {/* Center Nav Links */}
-          <nav className="hidden items-center gap-8 md:flex">
-            <Link
-              href="/"
-              className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-            >
-              Home
-            </Link>
-            <Link
-              href="/shop"
-              className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-            >
-              Shop
-            </Link>
-            <Link
-              href="/categories"
-              className="text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-            >
-              Categories
-            </Link>
-          </nav>
-
-          {/* Right Side Actions */}
-          <div className="flex items-center gap-1">
-            <NavbarCart />
-            <Link
-              href={user ? "/profile" : "/login"}
-              className="rounded-full p-2.5 text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
-            >
-              <User className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar user={user} />
 
       {/* Page Content */}
       <main className="flex-1">{children}</main>

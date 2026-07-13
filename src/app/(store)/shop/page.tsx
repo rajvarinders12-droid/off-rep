@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { db } from "@/lib/db";
 import { Sparkles, SlidersHorizontal } from "lucide-react";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export const metadata = {
   title: "Shop All Products — OFF-REP",
@@ -13,14 +14,26 @@ export const metadata = {
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; q?: string }>;
 }) {
-  const { category } = await searchParams;
+  const { category, q } = await searchParams;
+
+  const whereClause: any = { stock: { gt: 0 } };
+  
+  if (category) {
+    whereClause.category = { slug: category };
+  }
+  
+  if (q) {
+    whereClause.OR = [
+      { name: { contains: q, mode: "insensitive" } },
+      { description: { contains: q, mode: "insensitive" } },
+      { searchKeywords: { contains: q, mode: "insensitive" } },
+    ];
+  }
 
   const products = await db.product.findMany({
-    where: category
-      ? { category: { slug: category }, stock: { gt: 0 } }
-      : { stock: { gt: 0 } },
+    where: whereClause,
     orderBy: { createdAt: "desc" },
     include: { category: true },
   });
@@ -38,12 +51,14 @@ export default async function ShopPage({
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+        <div className="flex-1">
           <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
             {activeCategory ? activeCategory.name : "All Products"}
           </p>
           <h1 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl">
-            {activeCategory
+            {q 
+              ? `Search Results for "${q}"`
+              : activeCategory
               ? `${activeCategory.name} Collection`
               : "Shop All Products"}
           </h1>
@@ -51,13 +66,27 @@ export default async function ShopPage({
             {products.length} {products.length === 1 ? "product" : "products"}{" "}
             available
           </p>
+          
+          <form action="/shop" method="GET" className="mt-6 flex max-w-md gap-2">
+            <input 
+              type="text" 
+              name="q" 
+              defaultValue={q || ""}
+              placeholder="Search products..." 
+              className="flex-1 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder:text-zinc-500" 
+            />
+            {category && <input type="hidden" name="category" value={category} />}
+            <button type="submit" className="rounded-full bg-zinc-900 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
+              Search
+            </button>
+          </form>
         </div>
       </div>
 
       {/* Category Filters */}
       <div className="mt-8 flex flex-wrap gap-2">
         <Link
-          href="/shop"
+          href={q ? `/shop?q=${q}` : "/shop"}
           className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
             !category
               ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
@@ -69,7 +98,7 @@ export default async function ShopPage({
         {categories.map((cat) => (
           <Link
             key={cat.id}
-            href={`/shop?category=${cat.slug}`}
+            href={`/shop?category=${cat.slug}${q ? `&q=${q}` : ""}`}
             className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
               category === cat.slug
                 ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
@@ -93,11 +122,12 @@ export default async function ShopPage({
               {/* Product Image */}
               <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                 {product.images.length > 0 ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={product.images[0]}
                     alt={product.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-zinc-300 dark:text-zinc-600">
@@ -112,6 +142,11 @@ export default async function ShopPage({
                 {product.stock <= 5 && product.stock > 0 && (
                   <div className="absolute right-3 top-3 rounded-full bg-amber-500/90 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
                     Only {product.stock} left
+                  </div>
+                )}
+                {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
+                  <div className="absolute right-3 bottom-3 rounded-full bg-red-600 px-2 py-1 text-[10px] font-bold text-white shadow-sm">
+                    -{Math.round(((Number(product.compareAtPrice) - Number(product.price)) / Number(product.compareAtPrice)) * 100)}%
                   </div>
                 )}
               </div>
@@ -129,9 +164,16 @@ export default async function ShopPage({
                     {product.description}
                   </p>
                 )}
-                <p className="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                  ₹{Number(product.price).toLocaleString("en-IN")}
-                </p>
+                <div className="mt-3 flex items-baseline gap-2">
+                  <p className="text-base font-bold text-zinc-900 dark:text-zinc-50">
+                    ₹{Number(product.price).toLocaleString("en-IN")}
+                  </p>
+                  {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
+                    <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                      ₹{Number(product.compareAtPrice).toLocaleString("en-IN")}
+                    </del>
+                  )}
+                </div>
               </div>
             </Link>
           ))}

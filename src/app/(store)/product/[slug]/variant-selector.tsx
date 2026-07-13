@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 interface ColorVariant {
   name: string;
@@ -29,6 +31,8 @@ export default function VariantSelector({
   onSizeChange,
 }: VariantSelectorProps) {
   const [showSizeChart, setShowSizeChart] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   // Find active color index
   const activeColorIdx = selectedColor
@@ -38,6 +42,11 @@ export default function VariantSelector({
   const handleColorClick = (idx: number) => {
     const color = colors[idx];
     onColorChange?.({ name: color.name, hex: color.hex });
+    
+    // Update URL
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("color", color.name);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handleSizeClick = (size: string) => {
@@ -95,9 +104,14 @@ export default function VariantSelector({
           {activeColorIdx >= 0 && colors[activeColorIdx].images.length > 1 && (
             <div className="flex gap-2 mt-2 flex-wrap">
               {colors[activeColorIdx].images.map((img, i) => (
-                <div key={i} className="h-14 w-14 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt="" className="h-full w-full object-cover" />
+                <div key={i} className="relative h-14 w-14 overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
+                  <Image
+                    src={img}
+                    alt=""
+                    fill
+                    sizes="56px"
+                    className="object-cover"
+                  />
                 </div>
               ))}
             </div>
@@ -141,9 +155,14 @@ export default function VariantSelector({
           </div>
 
           {showSizeChart && sizeChartUrl && (
-            <div className="mt-3 rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sizeChartUrl} alt="Size chart" className="w-full object-contain" />
+            <div className="relative mt-3 h-64 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">
+              <Image
+                src={sizeChartUrl}
+                alt="Size chart"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain"
+              />
             </div>
           )}
         </div>

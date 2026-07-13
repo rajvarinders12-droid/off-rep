@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Minus, Plus, ShoppingBag, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
@@ -7,7 +8,7 @@ import AddToCartButton from "./add-to-cart-button";
 import ProductGallery from "./product-gallery";
 import VariantAddToCart from "./variant-add-to-cart";
 
-export const revalidate = 0;
+export const revalidate = 60; // Cache for 60 seconds (ISR)
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -75,12 +76,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* Images — replaced with interactive gallery */}
-          <ProductGallery
-            initialImages={product.images}
-            colors={(product.colors as any[]) ?? []}
-            productName={product.name}
-            isFeatured={product.isFeatured}
-          />
+          <Suspense fallback={<div className="aspect-square bg-zinc-100 dark:bg-zinc-800 rounded-2xl animate-pulse" />}>
+            <ProductGallery
+              initialImages={product.images}
+              colors={(product.colors as any[]) ?? []}
+              productName={product.name}
+              isFeatured={product.isFeatured}
+            />
+          </Suspense>
 
           {/* Product Info */}
           <div className="flex flex-col py-2">
@@ -100,6 +103,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">
                   ₹{Number(product.price).toLocaleString("en-IN")}
                 </span>
+                {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
+                  <>
+                    <del className="text-lg font-medium text-zinc-400 dark:text-zinc-500">
+                      ₹{Number(product.compareAtPrice).toLocaleString("en-IN")}
+                    </del>
+                    <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold text-red-700 dark:bg-red-900/30 dark:text-red-400">
+                      -{Math.round(((Number(product.compareAtPrice) - Number(product.price)) / Number(product.compareAtPrice)) * 100)}%
+                    </span>
+                  </>
+                )}
               </div>
 
               {/* Stock Status */}
@@ -137,20 +150,22 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             {/* Variants + Add to Cart (unified so color selection feeds into cart) */}
             <div className="mt-8">
-              <VariantAddToCart
-                product={{
-                  id: product.id,
-                  name: product.name,
-                  price: Number(product.price),
-                  wholesalePrice: product.wholesalePrice ? Number(product.wholesalePrice) : null,
-                  moq: product.moq,
-                  images: product.images,
-                  stock: product.stock,
-                }}
-                colors={(product.colors as any[]) ?? []}
-                sizes={(product.sizes as string[]) ?? []}
-                sizeChartUrl={product.sizeChart}
-              />
+              <Suspense fallback={<div className="h-32 bg-zinc-100 dark:bg-zinc-800 rounded-xl animate-pulse" />}>
+                <VariantAddToCart
+                  product={{
+                    id: product.id,
+                    name: product.name,
+                    price: Number(product.price),
+                    wholesalePrice: product.wholesalePrice ? Number(product.wholesalePrice) : null,
+                    moq: product.moq,
+                    images: product.images,
+                    stock: product.stock,
+                  }}
+                  colors={(product.colors as any[]) ?? []}
+                  sizes={(product.sizes as string[]) ?? []}
+                  sizeChartUrl={product.sizeChart}
+                />
+              </Suspense>
             </div>
 
             {/* Trust Badges */}
@@ -191,11 +206,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 >
                   <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                     {relProduct.images.length > 0 ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={relProduct.images[0]}
                         alt={relProduct.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-zinc-300 dark:text-zinc-600">
@@ -210,9 +226,21 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     <h3 className="mt-1 line-clamp-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                       {relProduct.name}
                     </h3>
-                    <p className="mt-2 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                      ₹{Number(relProduct.price).toLocaleString("en-IN")}
-                    </p>
+                    <div className="mt-2 flex items-baseline gap-2">
+                      <p className="text-base font-bold text-zinc-900 dark:text-zinc-50">
+                        ₹{Number(relProduct.price).toLocaleString("en-IN")}
+                      </p>
+                      {relProduct.compareAtPrice && Number(relProduct.compareAtPrice) > Number(relProduct.price) && (
+                        <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                          ₹{Number(relProduct.compareAtPrice).toLocaleString("en-IN")}
+                        </del>
+                      )}
+                    </div>
+                    {relProduct.compareAtPrice && Number(relProduct.compareAtPrice) > Number(relProduct.price) && (
+                      <div className="absolute right-2 top-2 rounded bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white shadow-sm">
+                        -{Math.round(((Number(relProduct.compareAtPrice) - Number(relProduct.price)) / Number(relProduct.compareAtPrice)) * 100)}%
+                      </div>
+                    )}
                   </div>
                 </Link>
               ))}
