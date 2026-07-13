@@ -94,11 +94,6 @@ export default function ProductGallery({
             <Sparkles className="h-16 w-16" />
           </div>
         )}
-        {isFeatured && (
-          <div className="absolute left-4 top-4 rounded-full bg-zinc-900/80 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-sm dark:bg-white/80 dark:text-zinc-900">
-            Featured
-          </div>
-        )}
       </div>
 
       {/* Thumbnail strip */}
