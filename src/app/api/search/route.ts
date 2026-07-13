@@ -10,14 +10,17 @@ export async function GET(request: Request) {
   }
 
   try {
+    const isAll = q === "ALL";
+    const whereClause = isAll ? {} : {
+      OR: [
+        { name: { contains: q, mode: "insensitive" } as any },
+        { description: { contains: q, mode: "insensitive" } as any },
+        { searchKeywords: { contains: q, mode: "insensitive" } as any },
+      ],
+    };
+
     const products = await db.product.findMany({
-      where: {
-        OR: [
-          { name: { contains: q, mode: "insensitive" } },
-          { description: { contains: q, mode: "insensitive" } },
-          { searchKeywords: { contains: q, mode: "insensitive" } },
-        ],
-      },
+      where: whereClause,
       select: {
         id: true,
         name: true,
@@ -27,7 +30,7 @@ export async function GET(request: Request) {
         images: true,
         colors: true
       },
-      take: 5, // Limit to top 5 results for quick suggestions
+      ...(isAll ? {} : { take: 5 }),
     });
 
     return NextResponse.json(products);

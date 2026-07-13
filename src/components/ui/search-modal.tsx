@@ -26,12 +26,30 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<ProductResult[]>([]);
+  const [allProducts, setAllProducts] = useState<ProductResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
       setTimeout(() => inputRef.current?.focus(), 100);
+      
+      // Fetch all products exactly once for instant client-side filtering
+      if (!hasFetched) {
+        setIsLoading(true);
+        fetch(`/api/search?q=ALL`)
+          .then(res => res.json())
+          .then(data => {
+            setAllProducts(data);
+            setHasFetched(true);
+            setIsLoading(false);
+          })
+          .catch(err => {
+            console.error("Failed to fetch products for search", err);
+            setIsLoading(false);
+          });
+      }
     } else {
       document.body.style.overflow = "unset";
       setQuery("");
@@ -40,31 +58,20 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [isOpen, hasFetched]);
 
-  // Debounced search
+  // Instant client-side filtering
   useEffect(() => {
-    const timer = setTimeout(async () => {
-      if (!query.trim()) {
-        setResults([]);
-        return;
-      }
-      setIsLoading(true);
-      try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(query.trim())}`);
-        if (res.ok) {
-          const data = await res.json();
-          setResults(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch search results", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [query]);
+    if (!query.trim()) {
+      setResults([]);
+      return;
+    }
+    const q = query.toLowerCase().trim();
+    const filtered = allProducts.filter(p => 
+      p.name.toLowerCase().includes(q)
+    ).slice(0, 5); // top 5 results
+    setResults(filtered);
+  }, [query, allProducts]);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
