@@ -245,7 +245,13 @@ function SimpleForm({ categories, onBack, initialData }: { categories: Category[
               </div>
               <div className="space-y-2">
                 <Label htmlFor="features">Features (Optional)</Label>
-                <textarea id="features" name="features" rows={4} placeholder="Key features, materials, care instructions..." defaultValue={initialData?.features || ""}
+                <textarea id="features" name="features" rows={4} placeholder="Key features, materials..." defaultValue={initialData?.features || ""}
+                  className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+                <p className="text-xs text-zinc-500">Formatting is preserved. Use line breaks as needed.</p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="careInstructions">Care Instructions (Optional)</Label>
+                <textarea id="careInstructions" name="careInstructions" rows={3} placeholder="Wash cold, tumble dry low..." defaultValue={initialData?.careInstructions || ""}
                   className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
                 <p className="text-xs text-zinc-500">Formatting is preserved. Use line breaks as needed.</p>
               </div>
@@ -396,7 +402,13 @@ function VariantForm({ categories, onBack, initialData }: { categories: Category
               </div>
               <div className="space-y-2">
                 <Label htmlFor="features">Features (Optional)</Label>
-                <textarea id="features" name="features" rows={4} placeholder="Key features, materials, care instructions..." defaultValue={initialData?.features || ""}
+                <textarea id="features" name="features" rows={4} placeholder="Key features, materials..." defaultValue={initialData?.features || ""}
+                  className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+                <p className="text-xs text-zinc-500">Formatting is preserved. Use line breaks as needed.</p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="careInstructions">Care Instructions (Optional)</Label>
+                <textarea id="careInstructions" name="careInstructions" rows={3} placeholder="Wash cold, tumble dry low..." defaultValue={initialData?.careInstructions || ""}
                   className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
                 <p className="text-xs text-zinc-500">Formatting is preserved. Use line breaks as needed.</p>
               </div>

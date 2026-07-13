@@ -174,20 +174,35 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </Suspense>
             </div>
 
-            {/* Features Accordion */}
-            {product.features && (
-              <div className="mt-6">
-                <details className="group border-y border-zinc-200 dark:border-zinc-800 [&_summary::-webkit-details-marker]:hidden">
-                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm font-semibold uppercase tracking-widest text-zinc-900 outline-none dark:text-zinc-50">
-                    Product Features
-                    <ChevronDown className="h-4 w-4 transition-transform duration-300 group-open:rotate-180" />
-                  </summary>
-                  <div className="pb-4">
-                    <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      {product.features}
-                    </pre>
-                  </div>
-                </details>
+            {/* Features & Care Accordions */}
+            {(product.features || product.careInstructions) && (
+              <div className="mt-6 space-y-0">
+                {product.features && (
+                  <details className="group border-y border-zinc-200 dark:border-zinc-800 [&_summary::-webkit-details-marker]:hidden">
+                    <summary className="flex cursor-pointer items-center justify-between py-4 text-sm font-semibold uppercase tracking-widest text-zinc-900 outline-none dark:text-zinc-50">
+                      Product Features
+                      <ChevronDown className="h-4 w-4 transition-transform duration-300 group-open:rotate-180" />
+                    </summary>
+                    <div className="pb-4">
+                      <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                        {product.features}
+                      </pre>
+                    </div>
+                  </details>
+                )}
+                {product.careInstructions && (
+                  <details className={`group border-b border-zinc-200 dark:border-zinc-800 [&_summary::-webkit-details-marker]:hidden ${!product.features && "border-t"}`}>
+                    <summary className="flex cursor-pointer items-center justify-between py-4 text-sm font-semibold uppercase tracking-widest text-zinc-900 outline-none dark:text-zinc-50">
+                      Care Instructions
+                      <ChevronDown className="h-4 w-4 transition-transform duration-300 group-open:rotate-180" />
+                    </summary>
+                    <div className="pb-4">
+                      <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                        {product.careInstructions}
+                      </pre>
+                    </div>
+                  </details>
+                )}
               </div>
             )}
 

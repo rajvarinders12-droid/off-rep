@@ -68,8 +68,9 @@ model Product {
   isFeatured  Boolean     @default(false) @map("is_featured")
   categoryId  String?     @db.Uuid @map("category_id")
   category    Category?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  features    String?     @db.Text
-  createdAt   DateTime    @default(now()) @map("created_at")
+  features         String?     @db.Text
+  careInstructions String?     @db.Text @map("care_instructions")
+  createdAt        DateTime    @default(now()) @map("created_at")
   orderItems  OrderItem[]
 
   @@index([categoryId])

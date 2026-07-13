@@ -15,6 +15,7 @@ export async function createProduct(state: any, formData: FormData) {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
   const features = formData.get("features") as string;
+  const careInstructions = formData.get("careInstructions") as string;
   const priceString = formData.get("price") as string;
   const stockString = formData.get("stock") as string;
   const categoryId = formData.get("categoryId") as string;
@@ -76,6 +77,7 @@ export async function createProduct(state: any, formData: FormData) {
         slug,
         description,
         features: features || null,
+        careInstructions: careInstructions || null,
         price,
         compareAtPrice,
         wholesalePrice,
@@ -119,6 +121,7 @@ export async function updateProduct(id: string, state: any, formData: FormData) 
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
   const features = formData.get("features") as string;
+  const careInstructions = formData.get("careInstructions") as string;
   const priceString = formData.get("price") as string;
   const stockString = formData.get("stock") as string;
   const categoryId = formData.get("categoryId") as string;
@@ -178,6 +181,7 @@ export async function updateProduct(id: string, state: any, formData: FormData) 
         name,
         description,
         features: features || null,
+        careInstructions: careInstructions || null,
         price,
         compareAtPrice,
         wholesalePrice,
