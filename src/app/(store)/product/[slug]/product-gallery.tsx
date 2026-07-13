@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
+import { Sparkles, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ColorVariant {
   name: string;
@@ -27,6 +27,7 @@ export default function ProductGallery({
   const searchParams = useSearchParams();
   const urlColorParam = searchParams.get("color");
   const [clientColorParam, setClientColorParam] = useState<string | null>(urlColorParam);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const handleColorChange = (e: CustomEvent<string>) => {
@@ -55,17 +56,30 @@ export default function ProductGallery({
 
   const mainImage = activeImages[thumbIdx] || "";
 
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setThumbIdx((prev) => (prev === 0 ? activeImages.length - 1 : prev - 1));
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setThumbIdx((prev) => (prev === activeImages.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <div className="space-y-4">
       {/* Preload first image of all color variants so they load instantly when clicked */}
       <div className="hidden">
         {colors.map((c) => c.images?.[0] && (
-          <Image key={c.name} src={c.images[0]} alt="preload" priority width={10} height={10} />
+           <Image key={c.name} src={c.images[0]} alt="preload" priority width={10} height={10} />
         ))}
       </div>
 
       {/* Main Image */}
-      <div className="relative aspect-square overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
+      <div 
+        className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 cursor-zoom-in"
+        onClick={() => mainImage && setLightboxOpen(true)}
+      >
         {mainImage ? (
           <Image
             src={mainImage}
@@ -107,6 +121,70 @@ export default function ProductGallery({
               />
             </button>
           ))}
+        </div>
+      )}
+
+      {/* Lightbox Overlay */}
+      {lightboxOpen && (
+        <div className="fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-sm">
+          {/* Top Bar */}
+          <div className="absolute top-0 right-0 z-10 flex w-full justify-end p-4">
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Main Gallery Area */}
+          <div className="relative flex flex-1 items-center justify-center overflow-hidden">
+            {activeImages.length > 1 && (
+              <button
+                onClick={handlePrev}
+                className="absolute left-4 z-10 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors md:left-8"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+            )}
+
+            <div className="relative h-full w-full max-w-5xl max-h-[85vh]">
+              <Image
+                src={activeImages[thumbIdx]}
+                alt={`${productName} gallery view`}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            </div>
+
+            {activeImages.length > 1 && (
+              <button
+                onClick={handleNext}
+                className="absolute right-4 z-10 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 transition-colors md:right-8"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            )}
+          </div>
+
+          {/* Thumbnails in Lightbox */}
+          {activeImages.length > 1 && (
+            <div className="flex h-24 w-full justify-center gap-2 overflow-x-auto p-4 pb-6">
+              {activeImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setThumbIdx(i); }}
+                  className={`relative h-full w-16 shrink-0 overflow-hidden rounded-md transition-all ${
+                    thumbIdx === i ? "ring-2 ring-white" : "opacity-50 hover:opacity-100"
+                  }`}
+                >
+                  <Image src={img} alt="" fill className="object-cover" sizes="64px" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

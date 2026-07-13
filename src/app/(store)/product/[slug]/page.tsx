@@ -101,7 +101,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </Link>
               )}
 
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
+              <h1 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl md:text-4xl leading-tight">
                 {product.name}
               </h1>
 
