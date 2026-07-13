@@ -198,7 +198,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             {query.trim() === "" && (
               <div className="text-center mt-6">
                 <div className="flex flex-wrap justify-center gap-2">
-                  {["compression", "oversize", "tanks"].map((term) => (
+                  {["compression", "oversize", "tank"].map((term) => (
                     <button
                       key={term}
                       onClick={() => setQuery(term)}
