@@ -120,33 +120,34 @@ export default async function ShopPage({
               className="group overflow-hidden rounded-xl border border-zinc-200 bg-white transition-all hover:border-zinc-300 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
             >
               {/* Product Image */}
-              <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+              <div className="relative aspect-[4/5] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                 {product.images.length > 0 ? (
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+                        product.images.length > 1 ? "group-hover:opacity-0" : "group-hover:scale-105"
+                      }`}
+                    />
+                    {product.images.length > 1 && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={product.images[1]}
+                        alt={`${product.name} alternate view`}
+                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      />
+                    )}
+                  </>
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-zinc-300 dark:text-zinc-600">
                     <Sparkles className="h-10 w-10" />
                   </div>
                 )}
-                {product.isFeatured && (
-                  <div className="absolute left-3 top-3 rounded-full bg-zinc-900/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm dark:bg-white/80 dark:text-zinc-900">
-                    Featured
-                  </div>
-                )}
                 {product.stock <= 5 && product.stock > 0 && (
                   <div className="absolute right-3 top-3 rounded-full bg-amber-500/90 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
                     Only {product.stock} left
-                  </div>
-                )}
-                {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
-                  <div className="absolute right-3 bottom-3 rounded-full bg-red-600 px-2 py-1 text-[10px] font-bold text-white shadow-sm">
-                    -{Math.round(((Number(product.compareAtPrice) - Number(product.price)) / Number(product.compareAtPrice)) * 100)}%
                   </div>
                 )}
               </div>
@@ -171,9 +172,14 @@ export default async function ShopPage({
                     ₹{Number(product.price).toLocaleString("en-IN")}
                   </p>
                   {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
-                    <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
-                      ₹{Number(product.compareAtPrice).toLocaleString("en-IN")}
-                    </del>
+                    <div className="flex items-center gap-2">
+                      <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                        ₹{Number(product.compareAtPrice).toLocaleString("en-IN")}
+                      </del>
+                      <span className="rounded-sm bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                        -{Math.round(((Number(product.compareAtPrice) - Number(product.price)) / Number(product.compareAtPrice)) * 100)}%
+                      </span>
+                    </div>
                   )}
                 </div>
               </div>

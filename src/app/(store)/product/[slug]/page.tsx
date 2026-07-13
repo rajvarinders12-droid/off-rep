@@ -227,15 +227,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   href={`/product/${relProduct.slug}`}
                   className="group overflow-hidden rounded-xl border border-zinc-200 bg-white transition-all hover:border-zinc-300 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
                 >
-                  <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                     {relProduct.images.length > 0 ? (
-                      <Image
-                        src={relProduct.images[0]}
-                        alt={relProduct.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                      <>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={relProduct.images[0]}
+                          alt={relProduct.name}
+                          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+                            relProduct.images.length > 1 ? "group-hover:opacity-0" : "group-hover:scale-105"
+                          }`}
+                        />
+                        {relProduct.images.length > 1 && (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={relProduct.images[1]}
+                            alt={`${relProduct.name} alternate view`}
+                            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                          />
+                        )}
+                      </>
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-zinc-300 dark:text-zinc-600">
                         <Sparkles className="h-10 w-10" />
@@ -256,16 +267,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                         ₹{Number(relProduct.price).toLocaleString("en-IN")}
                       </p>
                       {relProduct.compareAtPrice && Number(relProduct.compareAtPrice) > Number(relProduct.price) && (
-                        <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
-                          ₹{Number(relProduct.compareAtPrice).toLocaleString("en-IN")}
-                        </del>
+                        <div className="flex items-center gap-2">
+                          <del className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
+                            ₹{Number(relProduct.compareAtPrice).toLocaleString("en-IN")}
+                          </del>
+                          <span className="rounded-sm bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                            -{Math.round(((Number(relProduct.compareAtPrice) - Number(relProduct.price)) / Number(relProduct.compareAtPrice)) * 100)}%
+                          </span>
+                        </div>
                       )}
                     </div>
-                    {relProduct.compareAtPrice && Number(relProduct.compareAtPrice) > Number(relProduct.price) && (
-                      <div className="absolute right-2 top-2 rounded bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white shadow-sm">
-                        -{Math.round(((Number(relProduct.compareAtPrice) - Number(relProduct.price)) / Number(relProduct.compareAtPrice)) * 100)}%
-                      </div>
-                    )}
                   </div>
                 </Link>
               ))}
