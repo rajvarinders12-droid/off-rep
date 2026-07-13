@@ -35,35 +35,33 @@ export default async function StorePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full bg-white dark:bg-zinc-950 py-4 sm:py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/shop" className="block w-full group overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl">
-            {/* Desktop Banner */}
-            <div className="relative hidden w-full md:block aspect-[2.5/1]">
-              <Image
-                src="/hero-banner.png"
-                alt="OFFREP New Collection"
-                fill
-                priority
-                unoptimized
-                quality={100}
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-            </div>
-            {/* Mobile Banner */}
-            <div className="relative block w-full md:hidden aspect-[4/5]">
-              <Image
-                src="/hero-mobile.png"
-                alt="OFFREP New Collection"
-                fill
-                priority
-                unoptimized
-                quality={100}
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-            </div>
-          </Link>
-        </div>
+      <section className="relative w-full bg-white dark:bg-zinc-950">
+        <Link href="/shop" className="block w-full group overflow-hidden">
+          {/* Desktop Banner */}
+          <div className="relative hidden w-full md:block aspect-[2.5/1]">
+            <Image
+              src="/hero-banner.png"
+              alt="OFFREP New Collection"
+              fill
+              priority
+              unoptimized
+              quality={100}
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+          </div>
+          {/* Mobile Banner */}
+          <div className="relative block w-full md:hidden aspect-[4/5]">
+            <Image
+              src="/hero-mobile.png"
+              alt="OFFREP New Collection"
+              fill
+              priority
+              unoptimized
+              quality={100}
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+          </div>
+        </Link>
       </section>
 
       {/* Trust Badges */}
