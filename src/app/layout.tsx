@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
+const eurostile = localFont({
+  src: "../../public/Eurostile-ExtendedTwo.woff",
   variable: "--font-heading",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${plusJakarta.variable} font-sans h-full antialiased`}
+      className={`${eurostile.variable} ${plusJakarta.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <CartProvider>{children}</CartProvider>
