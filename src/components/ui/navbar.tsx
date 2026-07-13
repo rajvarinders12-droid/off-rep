@@ -59,24 +59,24 @@ export default function Navbar({ user }: NavbarProps) {
                 alt="OFF-REP"
                 width={200}
                 height={80}
-                className="h-10 md:h-14 w-auto object-contain dark:invert"
+                className="h-12 md:h-14 w-auto object-contain dark:invert"
                 priority
               />
             </Link>
           </div>
 
           {/* Right: Icons (Search, Account, Cart) */}
-          <div className="flex flex-1 items-center justify-end gap-1 sm:gap-3">
+          <div className="flex flex-1 items-center justify-end gap-0.5 sm:gap-3">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="rounded-full p-2.5 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+              className="rounded-full p-2 sm:p-2.5 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
             </button>
             <Link
               href={user ? "/profile" : "/login"}
-              className="rounded-full p-2.5 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+              className="rounded-full p-2 sm:p-2.5 text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
               aria-label="Account"
             >
               <User className="h-5 w-5" />

@@ -11,7 +11,7 @@ export default function NavbarCart() {
   return (
     <Link
       href="/cart"
-      className="relative rounded-full p-2.5 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+      className="relative rounded-full p-2 sm:p-2.5 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
     >
       <ShoppingCart className="h-5 w-5" />
       {cartCount > 0 && (
