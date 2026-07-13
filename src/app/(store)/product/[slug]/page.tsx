@@ -38,7 +38,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   }
 
   // Get related products from same category
-  const relatedProducts = await db.product.findMany({
+  let relatedProducts = await db.product.findMany({
     where: {
       categoryId: product.categoryId || undefined,
       id: { not: product.id },
@@ -47,6 +47,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     take: 4,
     include: { category: true },
   });
+
+  // If we don't have 4 related products, fill the rest with other products
+  if (relatedProducts.length < 4) {
+    const existingIds = relatedProducts.map((p) => p.id);
+    const additionalProducts = await db.product.findMany({
+      where: {
+        id: { notIn: [product.id, ...existingIds] },
+        stock: { gt: 0 },
+      },
+      take: 4 - relatedProducts.length,
+      include: { category: true },
+    });
+    relatedProducts = [...relatedProducts, ...additionalProducts];
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
