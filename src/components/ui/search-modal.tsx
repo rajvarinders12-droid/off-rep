@@ -19,6 +19,7 @@ interface ProductResult {
   compareAtPrice: number | null;
   images: string[];
   colors: { name: string, hex: string, images: string[] }[];
+  searchKeywords?: string | null;
 }
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
@@ -68,7 +69,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
     const q = query.toLowerCase().trim();
     const filtered = allProducts.filter(p => 
-      p.name.toLowerCase().includes(q)
+      p.name.toLowerCase().includes(q) || 
+      (p.searchKeywords && p.searchKeywords.toLowerCase().includes(q))
     ).slice(0, 5); // top 5 results
     setResults(filtered);
   }, [query, allProducts]);

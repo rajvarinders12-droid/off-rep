@@ -28,7 +28,8 @@ export async function GET(request: Request) {
         price: true,
         compareAtPrice: true,
         images: true,
-        colors: true
+        colors: true,
+        searchKeywords: true
       },
       ...(isAll ? {} : { take: 5 }),
     });
