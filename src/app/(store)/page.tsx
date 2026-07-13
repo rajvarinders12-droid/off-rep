@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { db } from "@/lib/db";
 import { ArrowRight, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
 
@@ -34,57 +35,39 @@ export default async function StorePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-zinc-950 dark:bg-zinc-950">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="h-full w-full"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
-
-        {/* Gradient Orb */}
-        <div className="absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-zinc-700/20 to-transparent blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 h-[400px] w-[400px] rounded-full bg-gradient-to-tl from-zinc-600/10 to-transparent blur-3xl" />
-
-        <div className="relative mx-auto flex max-w-7xl flex-col items-center px-4 py-28 text-center sm:px-6 sm:py-36 lg:px-8 lg:py-44">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700/50 bg-zinc-800/50 px-4 py-1.5 text-xs font-medium text-zinc-300 backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5" />
-            New Collection Available
+      <section className="relative w-full bg-zinc-950 overflow-hidden">
+        <Link href="/shop" className="block w-full group">
+          {/* Desktop Banner */}
+          <div className="relative hidden w-full md:block aspect-[2/1]">
+            <Image
+              src="/hero-banner.png"
+              alt="OFFREP New Collection"
+              fill
+              priority
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              sizes="100vw"
+            />
           </div>
-
-          <h1 className="mt-8 max-w-4xl text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Discover Your{" "}
-            <span className="bg-gradient-to-r from-zinc-200 to-zinc-500 bg-clip-text text-transparent">
-              Personal Style
-            </span>
-          </h1>
-
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
-            Curated collections of premium products designed for those who
-            appreciate quality, aesthetics, and timeless design.
-          </p>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/shop"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-zinc-900 shadow-lg shadow-white/10 transition-all hover:bg-zinc-100 hover:shadow-white/20"
-            >
+          {/* Mobile Banner */}
+          <div className="relative block w-full md:hidden aspect-[4/5]">
+            <Image
+              src="/hero-mobile.png"
+              alt="OFFREP New Collection"
+              fill
+              priority
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              sizes="100vw"
+            />
+          </div>
+          
+          {/* Optional Overlay Button (shows on hover for desktop, always for mobile) */}
+          <div className="absolute inset-0 flex items-end justify-center pb-12 sm:pb-16 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+            <span className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-zinc-900 shadow-xl shadow-white/10 hover:bg-zinc-100">
               Shop Now
               <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/categories"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-700 px-8 py-3.5 text-sm font-semibold text-zinc-300 transition-all hover:border-zinc-500 hover:text-white"
-            >
-              Browse Categories
-            </Link>
+            </span>
           </div>
-        </div>
+        </Link>
       </section>
 
       {/* Trust Badges */}
