@@ -16,10 +16,11 @@ export default function AboutPage() {
           src="/hero-banner.png"
           alt="OFF-REP Athletes"
           fill
-          className="object-cover object-center opacity-60"
+          className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/20 to-transparent" />
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-white">
