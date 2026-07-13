@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import Image from "next/image";
+import { Instagram, Facebook } from "lucide-react";
 import Navbar from "@/components/ui/navbar";
 import { createClient } from "@/utils/supabase/server";
 
@@ -17,7 +18,6 @@ export default async function StoreLayout({
   return (
     <div className="flex min-h-screen flex-col">
 
-
       {/* Main Navbar */}
       <Navbar user={user} />
 
@@ -29,10 +29,10 @@ export default async function StoreLayout({
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand Column */}
-            <div className="space-y-4">
+            <div className="space-y-6">
               <Link href="/" className="flex items-center gap-2.5">
-                <ShoppingBag className="h-5 w-5 text-zinc-900 dark:text-zinc-50" />
-                <span className="text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                <Image src="/logo.png" alt="OFF-REP Logo" width={32} height={32} className="h-8 w-auto dark:invert" />
+                <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
                   OFF-REP
                 </span>
               </Link>
@@ -40,6 +40,14 @@ export default async function StoreLayout({
                 Premium quality products curated for the modern lifestyle.
                 Discover collections that speak to your sense of style.
               </p>
+              <div className="flex items-center gap-4 pt-2">
+                <a href="https://www.instagram.com/offrep.in?igsh=Yzh3cTJibWd0b2V6" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a href="https://www.facebook.com/share/1Bv8jg9doi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
+                  <Facebook className="h-5 w-5" />
+                </a>
+              </div>
             </div>
 
             {/* Quick Links */}
@@ -48,7 +56,7 @@ export default async function StoreLayout({
                 Quick Links
               </h3>
               <ul className="space-y-2.5">
-                {["Home", "Shop", "Categories"].map((link) => (
+                {["Home", "Shop", "Categories", "About"].map((link) => (
                   <li key={link}>
                     <Link
                       href={link === "Home" ? "/" : `/${link.toLowerCase()}`}
@@ -67,15 +75,26 @@ export default async function StoreLayout({
                 Customer Service
               </h3>
               <ul className="space-y-2.5">
-                {["Contact Us", "Shipping Policy", "Returns & Exchanges", "FAQs"].map(
-                  (link) => (
-                    <li key={link}>
-                      <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                        {link}
-                      </span>
-                    </li>
-                  )
-                )}
+                <li>
+                  <Link href="/contact" className="text-sm text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors">
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <span className="text-sm text-zinc-500 dark:text-zinc-400 cursor-not-allowed">
+                    Shipping Policy
+                  </span>
+                </li>
+                <li>
+                  <span className="text-sm text-zinc-500 dark:text-zinc-400 cursor-not-allowed">
+                    Returns & Exchanges
+                  </span>
+                </li>
+                <li>
+                  <span className="text-sm text-zinc-500 dark:text-zinc-400 cursor-not-allowed">
+                    FAQs
+                  </span>
+                </li>
               </ul>
             </div>
 
