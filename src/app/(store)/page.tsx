@@ -50,9 +50,9 @@ export default async function StorePage() {
             />
           </div>
           {/* Mobile Banner */}
-          <div className="relative block w-full md:hidden aspect-[4/5]">
+          <div className="relative block w-full md:hidden aspect-[3/4]">
             <Image
-              src="/hero-mobile.png"
+              src="/hero-mobile.jpg"
               alt="OFFREP New Collection"
               fill
               priority
