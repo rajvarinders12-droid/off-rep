@@ -47,8 +47,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
       {/* Modal Content */}
       <div
-        className={`fixed inset-0 z-50 flex flex-col transition-transform duration-500 ease-in-out ${
-          isOpen ? "translate-y-0" : "-translate-y-10 pointer-events-none"
+        className={`fixed inset-0 z-50 flex flex-col transition-all duration-500 ease-in-out ${
+          isOpen ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0 pointer-events-none"
         }`}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-end px-4 py-6 sm:px-6 lg:px-8">

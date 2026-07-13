@@ -16,12 +16,7 @@ export default async function StoreLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Announcement Bar */}
-      <div className="bg-zinc-900 px-4 py-2 text-center text-xs font-medium tracking-wide text-zinc-300 dark:bg-zinc-50 dark:text-zinc-700">
-        FREE SHIPPING ON ORDERS ABOVE ₹999 &mdash; USE CODE{" "}
-        <span className="font-bold text-white dark:text-zinc-900">WELCOME10</span>{" "}
-        FOR 10% OFF
-      </div>
+
 
       {/* Main Navbar */}
       <Navbar user={user} />

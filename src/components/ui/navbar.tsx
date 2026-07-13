@@ -57,9 +57,9 @@ export default function Navbar({ user }: NavbarProps) {
               <Image
                 src="/logo.png"
                 alt="OFF-REP"
-                width={120}
-                height={40}
-                className="h-10 w-auto object-contain dark:invert-0 invert"
+                width={200}
+                height={60}
+                className="h-14 md:h-16 w-auto object-contain dark:invert-0 invert"
                 priority
               />
             </Link>
