@@ -109,7 +109,7 @@ export default function ProductGallery({
               key={i}
               type="button"
               onClick={() => setThumbIdx(i)}
-              className={`relative aspect-square overflow-hidden rounded-lg border-2 transition-all
+              className={`relative aspect-[4/5] overflow-hidden rounded-lg border-2 transition-all
                 ${thumbIdx === i ? "border-zinc-900 dark:border-zinc-50" : "border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600"}`}
             >
               <Image

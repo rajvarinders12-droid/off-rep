@@ -449,7 +449,7 @@ export default function CheckoutPage() {
             <div className="mt-6 space-y-3">
               {cart.map((item) => (
                 <div key={item.id} className="flex items-center gap-3">
-                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800">
+                  <div className="h-14 w-10 shrink-0 overflow-hidden rounded-lg border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800">
                     {item.image ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img

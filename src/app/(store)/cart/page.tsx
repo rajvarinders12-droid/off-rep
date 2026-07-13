@@ -67,7 +67,7 @@ export default function CartPage() {
                 className="flex gap-4 p-4 sm:gap-6 sm:p-6"
               >
                 {/* Item Image */}
-                <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800 sm:h-28 sm:w-28">
+                <div className="h-32 w-24 shrink-0 overflow-hidden rounded-lg border border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800 sm:h-36 sm:w-28">
                   {item.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
