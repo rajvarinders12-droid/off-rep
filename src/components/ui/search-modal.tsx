@@ -115,7 +115,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           </button>
         </div>
 
-        <div className="mx-auto mt-10 w-full max-w-3xl px-4 sm:px-6 flex flex-col items-center">
+        <div className="mx-auto mt-2 w-full max-w-3xl px-4 sm:px-6 flex flex-col items-center">
           <form onSubmit={handleSearch} className="relative w-full max-w-2xl">
             <Search className="absolute left-6 top-1/2 h-6 w-6 -translate-y-1/2 text-zinc-400" />
             <input
@@ -194,12 +194,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
             {/* Empty State / Suggestions */}
             {query.trim() === "" && (
-              <div className="text-center mt-8">
-                <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                  Popular Searches
-                </p>
-                <div className="mt-4 flex flex-wrap justify-center gap-2">
-                  {["Activewear", "T-Shirts", "Hoodies", "Gym"].map((term) => (
+              <div className="text-center mt-6">
+                <div className="flex flex-wrap justify-center gap-2">
+                  {["compression", "oversize", "tanks"].map((term) => (
                     <button
                       key={term}
                       onClick={() => setQuery(term)}
