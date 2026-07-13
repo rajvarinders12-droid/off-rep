@@ -35,39 +35,35 @@ export default async function StorePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full bg-zinc-950 overflow-hidden">
-        <Link href="/shop" className="block w-full group">
-          {/* Desktop Banner */}
-          <div className="relative hidden w-full md:block aspect-[2/1]">
-            <Image
-              src="/hero-banner.png"
-              alt="OFFREP New Collection"
-              fill
-              priority
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              sizes="100vw"
-            />
-          </div>
-          {/* Mobile Banner */}
-          <div className="relative block w-full md:hidden aspect-[4/5]">
-            <Image
-              src="/hero-mobile.png"
-              alt="OFFREP New Collection"
-              fill
-              priority
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              sizes="100vw"
-            />
-          </div>
-          
-          {/* Optional Overlay Button (shows on hover for desktop, always for mobile) */}
-          <div className="absolute inset-0 flex items-end justify-center pb-12 sm:pb-16 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
-            <span className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-zinc-900 shadow-xl shadow-white/10 hover:bg-zinc-100">
-              Shop Now
-              <ArrowRight className="h-4 w-4" />
-            </span>
-          </div>
-        </Link>
+      <section className="relative w-full bg-white dark:bg-zinc-950 py-4 sm:py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Link href="/shop" className="block w-full group overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl">
+            {/* Desktop Banner */}
+            <div className="relative hidden w-full md:block aspect-[2.5/1]">
+              <Image
+                src="/hero-banner.png"
+                alt="OFFREP New Collection"
+                fill
+                priority
+                unoptimized
+                quality={100}
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+            </div>
+            {/* Mobile Banner */}
+            <div className="relative block w-full md:hidden aspect-[4/5]">
+              <Image
+                src="/hero-mobile.png"
+                alt="OFFREP New Collection"
+                fill
+                priority
+                unoptimized
+                quality={100}
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+            </div>
+          </Link>
+        </div>
       </section>
 
       {/* Trust Badges */}
