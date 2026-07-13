@@ -299,13 +299,28 @@ function VariantForm({ categories, onBack, initialData }: { categories: Category
   const [sizeChart, setSizeChart] = useState(initialData?.sizeChart || "");
   const [uploadingSizeChart, setUploadingSizeChart] = useState(false);
   const [uploadingColorIdx, setUploadingColorIdx] = useState<number | null>(null);
+  const [generalImages, setGeneralImages] = useState<string[]>(
+    initialData?.images?.filter((img: string) => !initialData.colors?.some((c: any) => c.images.includes(img))) || []
+  );
+  const [uploadingGeneral, setUploadingGeneral] = useState(false);
   const [wholesaleEnabled, setWholesaleEnabled] = useState(!!initialData?.wholesalePrice);
   
   const action = initialData ? updateProduct.bind(null, initialData.id) : createProduct;
   const [state, formAction, isPending] = useActionState<any, FormData>(action as any, null);
 
-  // Compute images: all images from all colors (first color's first image = cover)
-  const allImages = colors.flatMap((c) => c.images);
+  // Compute images: general images first, then all images from all colors
+  const allImages = [...generalImages, ...colors.flatMap((c) => c.images)];
+
+  const handleGeneralImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    setUploadingGeneral(true);
+    for (const file of Array.from(files)) {
+      const url = await uploadToSupabase(file);
+      if (url) setGeneralImages((prev) => [...prev, url]);
+    }
+    setUploadingGeneral(false);
+  };
 
   const addColor = () => {
     if (!newColorName.trim()) {
@@ -348,7 +363,7 @@ function VariantForm({ categories, onBack, initialData }: { categories: Category
   const toggleSize = (size: string) =>
     setSelectedSizes((prev) => prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]);
 
-  const isUploading = uploadingColorIdx !== null || uploadingSizeChart;
+  const isUploading = uploadingGeneral || uploadingColorIdx !== null || uploadingSizeChart;
 
   return (
     <form action={formAction} className="space-y-6">
@@ -434,6 +449,39 @@ function VariantForm({ categories, onBack, initialData }: { categories: Category
                 ))}
               </div>
               {selectedSizes.length > 0 && <p className="text-xs text-zinc-500">Selected: {selectedSizes.join(", ")}</p>}
+            </CardContent>
+          </Card>
+
+          {/* General Images */}
+          <Card className="border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+            <CardHeader>
+              <CardTitle>General Product Images</CardTitle>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+                Upload images that apply to the product overall. If you don't add specific colours below, these will be the main images.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <label className="flex h-24 cursor-pointer flex-col items-center justify-center rounded-md border border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100/50 dark:border-zinc-700 dark:bg-zinc-950">
+                  <Upload className="h-5 w-5 text-zinc-400" />
+                  <span className="mt-1 text-xs text-zinc-500">Upload</span>
+                  <input type="file" accept="image/*" multiple onChange={handleGeneralImageUpload} disabled={uploadingGeneral} className="hidden" />
+                </label>
+                {generalImages.map((url, idx) => (
+                  <div key={idx} className="group relative h-24 rounded-md border border-zinc-100 dark:border-zinc-800">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={url} alt="" className="h-full w-full rounded-md object-cover" />
+                    {idx === 0 && colors.length === 0 && (
+                      <span className="absolute bottom-1 left-1 text-[9px] bg-emerald-600 text-white px-1.5 py-0.5 rounded font-medium">Cover</span>
+                    )}
+                    <button type="button" onClick={() => setGeneralImages((p) => p.filter((_, i) => i !== idx))}
+                      className="absolute right-1.5 top-1.5 rounded-full bg-zinc-900/80 p-1 text-white opacity-0 group-hover:opacity-100">
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))}
+                {uploadingGeneral && <div className="flex h-24 items-center justify-center rounded-md border border-zinc-100 dark:border-zinc-800"><Loader2 className="h-5 w-5 animate-spin text-zinc-500" /></div>}
+              </div>
             </CardContent>
           </Card>
 
