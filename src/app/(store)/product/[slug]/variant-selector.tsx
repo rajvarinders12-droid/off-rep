@@ -43,10 +43,13 @@ export default function VariantSelector({
     const color = colors[idx];
     onColorChange?.({ name: color.name, hex: color.hex });
     
-    // Update URL
+    // Dispatch instant client-side event for the gallery
+    window.dispatchEvent(new CustomEvent('productColorChange', { detail: color.name }));
+
+    // Update URL instantly without triggering Next.js server navigation
     const params = new URLSearchParams(searchParams.toString());
     params.set("color", color.name);
-    router.replace(`?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, '', `?${params.toString()}`);
   };
 
   const handleSizeClick = (size: string) => {

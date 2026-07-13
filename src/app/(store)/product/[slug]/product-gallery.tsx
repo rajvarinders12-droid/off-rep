@@ -25,9 +25,22 @@ export default function ProductGallery({
   isFeatured,
 }: ProductGalleryProps) {
   const searchParams = useSearchParams();
-  const colorParam = searchParams.get("color");
+  const urlColorParam = searchParams.get("color");
+  const [clientColorParam, setClientColorParam] = useState<string | null>(urlColorParam);
 
-  const activeColorIdx = colors.findIndex((c) => c.name === colorParam);
+  useEffect(() => {
+    const handleColorChange = (e: CustomEvent<string>) => {
+      setClientColorParam(e.detail);
+      setThumbIdx(0);
+    };
+    
+    window.addEventListener('productColorChange', handleColorChange as EventListener);
+    return () => {
+      window.removeEventListener('productColorChange', handleColorChange as EventListener);
+    };
+  }, []);
+
+  const activeColorIdx = colors.findIndex((c) => c.name === clientColorParam);
   const resolvedIdx = activeColorIdx !== -1 ? activeColorIdx : 0;
   
   const activeImages = colors.length > 0 && colors[resolvedIdx]?.images?.length > 0 
@@ -38,7 +51,7 @@ export default function ProductGallery({
 
   useEffect(() => {
     setThumbIdx(0);
-  }, [colorParam]);
+  }, [clientColorParam]);
 
   const mainImage = activeImages[thumbIdx] || "";
 
