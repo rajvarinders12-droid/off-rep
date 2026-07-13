@@ -27,9 +27,9 @@ export default function NavSidebar({ isOpen, onClose }: NavSidebarProps) {
 
   const links = [
     { name: "Home", href: "/", icon: Home },
-    { name: "Shop", href: "/shop", icon: ShoppingBag },
-    { name: "Categories", href: "/categories", icon: Grid },
-    { name: "Contact", href: "/contact", icon: Phone },
+    { name: "All Products", href: "/shop", icon: ShoppingBag },
+    { name: "About Us", href: "/about", icon: Grid },
+    { name: "Contact Us", href: "/contact", icon: Phone },
   ];
 
   return (

@@ -35,13 +35,14 @@ export default function Navbar({ user }: NavbarProps) {
             : "border-b border-transparent bg-white py-3 dark:bg-zinc-950"
         }`}
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex w-full items-center justify-between px-4 sm:px-6 lg:px-12 xl:px-16">
           
-          {/* Left: Hamburger Menu (Animated) */}
+          {/* Left: Navigation */}
           <div className="flex flex-1 items-center justify-start">
+            {/* Mobile Hamburger Menu (Animated) */}
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="group relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+              className="md:hidden group relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
               aria-label="Toggle Menu"
             >
               <div className="flex flex-col items-center justify-center gap-1.5">
@@ -49,6 +50,25 @@ export default function Navbar({ user }: NavbarProps) {
                 <span className="block h-0.5 w-4 rounded-full bg-zinc-900 transition-all duration-300 group-hover:w-6 dark:bg-zinc-50"></span>
               </div>
             </button>
+
+            {/* Desktop Navigation Links */}
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+              {[
+                { name: "Home", href: "/" },
+                { name: "All Products", href: "/shop" },
+                { name: "About Us", href: "/about" },
+                { name: "Contact Us", href: "/contact" },
+              ].map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="group relative text-sm font-semibold tracking-wide text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white py-2"
+                >
+                  {link.name}
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 transform bg-zinc-900 transition-transform duration-300 ease-out group-hover:scale-x-100 dark:bg-white" />
+                </Link>
+              ))}
+            </nav>
           </div>
 
           {/* Center: Logo */}
