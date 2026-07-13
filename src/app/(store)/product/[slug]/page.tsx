@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Minus, Plus, ShoppingBag, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
+import { ChevronDown, ArrowLeft, Minus, Plus, ShoppingBag, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
 import AddToCartButton from "./add-to-cart-button";
 import ProductGallery from "./product-gallery";
 import VariantAddToCart from "./variant-add-to-cart";
@@ -40,7 +40,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   // Get related products from same category
   const relatedProducts = await db.product.findMany({
     where: {
-      categoryId: product.categoryId,
+      categoryId: product.categoryId || undefined,
       id: { not: product.id },
       stock: { gt: 0 },
     },
@@ -60,13 +60,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <Link href="/shop" className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-50">
             Shop
           </Link>
-          <span>/</span>
-          <Link
-            href={`/shop?category=${product.category.slug}`}
-            className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
-          >
-            {product.category.name}
-          </Link>
+          {product.category && (
+            <>
+              <span>/</span>
+              <Link
+                href={`/shop?category=${product.category.slug}`}
+                className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-50"
+              >
+                {product.category.name}
+              </Link>
+            </>
+          )}
           <span>/</span>
           <span className="text-zinc-900 dark:text-zinc-50">{product.name}</span>
         </nav>
@@ -88,12 +92,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {/* Product Info */}
           <div className="flex flex-col py-2">
             <div>
-              <Link
-                href={`/shop?category=${product.category.slug}`}
-                className="text-xs font-medium uppercase tracking-widest text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-              >
-                {product.category.name}
-              </Link>
+              {product.category && (
+                <Link
+                  href={`/shop?category=${product.category.slug}`}
+                  className="text-xs font-medium uppercase tracking-widest text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
+                >
+                  {product.category.name}
+                </Link>
+              )}
 
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
                 {product.name}
@@ -167,6 +173,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 />
               </Suspense>
             </div>
+
+            {/* Features Accordion */}
+            {product.features && (
+              <div className="mt-6">
+                <details className="group border-y border-zinc-200 dark:border-zinc-800 [&_summary::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer items-center justify-between py-4 text-sm font-semibold uppercase tracking-widest text-zinc-900 outline-none dark:text-zinc-50">
+                    Product Features
+                    <ChevronDown className="h-4 w-4 transition-transform duration-300 group-open:rotate-180" />
+                  </summary>
+                  <div className="pb-4">
+                    <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      {product.features}
+                    </pre>
+                  </div>
+                </details>
+              </div>
+            )}
 
             {/* Trust Badges */}
             <div className="mt-8 grid grid-cols-3 gap-4">

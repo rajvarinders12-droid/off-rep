@@ -14,6 +14,7 @@ function generateSlug(name: string) {
 export async function createProduct(state: any, formData: FormData) {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
+  const features = formData.get("features") as string;
   const priceString = formData.get("price") as string;
   const stockString = formData.get("stock") as string;
   const categoryId = formData.get("categoryId") as string;
@@ -27,8 +28,8 @@ export async function createProduct(state: any, formData: FormData) {
   const sizesJson = formData.get("sizes") as string;
   const compareAtPriceString = formData.get("compareAtPrice") as string | null;
 
-  if (!name || !priceString || !stockString || !categoryId) {
-    return { error: "Name, price, stock, and category are required." };
+  if (!name || !priceString || !stockString) {
+    return { error: "Name, price, and stock are required." };
   }
 
   const price = parseFloat(priceString);
@@ -74,12 +75,13 @@ export async function createProduct(state: any, formData: FormData) {
         name,
         slug,
         description,
+        features: features || null,
         price,
         compareAtPrice,
         wholesalePrice,
         moq,
         stock,
-        categoryId,
+        categoryId: categoryId || null,
         images,
         isFeatured,
         sizeChart: sizeChart || null,
@@ -116,6 +118,7 @@ export async function deleteProduct(id: string) {
 export async function updateProduct(id: string, state: any, formData: FormData) {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
+  const features = formData.get("features") as string;
   const priceString = formData.get("price") as string;
   const stockString = formData.get("stock") as string;
   const categoryId = formData.get("categoryId") as string;
@@ -129,8 +132,8 @@ export async function updateProduct(id: string, state: any, formData: FormData) 
   const sizesJson = formData.get("sizes") as string;
   const compareAtPriceString = formData.get("compareAtPrice") as string | null;
 
-  if (!name || !priceString || !stockString || !categoryId) {
-    return { error: "Name, price, stock, and category are required." };
+  if (!name || !priceString || !stockString) {
+    return { error: "Name, price, and stock are required." };
   }
 
   const price = parseFloat(priceString);
@@ -174,12 +177,13 @@ export async function updateProduct(id: string, state: any, formData: FormData) 
       data: {
         name,
         description,
+        features: features || null,
         price,
         compareAtPrice,
         wholesalePrice,
         moq,
         stock,
-        categoryId,
+        categoryId: categoryId || null,
         images,
         isFeatured,
         sizeChart: sizeChart || null,

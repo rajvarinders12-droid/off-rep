@@ -66,8 +66,9 @@ model Product {
   sizes          String[]    @default([])            // ["XS","S","M","L","XL","XXL"]
   stock       Int         @default(0)
   isFeatured  Boolean     @default(false) @map("is_featured")
-  categoryId  String      @db.Uuid @map("category_id")
-  category    Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String?     @db.Uuid @map("category_id")
+  category    Category?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  features    String?     @db.Text
   createdAt   DateTime    @default(now()) @map("created_at")
   orderItems  OrderItem[]
 

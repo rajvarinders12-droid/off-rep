@@ -146,9 +146,9 @@ function InventorySidebar({
           </div>
           <div className="space-y-2">
             <Label htmlFor="categoryId">Category</Label>
-            <select id="categoryId" name="categoryId" required defaultValue={initialData?.categoryId || ""}
+            <select id="categoryId" name="categoryId" defaultValue={initialData?.categoryId || ""}
               className="flex h-9 w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-1 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800">
-              <option value="" disabled>Select category...</option>
+              <option value="">No Category</option>
               {categories.map((cat) => <option key={cat.id} value={cat.id} className="text-zinc-900">{cat.name}</option>)}
             </select>
           </div>
@@ -242,6 +242,12 @@ function SimpleForm({ categories, onBack, initialData }: { categories: Category[
                 <Label htmlFor="description">Description</Label>
                 <textarea id="description" name="description" rows={5} placeholder="Describe your product..." defaultValue={initialData?.description || ""}
                   className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="features">Features (Optional)</Label>
+                <textarea id="features" name="features" rows={4} placeholder="Key features, materials, care instructions..." defaultValue={initialData?.features || ""}
+                  className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+                <p className="text-xs text-zinc-500">Formatting is preserved. Use line breaks as needed.</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="searchKeywords">Search Keywords</Label>
@@ -372,6 +378,12 @@ function VariantForm({ categories, onBack, initialData }: { categories: Category
                 <Label htmlFor="description">Description</Label>
                 <textarea id="description" name="description" rows={4} placeholder="Describe your product..." defaultValue={initialData?.description || ""}
                   className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="features">Features (Optional)</Label>
+                <textarea id="features" name="features" rows={4} placeholder="Key features, materials, care instructions..." defaultValue={initialData?.features || ""}
+                  className="flex w-full rounded-md border border-zinc-200/80 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 dark:border-zinc-800 dark:placeholder:text-zinc-400" />
+                <p className="text-xs text-zinc-500">Formatting is preserved. Use line breaks as needed.</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="searchKeywords">Search Keywords</Label>
