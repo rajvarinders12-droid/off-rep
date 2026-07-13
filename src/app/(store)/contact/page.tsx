@@ -1,6 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { Mail, Phone, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Mail, Phone, Instagram, MessageCircle } from "lucide-react";
+
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+  </svg>
+);
 
 export const metadata = {
   title: "Contact Us — OFF-REP",
@@ -87,7 +93,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="group flex items-center gap-4 p-4 border border-zinc-200 dark:border-zinc-800 rounded-2xl hover:border-zinc-900 dark:hover:border-zinc-50 transition-colors bg-white dark:bg-zinc-950"
                 >
-                  <Facebook className="w-6 h-6 text-zinc-900 dark:text-zinc-50 group-hover:scale-110 transition-transform" />
+                  <FacebookIcon className="w-6 h-6 text-zinc-900 dark:text-zinc-50 group-hover:scale-110 transition-transform" />
                   <span className="font-semibold text-zinc-900 dark:text-zinc-50">OFF-REP on Facebook</span>
                 </a>
               </div>
