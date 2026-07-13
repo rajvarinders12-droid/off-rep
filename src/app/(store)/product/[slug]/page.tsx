@@ -250,7 +250,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                           src={relProduct.images[0]}
                           alt={relProduct.name}
                           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                            relProduct.images.length > 1 ? "group-hover:opacity-0" : "group-hover:scale-105"
+                            relProduct.images.length > 1 ? "group-hover:opacity-0 group-active:opacity-0 group-focus:opacity-0" : "group-hover:scale-105 group-active:scale-105 group-focus:scale-105"
                           }`}
                         />
                         {relProduct.images.length > 1 && (
@@ -258,7 +258,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                           <img
                             src={relProduct.images[1]}
                             alt={`${relProduct.name} alternate view`}
-                            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100"
                           />
                         )}
                       </>

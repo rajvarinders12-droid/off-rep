@@ -128,7 +128,7 @@ export default async function ShopPage({
                       src={product.images[0]}
                       alt={product.name}
                       className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                        product.images.length > 1 ? "group-hover:opacity-0" : "group-hover:scale-105"
+                        product.images.length > 1 ? "group-hover:opacity-0 group-active:opacity-0 group-focus:opacity-0" : "group-hover:scale-105 group-active:scale-105 group-focus:scale-105"
                       }`}
                     />
                     {product.images.length > 1 && (
@@ -136,7 +136,7 @@ export default async function ShopPage({
                       <img
                         src={product.images[1]}
                         alt={`${product.name} alternate view`}
-                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100"
                       />
                     )}
                   </>
