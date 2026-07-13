@@ -215,7 +215,7 @@ export default async function StorePage() {
                 {/* Product Info */}
                 <div className="p-4">
                   <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                    {product.category.name}
+                    {product.category?.name || "Uncategorized"}
                   </p>
                   <h3 className="mt-1 line-clamp-1 text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                     {product.name}

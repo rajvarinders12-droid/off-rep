@@ -83,7 +83,7 @@ export default async function AdminProductsPage() {
                       {product.name}
                     </td>
                     <td className="p-4 capitalize">
-                      {product.category.name}
+                      {product.category?.name || "Uncategorized"}
                     </td>
                     <td className="p-4 font-semibold">
                       ₹{Number(product.price).toFixed(2)}
