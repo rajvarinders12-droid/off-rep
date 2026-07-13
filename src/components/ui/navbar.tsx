@@ -31,8 +31,8 @@ export default function Navbar({ user }: NavbarProps) {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? "border-b border-zinc-200/80 bg-white/80 py-3 backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/80"
-            : "border-b border-transparent bg-white py-5 dark:bg-zinc-950"
+            ? "border-b border-zinc-200/80 bg-white/80 py-2 backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/80"
+            : "border-b border-transparent bg-white py-3 dark:bg-zinc-950"
         }`}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -57,9 +57,9 @@ export default function Navbar({ user }: NavbarProps) {
               <Image
                 src="/logo.png"
                 alt="OFF-REP"
-                width={200}
-                height={60}
-                className="h-14 md:h-16 w-auto object-contain dark:invert-0 invert"
+                width={300}
+                height={120}
+                className="h-16 md:h-24 w-auto object-contain dark:invert"
                 priority
               />
             </Link>
