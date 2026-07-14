@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/lib/db";
-import { ArrowRight, Sparkles, Truck, Shield, RotateCcw } from "lucide-react";
+import { ArrowRight, Sparkles, Truck, Shield, RotateCcw, Star } from "lucide-react";
 
 export const revalidate = 60; // Cache page for 60 seconds - revalidates in background
 
@@ -103,12 +103,12 @@ export default async function StorePage() {
               </Link>
             </div>
 
-            <div className="mt-6 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-6 sm:mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
               {categories.map((category) => (
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-100 bg-zinc-50 p-4 sm:p-6 transition-all hover:border-zinc-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-100 bg-zinc-50 p-4 sm:p-6 transition-all hover:border-zinc-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
                 >
                   {category.imageUrl && (
                     <div className="absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20">
@@ -282,6 +282,62 @@ export default async function StorePage() {
                 Hassle-free return and exchange policy.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Reviews Section */}
+      <section className="bg-zinc-50 dark:bg-zinc-950 py-24 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold uppercase tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
+              What Our Athletes Say
+            </h2>
+            <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-400">
+              Real reviews from the OFF-REP community.
+            </p>
+          </div>
+        </div>
+        
+        <div className="relative flex w-full flex-nowrap items-center group">
+          <div className="flex animate-marquee items-center gap-6 whitespace-nowrap px-4 w-max hover:[animation-play-state:paused]">
+            {[
+              { name: "Rahul S.", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
+              { name: "Vikram R.", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
+              { name: "Arjun K.", review: "Finally a brand that understands gym aesthetics. Fits true to size." },
+              { name: "Ravi M.", review: "Washed them multiple times and the fabric is still as good as new. Highly recommend." },
+              { name: "Karan D.", review: "Super fast delivery and the packaging felt really premium. 10/10." },
+              { name: "Aarav P.", review: "The compression shirts actually feel compressive unlike other brands. Love it." }
+            ].map((item, idx) => (
+              <div key={idx} className="w-[280px] sm:w-[320px] whitespace-normal rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-6 shadow-sm shrink-0">
+                <div className="flex text-yellow-400 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="text-zinc-700 dark:text-zinc-300 italic mb-4 leading-relaxed line-clamp-4">"{item.review}"</p>
+                <p className="text-sm font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">— {item.name}</p>
+              </div>
+            ))}
+            {/* Duplicate for infinite marquee effect */}
+            {[
+              { name: "Rahul S.", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
+              { name: "Vikram R.", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
+              { name: "Arjun K.", review: "Finally a brand that understands gym aesthetics. Fits true to size." },
+              { name: "Ravi M.", review: "Washed them multiple times and the fabric is still as good as new. Highly recommend." },
+              { name: "Karan D.", review: "Super fast delivery and the packaging felt really premium. 10/10." },
+              { name: "Aarav P.", review: "The compression shirts actually feel compressive unlike other brands. Love it." }
+            ].map((item, idx) => (
+              <div key={`dup-${idx}`} className="w-[280px] sm:w-[320px] whitespace-normal rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-6 shadow-sm shrink-0">
+                <div className="flex text-yellow-400 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="text-zinc-700 dark:text-zinc-300 italic mb-4 leading-relaxed line-clamp-4">"{item.review}"</p>
+                <p className="text-sm font-bold text-zinc-900 dark:text-zinc-50 uppercase tracking-wide">— {item.name}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
