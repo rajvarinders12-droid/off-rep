@@ -302,12 +302,12 @@ export default async function StorePage() {
         <div className="relative flex w-full flex-nowrap items-center group">
           <div className="flex animate-marquee items-center gap-6 whitespace-nowrap px-4 w-max hover:[animation-play-state:paused]">
             {[
-              { name: "Rahul S.", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
-              { name: "Vikram R.", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
-              { name: "Arjun K.", review: "Finally a brand that understands gym aesthetics. Fits true to size." },
-              { name: "Ravi M.", review: "Washed them multiple times and the fabric is still as good as new. Highly recommend." },
-              { name: "Karan D.", review: "Super fast delivery and the packaging felt really premium. 10/10." },
-              { name: "Aarav P.", review: "The compression shirts actually feel compressive unlike other brands. Love it." }
+              { name: "Gurpreet Singh", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
+              { name: "Vikram Rathore", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
+              { name: "Arjun Kapoor", review: "Finally a brand that understands gym aesthetics. Fits true to size." },
+              { name: "Maninder Dhillon", review: "Washed them multiple times and the fabric is still as good as new. Highly recommend." },
+              { name: "Karan Desai", review: "Super fast delivery and the packaging felt really premium. 10/10." },
+              { name: "Harjot Gill", review: "The compression shirts actually feel compressive unlike other brands. Love it." }
             ].map((item, idx) => (
               <div key={idx} className="w-[280px] sm:w-[320px] whitespace-normal rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-6 shadow-sm shrink-0">
                 <div className="flex text-yellow-400 mb-3">
@@ -321,12 +321,12 @@ export default async function StorePage() {
             ))}
             {/* Duplicate for infinite marquee effect */}
             {[
-              { name: "Rahul S.", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
-              { name: "Vikram R.", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
-              { name: "Arjun K.", review: "Finally a brand that understands gym aesthetics. Fits true to size." },
-              { name: "Ravi M.", review: "Washed them multiple times and the fabric is still as good as new. Highly recommend." },
-              { name: "Karan D.", review: "Super fast delivery and the packaging felt really premium. 10/10." },
-              { name: "Aarav P.", review: "The compression shirts actually feel compressive unlike other brands. Love it." }
+              { name: "Gurpreet Singh", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
+              { name: "Vikram Rathore", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
+              { name: "Arjun Kapoor", review: "Finally a brand that understands gym aesthetics. Fits true to size." },
+              { name: "Maninder Dhillon", review: "Washed them multiple times and the fabric is still as good as new. Highly recommend." },
+              { name: "Karan Desai", review: "Super fast delivery and the packaging felt really premium. 10/10." },
+              { name: "Harjot Gill", review: "The compression shirts actually feel compressive unlike other brands. Love it." }
             ].map((item, idx) => (
               <div key={`dup-${idx}`} className="w-[280px] sm:w-[320px] whitespace-normal rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-6 shadow-sm shrink-0">
                 <div className="flex text-yellow-400 mb-3">
