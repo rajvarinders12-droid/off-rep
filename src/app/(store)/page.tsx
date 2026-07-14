@@ -38,7 +38,7 @@ export default async function StorePage() {
       <section className="relative w-full bg-white dark:bg-zinc-950">
         <Link href="/shop" className="block w-full group overflow-hidden">
           {/* Desktop Banner */}
-          <div className="relative hidden w-full md:block aspect-[2.5/1]">
+          <div className="relative hidden w-full md:block h-[calc(100vh-130px)] min-h-[500px]">
             <Image
               src="/hero-banner.png"
               alt="OFFREP New Collection"
