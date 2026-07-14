@@ -64,41 +64,21 @@ export default async function StorePage() {
         </Link>
       </section>
 
-      {/* Trust Badges */}
-      <section className="border-b border-zinc-100 bg-white dark:border-zinc-800/50 dark:bg-zinc-950">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-zinc-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0 dark:divide-zinc-800/50">
-          {[
-            {
-              icon: Truck,
-              title: "Free Shipping",
-              desc: "On orders above ₹999",
-            },
-            {
-              icon: Shield,
-              title: "Secure Payments",
-              desc: "100% secure checkout",
-            },
-            {
-              icon: RotateCcw,
-              title: "Easy Returns",
-              desc: "7-day return policy",
-            },
-          ].map((badge) => (
-            <div
-              key={badge.title}
-              className="flex items-center gap-4 px-6 py-5 sm:justify-center"
-            >
-              <badge.icon className="h-5 w-5 shrink-0 text-zinc-400 dark:text-zinc-500" />
-              <div>
-                <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-                  {badge.title}
-                </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  {badge.desc}
-                </p>
-              </div>
-            </div>
-          ))}
+      {/* Brand Marquee Section */}
+      <section className="bg-black py-4 sm:py-6 overflow-hidden border-y border-zinc-900">
+        <div className="relative flex w-full flex-nowrap items-center group">
+          <div className="flex animate-marquee items-center gap-8 sm:gap-16 whitespace-nowrap px-4 w-max">
+            {[...Array(12)].map((_, i) => (
+              <React.Fragment key={i}>
+                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-white">Consistency</span>
+                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 invert object-contain" />
+                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-white">Discipline</span>
+                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 invert object-contain" />
+                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-white">Excellence</span>
+                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 invert object-contain" />
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -123,12 +103,12 @@ export default async function StorePage() {
               </Link>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-6 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {categories.map((category) => (
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="group relative overflow-hidden rounded-xl border border-zinc-100 bg-zinc-50 p-6 transition-all hover:border-zinc-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                  className="group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-100 bg-zinc-50 p-4 sm:p-6 transition-all hover:border-zinc-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
                 >
                   {category.imageUrl && (
                     <div className="absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20">
@@ -140,16 +120,16 @@ export default async function StorePage() {
                       />
                     </div>
                   )}
-                  <div className="relative">
-                    <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+                  <div className="relative pr-6 sm:pr-8">
+                    <h3 className="text-sm sm:text-base font-bold sm:font-semibold leading-tight text-zinc-900 dark:text-zinc-50">
                       {category.name}
                     </h3>
-                    <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                    <p className="mt-1 sm:mt-2 text-xs text-zinc-500 dark:text-zinc-400">
                       {category._count.products}{" "}
                       {category._count.products === 1 ? "product" : "products"}
                     </p>
                   </div>
-                  <ArrowRight className="absolute bottom-6 right-6 h-4 w-4 text-zinc-300 transition-all group-hover:translate-x-1 group-hover:text-zinc-600 dark:text-zinc-700 dark:group-hover:text-zinc-400" />
+                  <ArrowRight className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 h-4 w-4 text-zinc-300 transition-all group-hover:translate-x-1 group-hover:text-zinc-600 dark:text-zinc-700 dark:group-hover:text-zinc-400" />
                 </Link>
               ))}
             </div>
