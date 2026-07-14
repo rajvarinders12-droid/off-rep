@@ -84,20 +84,20 @@ export default async function StorePage() {
 
       {/* Categories Section */}
       {categories.length > 0 && (
-        <section className="bg-white py-20 dark:bg-zinc-950">
+        <section className="bg-zinc-950 dark:bg-black py-20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
                   Browse by
                 </p>
-                <h2 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl">
+                <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
                   Categories
                 </h2>
               </div>
               <Link
                 href="/categories"
-                className="hidden items-center gap-1 text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 sm:flex"
+                className="hidden items-center gap-1 text-sm font-medium text-zinc-400 transition-colors hover:text-white sm:flex"
               >
                 View All <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -108,28 +108,31 @@ export default async function StorePage() {
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-100 bg-zinc-50 p-4 sm:p-6 transition-all hover:border-zinc-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-4 sm:p-6 transition-all hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
                 >
                   {category.imageUrl && (
-                    <div className="absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20">
+                    <div className="absolute inset-0 opacity-40 mix-blend-overlay transition-all duration-500 group-hover:opacity-70 group-hover:scale-105">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={category.imageUrl}
                         alt=""
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover grayscale"
                       />
                     </div>
                   )}
-                  <div className="relative pr-6 sm:pr-8">
-                    <h3 className="text-sm sm:text-base font-bold sm:font-semibold leading-tight text-zinc-900 dark:text-zinc-50">
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-80 transition-opacity group-hover:opacity-60" />
+                  
+                  <div className="relative pr-6 sm:pr-8 z-10">
+                    <h3 className="text-sm sm:text-base font-bold sm:font-semibold leading-tight text-white group-hover:text-zinc-50 transition-colors">
                       {category.name}
                     </h3>
-                    <p className="mt-1 sm:mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                    <p className="mt-1 sm:mt-2 text-xs text-zinc-400">
                       {category._count.products}{" "}
                       {category._count.products === 1 ? "product" : "products"}
                     </p>
                   </div>
-                  <ArrowRight className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 h-4 w-4 text-zinc-300 transition-all group-hover:translate-x-1 group-hover:text-zinc-600 dark:text-zinc-700 dark:group-hover:text-zinc-400" />
+                  <ArrowRight className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 h-4 w-4 text-zinc-500 transition-all group-hover:translate-x-1 group-hover:text-white z-10" />
                 </Link>
               ))}
             </div>
