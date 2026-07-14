@@ -259,6 +259,52 @@ export default async function StorePage() {
           )}
         </div>
       </section>
+
+      {/* Why Choose Us Section */}
+      <section className="border-t border-zinc-100 bg-zinc-50 py-24 dark:border-zinc-800/50 dark:bg-zinc-900/50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold uppercase tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
+              Why Choose Us
+            </h2>
+            <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-400">
+              The OFF-REP standard of excellence.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
+              <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-6">
+                <Truck className="w-8 h-8 text-zinc-900 dark:text-zinc-50" />
+              </div>
+              <h3 className="text-xl font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-50 mb-3">Fast & Reliable Shipping</h3>
+              <p className="text-zinc-500 dark:text-zinc-400">
+                We ensure your gear arrives quickly and securely, so you never miss a beat in your training schedule.
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
+              <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-6">
+                <Shield className="w-8 h-8 text-zinc-900 dark:text-zinc-50" />
+              </div>
+              <h3 className="text-xl font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-50 mb-3">Premium Quality</h3>
+              <p className="text-zinc-500 dark:text-zinc-400">
+                Engineered from high-performance materials tested by athletes. Built to endure your toughest workouts.
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
+              <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-6">
+                <RotateCcw className="w-8 h-8 text-zinc-900 dark:text-zinc-50" />
+              </div>
+              <h3 className="text-xl font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-50 mb-3">Easy Returns</h3>
+              <p className="text-zinc-500 dark:text-zinc-400">
+                Not the perfect fit? No problem. We offer a hassle-free return and exchange policy to guarantee your satisfaction.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
