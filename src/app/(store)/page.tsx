@@ -65,17 +65,17 @@ export default async function StorePage() {
       </section>
 
       {/* Brand Marquee Section */}
-      <section className="bg-black py-4 sm:py-6 overflow-hidden border-y border-zinc-900">
+      <section className="bg-white py-4 sm:py-6 overflow-hidden border-y border-zinc-100 dark:bg-zinc-950 dark:border-zinc-900">
         <div className="relative flex w-full flex-nowrap items-center group">
           <div className="flex animate-marquee items-center gap-8 sm:gap-16 whitespace-nowrap px-4 w-max">
             {[...Array(12)].map((_, i) => (
               <React.Fragment key={i}>
-                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-white">Consistency</span>
-                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 invert object-contain" />
-                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-white">Discipline</span>
-                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 invert object-contain" />
-                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-white">Excellence</span>
-                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 invert object-contain" />
+                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-zinc-900 dark:text-white">Consistency</span>
+                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 object-contain dark:invert" />
+                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-zinc-900 dark:text-white">Discipline</span>
+                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 object-contain dark:invert" />
+                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-zinc-900 dark:text-white">Excellence</span>
+                <Image src="/logo.png" alt="logo" width={32} height={32} className="h-6 w-auto sm:h-8 object-contain dark:invert" />
               </React.Fragment>
             ))}
           </div>
