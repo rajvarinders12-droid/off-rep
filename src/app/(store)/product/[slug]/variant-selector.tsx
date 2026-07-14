@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { X } from "lucide-react";
 
 interface ColorVariant {
   name: string;
@@ -158,14 +159,30 @@ export default function VariantSelector({
           </div>
 
           {showSizeChart && sizeChartUrl && (
-            <div className="relative mt-3 h-64 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">
-              <Image
-                src={sizeChartUrl}
-                alt="Size chart"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain"
-              />
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onClick={() => setShowSizeChart(false)}>
+              <div 
+                className="relative flex flex-col max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-xl bg-white dark:bg-zinc-900 shadow-2xl" 
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 p-4 shrink-0">
+                  <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Size Chart</h3>
+                  <button 
+                    onClick={() => setShowSizeChart(false)}
+                    className="rounded-full p-2 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+                <div className="relative h-[60vh] md:h-[70vh] w-full p-4 bg-zinc-50 dark:bg-zinc-950/50">
+                  <Image
+                    src={sizeChartUrl}
+                    alt="Size chart"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    className="object-contain p-4"
+                  />
+                </div>
+              </div>
             </div>
           )}
         </div>
