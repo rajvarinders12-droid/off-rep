@@ -261,45 +261,45 @@ export default async function StorePage() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="border-t border-zinc-100 bg-zinc-50 py-24 dark:border-zinc-800/50 dark:bg-zinc-900/50">
+      <section className="bg-zinc-950 dark:bg-black py-24 text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold uppercase tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
+            <h2 className="text-3xl font-bold uppercase tracking-tight text-white sm:text-4xl">
               Why Choose Us
             </h2>
-            <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-400">
+            <p className="mt-4 text-lg text-zinc-400">
               The OFF-REP standard of excellence.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
-              <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-6">
-                <Truck className="w-8 h-8 text-zinc-900 dark:text-zinc-50" />
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+            <div className="w-[calc(50%-0.5rem)] md:flex-1 min-w-[140px] flex flex-col items-center text-center p-4 sm:p-6 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800 hover:shadow-2xl transition-all">
+              <div className="p-3 sm:p-4 bg-zinc-800 rounded-full mb-4 sm:mb-6">
+                <Truck className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-50 mb-3">Fast & Reliable Shipping</h3>
-              <p className="text-zinc-500 dark:text-zinc-400">
-                We ensure your gear arrives quickly and securely, so you never miss a beat in your training schedule.
+              <h3 className="text-sm sm:text-lg md:text-xl font-bold uppercase tracking-wide text-white mb-2 sm:mb-3">Fast Shipping</h3>
+              <p className="text-xs sm:text-sm md:text-base text-zinc-400">
+                We ensure your gear arrives quickly and securely.
               </p>
             </div>
             
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
-              <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-6">
-                <Shield className="w-8 h-8 text-zinc-900 dark:text-zinc-50" />
+            <div className="w-[calc(50%-0.5rem)] md:flex-1 min-w-[140px] flex flex-col items-center text-center p-4 sm:p-6 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800 hover:shadow-2xl transition-all">
+              <div className="p-3 sm:p-4 bg-zinc-800 rounded-full mb-4 sm:mb-6">
+                <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-50 mb-3">Premium Quality</h3>
-              <p className="text-zinc-500 dark:text-zinc-400">
-                Engineered from high-performance materials tested by athletes. Built to endure your toughest workouts.
+              <h3 className="text-sm sm:text-lg md:text-xl font-bold uppercase tracking-wide text-white mb-2 sm:mb-3">Premium Quality</h3>
+              <p className="text-xs sm:text-sm md:text-base text-zinc-400">
+                Engineered from high-performance materials.
               </p>
             </div>
             
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-xl transition-shadow">
-              <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-6">
-                <RotateCcw className="w-8 h-8 text-zinc-900 dark:text-zinc-50" />
+            <div className="w-[calc(50%-0.5rem)] md:flex-1 min-w-[140px] flex flex-col items-center text-center p-4 sm:p-6 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800 hover:shadow-2xl transition-all">
+              <div className="p-3 sm:p-4 bg-zinc-800 rounded-full mb-4 sm:mb-6">
+                <RotateCcw className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-50 mb-3">Easy Returns</h3>
-              <p className="text-zinc-500 dark:text-zinc-400">
-                Not the perfect fit? No problem. We offer a hassle-free return and exchange policy to guarantee your satisfaction.
+              <h3 className="text-sm sm:text-lg md:text-xl font-bold uppercase tracking-wide text-white mb-2 sm:mb-3">Easy Returns</h3>
+              <p className="text-xs sm:text-sm md:text-base text-zinc-400">
+                Hassle-free return and exchange policy.
               </p>
             </div>
           </div>
