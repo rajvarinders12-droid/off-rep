@@ -84,20 +84,20 @@ export default async function StorePage() {
 
       {/* Categories Section */}
       {categories.length > 0 && (
-        <section className="bg-white py-20 dark:bg-zinc-950">
+        <section className="bg-zinc-950 dark:bg-black py-20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
                   Browse by
                 </p>
-                <h2 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl">
+                <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
                   Categories
                 </h2>
               </div>
               <Link
                 href="/categories"
-                className="hidden items-center gap-1 text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 sm:flex"
+                className="hidden items-center gap-1 text-sm font-medium text-zinc-400 transition-colors hover:text-white sm:flex"
               >
                 View All <ArrowRight className="h-3.5 w-3.5" />
               </Link>
