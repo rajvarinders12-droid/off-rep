@@ -5,6 +5,8 @@ import { db } from "@/lib/db";
 import { ArrowLeft, Package, Truck, User, MapPin, Receipt, CreditCard } from "lucide-react";
 import StatusSelect from "../status-select";
 import DownloadPdfButton from "./download-pdf-button";
+import InvoiceTemplate from "./invoice-template";
+import DeleteOrderButton from "./delete-order-button";
 
 export default async function OrderDetailsPage({
   params,
@@ -36,27 +38,30 @@ export default async function OrderDetailsPage({
   const subtotal = totalPriceNum - shippingCost;
 
   return (
-    <div className="space-y-6 max-w-5xl" id="order-details-container">
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/admin/orders"
-            className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors print:hidden"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">Order #{order.id.slice(0, 8)}...</h1>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              Placed on {new Date(order.createdAt).toLocaleString("en-IN")}
-            </p>
+    <>
+      <InvoiceTemplate order={order} />
+      <div className="space-y-6 max-w-5xl print:hidden" id="order-details-container">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/admin/orders"
+              className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight">Order #{order.id.slice(0, 8)}...</h1>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                Placed on {new Date(order.createdAt).toLocaleString("en-IN")}
+              </p>
+            </div>
+          </div>
+          <div className="sm:ml-auto flex flex-wrap items-center gap-3">
+            <DeleteOrderButton orderId={order.id} />
+            <DownloadPdfButton orderId={order.id} />
+            <StatusSelect orderId={order.id} currentStatus={order.status} />
           </div>
         </div>
-        <div className="sm:ml-auto flex flex-wrap items-center gap-3 print:hidden">
-          <DownloadPdfButton orderId={order.id} />
-          <StatusSelect orderId={order.id} currentStatus={order.status} />
-        </div>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Column: Items & Summary */}
@@ -190,5 +195,6 @@ export default async function OrderDetailsPage({
         </div>
       </div>
     </div>
+    </>
   );
 }

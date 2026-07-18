@@ -133,14 +133,29 @@ export default function AdminLayout({
       <div className="lg:pl-64 flex-1 flex flex-col min-h-screen w-full print:pl-0">
         {/* Top Navbar */}
         <header className="sticky top-0 z-10 flex h-16 items-center justify-between lg:justify-end border-b border-zinc-200 bg-white px-4 sm:px-8 dark:border-zinc-800 dark:bg-zinc-900 print:hidden">
-          <div className="flex items-center gap-3 lg:hidden">
+          <div className="flex items-center gap-1 sm:gap-2 lg:hidden flex-wrap">
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
+              className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 mr-2 p-1"
+              title="Menu"
             >
               <Menu className="h-6 w-6" />
             </button>
-            <span className="font-bold text-zinc-900 dark:text-zinc-50">Admin Panel</span>
+            <Link href="/admin/dashboard" className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" title="Dashboard">
+              <LayoutDashboard className="h-5 w-5" />
+            </Link>
+            <Link href="/admin/products" className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" title="Products">
+              <ShoppingBag className="h-5 w-5" />
+            </Link>
+            <Link href="/admin/categories" className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" title="Categories">
+              <FolderTree className="h-5 w-5" />
+            </Link>
+            <Link href="/admin/orders" className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" title="Orders">
+              <Receipt className="h-5 w-5" />
+            </Link>
+            <Link href="/admin/coupons" className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50" title="Coupons">
+              <Tag className="h-5 w-5" />
+            </Link>
           </div>
 
           <div className="flex items-center gap-2">
