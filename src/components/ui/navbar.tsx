@@ -73,7 +73,7 @@ export default function Navbar({ user }: NavbarProps) {
 
           {/* Center: Logo */}
           <div className="flex flex-1 items-center justify-center">
-            <Link href="/" className="relative flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+            <Link href="/" className="relative flex items-center justify-center transition-transform hover:scale-105 md:hover:scale-100 active:scale-95 md:active:scale-100">
               <Image
                 src="/logo.png"
                 alt="OFF-REP"
