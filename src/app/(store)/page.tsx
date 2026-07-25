@@ -44,13 +44,13 @@ export default async function StorePage() {
         <div className="hidden lg:block w-full h-full relative max-w-[1800px] mx-auto z-10">
           
           {/* Top Center: Massive Metallic Text */}
-          <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[90%] max-w-[1400px] h-[35vh] z-20 pointer-events-none">
+          <div className="absolute top-4 xl:top-8 left-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[40vh] z-20 pointer-events-none">
             <Image 
               src="/metallic.png" 
               alt="OFF-REP" 
               fill 
               sizes="100vw"
-              className="object-contain object-top drop-shadow-2xl scale-[1.15]" 
+              className="object-contain object-top drop-shadow-2xl scale-[1.3] xl:scale-[1.4]" 
               priority 
             />
           </div>
@@ -80,19 +80,19 @@ export default async function StorePage() {
           </div>
 
           {/* Bottom Center: Minimal Text & Button */}
-          <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-30 w-full max-w-lg pointer-events-none">
-            <h2 className="text-4xl xl:text-5xl font-black uppercase tracking-[0.1em] text-zinc-900 dark:text-zinc-50 leading-[1.1]">
+          <div className="absolute bottom-12 xl:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-30 w-full max-w-lg pointer-events-none">
+            <h2 className="text-2xl xl:text-3xl font-black uppercase tracking-[0.15em] text-zinc-900 dark:text-zinc-50 leading-[1.2]">
               Built In Silence. <br /> Reps Speak.
             </h2>
-            <p className="mt-5 mb-10 text-sm xl:text-base text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-[0.3em]">
+            <p className="mt-4 mb-8 text-xs xl:text-sm text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-[0.3em]">
               Premium Engineered Sportswear
             </p>
             <Link 
               href="/shop" 
-              className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-14 py-6 text-lg font-black uppercase tracking-[0.25em] text-white shadow-2xl transition-transform hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 pointer-events-auto"
+              className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-12 py-5 text-sm xl:text-base font-black uppercase tracking-[0.25em] text-white shadow-2xl transition-transform hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 pointer-events-auto"
             >
               Shop All
-              <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="h-5 w-5 xl:h-6 xl:w-6 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </div>
@@ -101,39 +101,39 @@ export default async function StorePage() {
         <div className="flex lg:hidden flex-col h-full w-full relative z-20">
           
           {/* Top: Massive Metallic Text (Bleeds off edges to be huge) */}
-          <div className="relative w-[160vw] -ml-[30vw] h-[22vh] shrink-0 mt-6 pointer-events-none">
+          <div className="relative w-[180vw] -ml-[40vw] h-[22vh] shrink-0 mt-4 pointer-events-none">
             <Image 
               src="/metallic.png" 
               alt="OFF-REP" 
               fill 
               sizes="100vw"
-              className="object-contain object-center drop-shadow-xl" 
+              className="object-contain object-center drop-shadow-xl scale-[1.4]" 
               priority 
             />
           </div>
 
           {/* Middle: Text & Button */}
           <div className="flex flex-col items-center text-center px-4 shrink-0 mt-2 z-30">
-            <h2 className="text-[1.75rem] leading-[1.1] sm:text-4xl font-black uppercase tracking-[0.05em] text-zinc-900 dark:text-zinc-50 drop-shadow-sm">
+            <h2 className="text-xl sm:text-2xl font-black uppercase tracking-[0.1em] text-zinc-900 dark:text-zinc-50 drop-shadow-sm leading-snug">
               Built In Silence. <br /> Reps Speak.
             </h2>
             <Link 
               href="/shop" 
-              className="group mt-6 flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-12 py-5 text-sm sm:text-base font-black uppercase tracking-[0.2em] text-white shadow-xl active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+              className="group mt-5 flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-10 py-4 text-sm font-black uppercase tracking-[0.2em] text-white shadow-xl active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
             >
               Shop All
-              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
           {/* Bottom: Seated Model (Fills remaining exact height) */}
-          <div className="relative w-[140vw] -ml-[20vw] flex-1 mt-4 sm:mt-6 pointer-events-none overflow-hidden">
+          <div className="relative w-full flex-1 mt-2 sm:mt-4 pointer-events-none overflow-hidden">
             <Image 
               src="/hero-model-seated.png" 
               alt="OFFREP Athlete Seated" 
               fill 
               sizes="100vw"
-              className="object-contain object-bottom drop-shadow-2xl origin-bottom" 
+              className="object-contain object-bottom drop-shadow-2xl scale-[1.3] sm:scale-125 origin-bottom" 
               priority 
             />
           </div>
