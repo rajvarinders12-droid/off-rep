@@ -133,23 +133,7 @@ export default async function StorePage() {
         </div>
       </section>
 
-      {/* Brand Marquee Section */}
-      <section className="bg-white py-4 sm:py-6 overflow-hidden border-t border-zinc-100 border-b-2 border-b-zinc-900 dark:bg-zinc-950 dark:border-t-zinc-900 dark:border-b-black">
-        <div className="relative flex w-full flex-nowrap items-center group">
-          <div className="flex animate-marquee items-center gap-8 sm:gap-16 whitespace-nowrap px-4 w-max">
-            {[...Array(12)].map((_, i) => (
-              <React.Fragment key={i}>
-                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-zinc-900 dark:text-white">Consistency</span>
-                <Image src="/logo.png" alt="logo" width={32} height={32} style={{ width: "auto" }} className="h-6 sm:h-8 object-contain dark:invert" />
-                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-zinc-900 dark:text-white">Discipline</span>
-                <Image src="/logo.png" alt="logo" width={32} height={32} style={{ width: "auto" }} className="h-6 sm:h-8 object-contain dark:invert" />
-                <span className="text-xl sm:text-2xl font-black uppercase italic tracking-widest text-zinc-900 dark:text-white">Excellence</span>
-                <Image src="/logo.png" alt="logo" width={32} height={32} style={{ width: "auto" }} className="h-6 sm:h-8 object-contain dark:invert" />
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Categories Section */}
       {categories.length > 0 && (
