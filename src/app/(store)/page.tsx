@@ -34,62 +34,86 @@ export default async function StorePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Symmetrical Centered Hero Section */}
-      <section className="relative w-full overflow-hidden bg-white dark:bg-zinc-950 min-h-[85vh] lg:min-h-[calc(100vh-80px)] flex flex-col justify-end pb-8 lg:pb-0 pt-20 border-b border-zinc-200 dark:border-zinc-800">
+      {/* Immersive Center-Focused Hero Section */}
+      <section className="relative w-full min-h-[90vh] lg:min-h-[calc(100vh-80px)] overflow-hidden bg-white dark:bg-zinc-950 flex flex-col pt-24 lg:pt-32 border-b border-zinc-200 dark:border-zinc-800">
         
-        {/* Center Metallic Font/Image Background */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 px-4">
-          <div className="relative w-full max-w-[1400px] aspect-[21/9] opacity-100 drop-shadow-2xl">
-             <Image src="/metallic.png" alt="OFFREP Metallic" fill className="object-contain" priority />
+        {/* Ambient Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-zinc-950/50 dark:to-zinc-950 z-0 pointer-events-none" />
+
+        {/* ---------------- DESKTOP MODELS (Absolute Sides) ---------------- */}
+        <div className="absolute inset-0 max-w-[1800px] mx-auto pointer-events-none z-10 hidden lg:block">
+          {/* Left Model (Standing) */}
+          <div className="absolute bottom-0 left-0 xl:left-8 w-[45%] max-w-[600px] h-[95%]">
+            <Image 
+              src="/h1.png" 
+              alt="OFFREP Athlete Standing" 
+              fill 
+              sizes="45vw"
+              className="object-contain object-bottom drop-shadow-[0_30px_40px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_30px_40px_rgba(255,255,255,0.05)] opacity-95 transition-transform duration-1000 hover:scale-[1.02]" 
+              priority 
+            />
+          </div>
+          {/* Right Model (Seated) */}
+          <div className="absolute bottom-0 right-0 xl:right-8 w-[45%] max-w-[650px] h-[105%]">
+            <Image 
+              src="/hero-model-seated.png" 
+              alt="OFFREP Athlete Seated" 
+              fill 
+              sizes="45vw"
+              className="object-contain object-bottom drop-shadow-[0_35px_50px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_35px_50px_rgba(255,255,255,0.08)] transition-transform duration-1000 hover:scale-[1.02]" 
+              priority 
+            />
           </div>
         </div>
 
-        {/* Ambient Glows */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-zinc-950 z-[1] pointer-events-none" />
-
-        {/* Main Content Area (Z-Index 10 for models and text) */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col h-full flex-1">
+        {/* ---------------- MAIN CENTER CONTENT ---------------- */}
+        <div className="relative z-30 flex flex-col items-center flex-none w-full px-4 lg:pt-12">
           
-          {/* Models Container */}
-          <div className="relative flex-1 w-full min-h-[50vh] lg:min-h-[60vh] flex items-end justify-center lg:justify-between px-0 lg:px-4 pointer-events-none">
-            {/* Left Model (Standing) - Desktop Only */}
-            <div className="hidden lg:block relative w-[40%] max-w-[450px] h-[95%] z-20 transition-transform duration-700 hover:scale-[1.02]">
-              <Image
-                src="/hero-model-back.png"
-                alt="OFFREP Athlete Standing"
-                fill
-                priority
-                sizes="40vw"
-                className="object-contain object-bottom drop-shadow-[0_20px_25px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_20px_25px_rgba(255,255,255,0.05)]"
-              />
-            </div>
-
-            {/* Right Model (Seated) - Visible on all screens */}
-            <div className="relative w-[90%] sm:w-[70%] lg:w-[45%] max-w-[500px] h-[95%] lg:h-[105%] z-20 transition-transform duration-700 hover:scale-[1.02] -mb-4 lg:-mb-10">
-              <Image
-                src="/hero-model-seated.png"
-                alt="OFFREP Athlete Seated"
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 45vw"
-                className="object-contain object-bottom drop-shadow-[0_25px_35px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_25px_35px_rgba(255,255,255,0.07)]"
-              />
-            </div>
+          {/* Metallic Font (Big, Upper Center) */}
+          <div className="relative w-[92vw] sm:w-[80vw] md:w-[70vw] lg:max-w-[900px] aspect-[4/1] mb-8 lg:mb-12">
+            <Image 
+              src="/metallic.png" 
+              alt="OFF-REP" 
+              fill 
+              sizes="(max-width: 1024px) 90vw, 900px"
+              className="object-contain filter drop-shadow-2xl" 
+              priority 
+            />
           </div>
-
-          {/* Central Foreground Button */}
-          <div className="relative z-30 flex flex-col items-center justify-center mt-8 lg:mt-0 lg:absolute lg:bottom-16 lg:left-1/2 lg:-translate-x-1/2 gap-6 pointer-events-auto">
-            
-            <Link
-              href="/shop"
-              className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-10 py-5 text-sm md:text-base font-black uppercase tracking-widest text-white shadow-2xl transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 hover:shadow-zinc-900/40 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 dark:hover:shadow-white/20"
-            >
-              Shop All
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            
+          
+          {/* Minimal Text Container */}
+          <div className="text-center mb-10 max-w-xl backdrop-blur-sm bg-white/30 dark:bg-zinc-950/30 p-6 rounded-3xl lg:bg-transparent lg:dark:bg-transparent lg:p-0 lg:backdrop-blur-none">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black uppercase tracking-[0.15em] text-zinc-900 dark:text-zinc-50 leading-tight">
+              Built In Silence. <br className="lg:hidden"/> Reps Speak.
+            </h2>
+            <p className="mt-4 text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-[0.25em]">
+              Premium Engineered Sportswear
+            </p>
           </div>
+          
+          {/* Shop All Button */}
+          <Link
+            href="/shop"
+            className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-12 py-5 text-sm lg:text-base font-black uppercase tracking-[0.25em] text-white shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 pointer-events-auto"
+          >
+            Shop All
+            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
+
+        {/* ---------------- MOBILE MODEL (Bottom Flex) ---------------- */}
+        {/* Visible only on mobile/tablet to utilize empty space at the bottom */}
+        <div className="relative z-10 w-full flex-1 min-h-[45vh] mt-12 lg:hidden pointer-events-none">
+          <Image 
+            src="/hero-model-seated.png" 
+            alt="OFFREP Athlete Seated" 
+            fill 
+            sizes="100vw"
+            className="object-contain object-bottom drop-shadow-[0_25px_35px_rgba(0,0,0,0.3)]" 
+            priority 
+          />
+        </div>
+
       </section>
 
 
