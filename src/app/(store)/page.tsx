@@ -47,7 +47,7 @@ export default async function StorePage() {
             alt="OFFREP Desktop Poster" 
             fill 
             sizes="100vw"
-            className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" 
+            className="object-contain object-center transition-transform duration-1000 group-hover:scale-[1.02]" 
             priority 
           />
           {/* Subtle overlay that fades on hover to indicate clickability */}
