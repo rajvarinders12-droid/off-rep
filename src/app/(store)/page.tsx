@@ -40,62 +40,19 @@ export default async function StorePage() {
         {/* Ambient Gradient Layer */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/40 dark:to-zinc-950/80 z-0 pointer-events-none" />
 
-        {/* ======================= DESKTOP LAYOUT (Absolute Positioning) ======================= */}
-        <div className="hidden lg:block w-full h-full relative max-w-[1800px] mx-auto z-10">
-          
-          {/* Top Center: Massive Metallic Text */}
-          <div className="absolute top-4 xl:top-8 left-1/2 -translate-x-1/2 w-full max-w-[1600px] h-[40vh] z-20 pointer-events-none">
-            <Image 
-              src="/metallic.png" 
-              alt="OFF-REP" 
-              fill 
-              sizes="100vw"
-              className="object-contain object-top drop-shadow-2xl scale-[1.3] xl:scale-[1.4]" 
-              priority 
-            />
-          </div>
-
-          {/* Left Model (h1.png) */}
-          <div className="absolute bottom-0 -left-4 xl:left-8 w-[45%] max-w-[650px] h-[85%] z-10 pointer-events-none">
-            <Image 
-              src="/h1.png" 
-              alt="OFFREP Athlete Standing" 
-              fill 
-              sizes="50vw"
-              className="object-contain object-bottom drop-shadow-[0_30px_50px_rgba(0,0,0,0.3)] transition-transform duration-1000" 
-              priority 
-            />
-          </div>
-
-          {/* Right Model (Seated) */}
-          <div className="absolute bottom-0 -right-4 xl:right-8 w-[45%] max-w-[700px] h-[95%] z-10 pointer-events-none">
-            <Image 
-              src="/hero-model-seated.png" 
-              alt="OFFREP Athlete Seated" 
-              fill 
-              sizes="50vw"
-              className="object-contain object-bottom drop-shadow-[0_35px_50px_rgba(0,0,0,0.4)] transition-transform duration-1000" 
-              priority 
-            />
-          </div>
-
-          {/* Bottom Center: Minimal Text & Button */}
-          <div className="absolute bottom-12 xl:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-30 w-full max-w-lg pointer-events-none">
-            <h2 className="text-2xl xl:text-3xl font-black uppercase tracking-[0.15em] text-zinc-900 dark:text-zinc-50 leading-[1.2]">
-              Built In Silence. <br /> Reps Speak.
-            </h2>
-            <p className="mt-4 mb-8 text-xs xl:text-sm text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-[0.3em]">
-              Premium Engineered Sportswear
-            </p>
-            <Link 
-              href="/shop" 
-              className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-12 py-5 text-sm xl:text-base font-black uppercase tracking-[0.25em] text-white shadow-2xl transition-transform hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 pointer-events-auto"
-            >
-              Shop All
-              <ArrowRight className="h-5 w-5 xl:h-6 xl:w-6 group-hover:translate-x-2 transition-transform" />
-            </Link>
-          </div>
-        </div>
+        {/* ======================= DESKTOP LAYOUT (Poster Image) ======================= */}
+        <Link href="/shop" className="hidden lg:block w-full h-full relative group z-10 overflow-hidden cursor-pointer">
+          <Image 
+            src="/p1.png" 
+            alt="OFFREP Desktop Poster" 
+            fill 
+            sizes="100vw"
+            className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]" 
+            priority 
+          />
+          {/* Subtle overlay that fades on hover to indicate clickability */}
+          <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
+        </Link>
 
         {/* ======================= MOBILE LAYOUT (No-Scroll Flexbox) ======================= */}
         <div className="flex lg:hidden flex-col h-full w-full relative z-20">
