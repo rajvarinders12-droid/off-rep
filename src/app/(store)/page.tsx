@@ -34,84 +34,60 @@ export default async function StorePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Ultra-Clean Split Hero Section */}
-      <section className="relative w-full overflow-hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 pt-24 lg:pt-32 pb-16 lg:pb-0">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[65vh] lg:min-h-[75vh]">
+      {/* Symmetrical Centered Hero Section */}
+      <section className="relative w-full overflow-hidden bg-white dark:bg-zinc-950 min-h-[85vh] lg:min-h-[calc(100vh-80px)] flex flex-col justify-end pb-8 lg:pb-0 pt-20 border-b border-zinc-200 dark:border-zinc-800">
+        
+        {/* Center Metallic Font/Image Background */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 px-4">
+          <div className="relative w-full max-w-[1400px] aspect-[21/9] opacity-100 drop-shadow-2xl">
+             <Image src="/metallic.png" alt="OFFREP Metallic" fill className="object-contain" priority />
+          </div>
+        </div>
+
+        {/* Ambient Glows */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-zinc-950 z-[1] pointer-events-none" />
+
+        {/* Main Content Area (Z-Index 10 for models and text) */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col h-full flex-1">
+          
+          {/* Models Container */}
+          <div className="relative flex-1 w-full min-h-[50vh] lg:min-h-[60vh] flex items-end justify-center lg:justify-between px-0 lg:px-4 pointer-events-none">
+            {/* Left Model (Standing) - Desktop Only */}
+            <div className="hidden lg:block relative w-[40%] max-w-[450px] h-[95%] z-20 transition-transform duration-700 hover:scale-[1.02]">
+              <Image
+                src="/hero-model-back.png"
+                alt="OFFREP Athlete Standing"
+                fill
+                priority
+                sizes="40vw"
+                className="object-contain object-bottom drop-shadow-[0_20px_25px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_20px_25px_rgba(255,255,255,0.05)]"
+              />
+            </div>
+
+            {/* Right Model (Seated) - Visible on all screens */}
+            <div className="relative w-[90%] sm:w-[70%] lg:w-[45%] max-w-[500px] h-[95%] lg:h-[105%] z-20 transition-transform duration-700 hover:scale-[1.02] -mb-4 lg:-mb-10">
+              <Image
+                src="/hero-model-seated.png"
+                alt="OFFREP Athlete Seated"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 45vw"
+                className="object-contain object-bottom drop-shadow-[0_25px_35px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_25px_35px_rgba(255,255,255,0.07)]"
+              />
+            </div>
+          </div>
+
+          {/* Central Foreground Button */}
+          <div className="relative z-30 flex flex-col items-center justify-center mt-8 lg:mt-0 lg:absolute lg:bottom-16 lg:left-1/2 lg:-translate-x-1/2 gap-6 pointer-events-auto">
             
-            {/* Left Column: Minimalist Typography & CTA */}
-            <div className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left z-20">
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black italic uppercase tracking-tighter text-zinc-900 dark:text-white leading-[0.9]">
-                OFF<br className="hidden lg:block"/>REP
-              </h1>
-              
-              <div className="mt-8 flex flex-col items-center lg:items-start">
-                <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-zinc-800 dark:text-zinc-200">
-                  Built In Silence.
-                </h2>
-                <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-zinc-500 dark:text-zinc-400">
-                  Reps Speak.
-                </h2>
-                <p className="mt-4 text-sm font-medium text-zinc-600 dark:text-zinc-500 max-w-sm">
-                  Premium Engineered Sportswear.
-                </p>
-              </div>
-
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Link
-                  href="/shop"
-                  className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
-                >
-                  Shop OFFREP
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  href="/about"
-                  className="flex items-center justify-center rounded-full border-2 border-zinc-900 bg-transparent px-8 py-4 text-sm font-bold uppercase tracking-wider text-zinc-900 transition-all duration-300 hover:bg-zinc-900 hover:text-white hover:scale-105 active:scale-95 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-zinc-900"
-                >
-                  Explore More
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column: Master Visual Composition of Both Models */}
-            <div className="lg:col-span-7 relative flex items-end justify-center w-full min-h-[50vh] lg:min-h-[75vh] mt-8 lg:mt-0 z-10">
-              
-              {/* Subtle Background Watermark behind models */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] lg:text-[12vw] font-black italic uppercase text-zinc-50 dark:text-zinc-900/50 pointer-events-none select-none -skew-x-6">
-                OR
-              </div>
-
-              {/* Composition Container */}
-              <div className="relative w-full max-w-[700px] h-full flex items-end justify-center lg:justify-end">
-                
-                {/* Left/Background Model (Standing) */}
-                <div className="absolute bottom-0 left-0 lg:-left-12 w-[55%] max-w-[350px] aspect-[3/4] z-10 transition-transform duration-700 hover:scale-[1.02] opacity-95">
-                  <Image
-                    src="/hero-model-back.png"
-                    alt="OFFREP Athlete Standing"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 50vw, 350px"
-                    className="object-contain object-bottom drop-shadow-xl dark:drop-shadow-[0_20px_25px_rgba(255,255,255,0.03)]"
-                  />
-                </div>
-
-                {/* Right/Foreground Model (Seated) */}
-                <div className="relative w-[70%] max-w-[450px] aspect-[4/5] z-20 transition-transform duration-700 hover:scale-[1.02] ml-auto">
-                  <Image
-                    src="/hero-model-seated.png"
-                    alt="OFFREP Athlete Seated"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 70vw, 450px"
-                    className="object-contain object-bottom drop-shadow-2xl dark:drop-shadow-[0_25px_35px_rgba(255,255,255,0.08)]"
-                  />
-                </div>
-
-              </div>
-            </div>
-
+            <Link
+              href="/shop"
+              className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-10 py-5 text-sm md:text-base font-black uppercase tracking-widest text-white shadow-2xl transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 hover:shadow-zinc-900/40 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 dark:hover:shadow-white/20"
+            >
+              Shop All
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+            
           </div>
         </div>
       </section>
