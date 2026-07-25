@@ -34,85 +34,101 @@ export default async function StorePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Luxury Interactive Hero Section */}
+      {/* Engineered Luxury Editorial Hero Section */}
       <section className="relative w-full overflow-hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800">
-        {/* --- DESKTOP / TABLET HERO VIEW (Master Poster) --- */}
-        <div className="relative hidden md:block w-full aspect-[16/9] max-h-[88vh] bg-zinc-100 dark:bg-zinc-900 overflow-hidden group">
-          <Link href="/shop" className="block w-full h-full relative">
-            <Image
-              src="/desktop-hero-poster.png"
-              alt="OFFREP Built In Silence Reps Speak - Desktop Master Poster"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.01]"
-            />
-          </Link>
-
-          {/* Interactive Floating CTA Console at Bottom Center */}
-          <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 sm:gap-6 z-20 pointer-events-auto">
-            <Link
-              href="/shop"
-              className="group flex items-center gap-3 rounded-full bg-zinc-900 px-8 py-3.5 md:px-10 md:py-4 text-sm md:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 hover:shadow-zinc-900/50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
-            >
-              Shop OFFREP
-              <ArrowRight className="h-4 w-4 md:h-5 md:w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/about"
-              className="flex items-center gap-2 rounded-full border-2 border-zinc-900/80 bg-white/70 backdrop-blur-md px-8 py-3.5 md:px-9 md:py-4 text-sm md:text-base font-bold text-zinc-900 shadow-xl transition-all duration-300 hover:border-zinc-900 hover:bg-white hover:scale-105 active:scale-95 dark:border-white/80 dark:bg-black/60 dark:text-white dark:hover:bg-black"
-            >
-              Explore More
-            </Link>
-          </div>
+        {/* Background AI Titanium Brand Backdrop */}
+        <div className="absolute inset-0 z-0 opacity-40 dark:opacity-20 pointer-events-none overflow-hidden">
+          <Image
+            src="/hero-studio-bg.jpg"
+            alt="OFFREP Metallic Studio Backdrop"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
         </div>
 
-        {/* --- MOBILE HERO VIEW (Small screens) --- */}
-        <div className="relative block md:hidden w-full overflow-hidden bg-gradient-to-b from-white via-zinc-50 to-zinc-200 dark:from-zinc-950 dark:via-zinc-900 dark:to-black px-4 pt-8 pb-12">
-          <div className="flex flex-col items-center justify-between min-h-[85vh] w-full z-10">
-            {/* Top Brand Tag */}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white/90 backdrop-blur-md px-3.5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-zinc-800 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-200 z-20">
-              Built In Silence • Reps Speak
-            </span>
+        {/* Ambient Gradient Masks for High Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-zinc-950 dark:via-zinc-950/80 dark:to-transparent z-[1] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/60 dark:from-zinc-950 dark:via-transparent dark:to-zinc-950/60 z-[1] pointer-events-none" />
 
-            {/* Center Brand Title */}
-            <div className="mt-6 flex flex-col items-center text-center z-20">
-              <h1 className="text-[16vw] font-black italic tracking-tight uppercase leading-none select-none drop-shadow-xl bg-gradient-to-b from-zinc-900 via-black to-zinc-700 dark:from-white dark:via-zinc-200 dark:to-zinc-500 bg-clip-text text-transparent transform -skew-x-6">
-                OFF-REP
+        {/* Main Responsive Grid Container */}
+        <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[65vh] xl:min-h-[72vh]">
+            
+            {/* LEFT COLUMN: Luxury Typography & Clear Interactive Console (Span 7) */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-left max-w-2xl pt-4 lg:pt-0">
+              {/* Brand Tag */}
+              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-300 bg-white/90 backdrop-blur-md px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-zinc-900 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-100 mb-6">
+                <Sparkles className="h-3.5 w-3.5 text-zinc-900 dark:text-zinc-100 fill-zinc-900 dark:fill-zinc-100 animate-pulse" />
+                Built In Silence • Reps Speak
+              </div>
+
+              {/* Colossal Responsive Headline */}
+              <h1 className="text-4xl sm:text-6xl xl:text-7xl font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-[1.05]">
+                Engineered For <br />
+                <span className="italic bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-500 dark:from-white dark:via-zinc-200 dark:to-zinc-500 bg-clip-text text-transparent drop-shadow-sm">
+                  The Relentless.
+                </span>
               </h1>
-              <p className="mt-2 text-xs font-semibold tracking-[0.25em] text-zinc-600 dark:text-zinc-400 uppercase">
-                Premium Sportswear
+
+              {/* Brand Philosophy Subtitle */}
+              <p className="mt-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 font-medium leading-relaxed max-w-xl">
+                OFFREP is more than a sportswear brand. It represents discipline, consistency, and an uncompromising will to outwork everyone in high-performance luxury attire.
               </p>
+
+              {/* Clean CTA Buttons (No Overlapping with Photos) */}
+              <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5">
+                <Link
+                  href="/shop"
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-8 py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 hover:shadow-zinc-900/40 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 dark:hover:shadow-white/20"
+                >
+                  Shop OFFREP
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-zinc-300 bg-white/70 backdrop-blur-md px-8 py-4 text-sm sm:text-base font-bold text-zinc-900 transition-all duration-300 hover:border-zinc-900 hover:bg-white hover:scale-105 active:scale-95 dark:border-zinc-700 dark:bg-zinc-900/70 dark:text-white dark:hover:border-white dark:hover:bg-zinc-900"
+                >
+                  Explore More
+                </Link>
+              </div>
+
+              {/* Trust & Quality Indicators */}
+              <div className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 grid grid-cols-3 gap-4 max-w-md">
+                <div>
+                  <h4 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-wider">Heavyweight</h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Premium GSM Fabric</p>
+                </div>
+                <div>
+                  <h4 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-wider">Ergonomic</h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Tapered Gym Fit</p>
+                </div>
+                <div>
+                  <h4 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-wider">Excellence</h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Built To Endure</p>
+                </div>
+              </div>
             </div>
 
-            {/* Mobile Athlete Display */}
-            <div className="relative w-4/5 max-w-[360px] h-[46vh] my-4 pointer-events-none z-10">
-              <Image
-                src="/hero-model-seated.png"
-                alt="OFFREP Athlete"
-                fill
-                sizes="90vw"
-                priority
-                className="object-contain object-bottom drop-shadow-[0_20px_25px_rgba(0,0,0,0.35)] dark:drop-shadow-[0_20px_25px_rgba(255,255,255,0.06)]"
-              />
+            {/* RIGHT COLUMN: Dedicated Athlete Showcase Zone (Span 5) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center lg:justify-end">
+              {/* Studio Glow Ring underneath model */}
+              <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-zinc-200 via-zinc-300/40 to-transparent dark:from-zinc-800 dark:via-zinc-700/30 blur-2xl pointer-events-none" />
+
+              {/* Clean Athlete Photograph Container */}
+              <div className="relative w-[85%] sm:w-[70%] md:w-[60%] lg:w-full max-w-[450px] aspect-[4/5] z-10 transition-transform duration-700 hover:scale-[1.02]">
+                <Image
+                  src="/hero-model-seated.png"
+                  alt="OFFREP Athlete Showcase"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 80vw, 450px"
+                  className="object-contain object-bottom filter drop-shadow-[0_25px_30px_rgba(0,0,0,0.35)] dark:drop-shadow-[0_25px_35px_rgba(255,255,255,0.07)]"
+                />
+              </div>
             </div>
 
-            {/* Mobile CTA Buttons */}
-            <div className="w-full max-w-xs flex flex-col gap-3.5 z-30">
-              <Link
-                href="/shop"
-                className="group flex w-full items-center justify-center gap-2 rounded-full bg-zinc-900 py-4 text-sm font-bold text-white shadow-xl transition-all duration-300 hover:bg-black active:scale-95 dark:bg-white dark:text-zinc-900"
-              >
-                Shop OFFREP
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/about"
-                className="flex w-full items-center justify-center rounded-full border-2 border-zinc-300 bg-white/70 backdrop-blur-md py-3.5 text-sm font-bold text-zinc-900 transition-all duration-300 hover:border-zinc-900 active:scale-95 dark:border-zinc-700 dark:bg-zinc-900/70 dark:text-white dark:hover:border-white"
-              >
-                Explore More
-              </Link>
-            </div>
           </div>
         </div>
       </section>
