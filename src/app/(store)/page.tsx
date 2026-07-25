@@ -34,82 +34,81 @@ export default async function StorePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Immersive Center-Focused Hero Section */}
-      <section className="relative w-full min-h-[90vh] lg:min-h-[calc(100vh-80px)] overflow-hidden bg-white dark:bg-zinc-950 flex flex-col pt-24 lg:pt-32 border-b border-zinc-200 dark:border-zinc-800">
+      {/* Massive Fixed-Scale Hero Section */}
+      <section className="relative w-full min-h-[100svh] lg:min-h-[calc(100vh-80px)] overflow-hidden bg-white dark:bg-zinc-950 flex flex-col items-center justify-between pt-24 lg:pt-20 border-b border-zinc-200 dark:border-zinc-800">
         
         {/* Ambient Gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-zinc-950/50 dark:to-zinc-950 z-0 pointer-events-none" />
 
-        {/* ---------------- DESKTOP MODELS (Absolute Sides) ---------------- */}
-        <div className="absolute inset-0 max-w-[1800px] mx-auto pointer-events-none z-10 hidden lg:block">
-          {/* Left Model (Standing) */}
-          <div className="absolute bottom-0 left-0 xl:left-8 w-[45%] max-w-[600px] h-[95%]">
+        {/* ---------------- DESKTOP MODELS (Fixed Absolute Sides) ---------------- */}
+        <div className="absolute inset-0 w-full max-w-[1800px] mx-auto pointer-events-none z-10 hidden lg:block overflow-hidden">
+          {/* Left Model (Standing h1.png) */}
+          <div className="absolute bottom-0 -left-12 xl:left-0 w-[50%] max-w-[750px] h-[95%]">
             <Image 
               src="/h1.png" 
               alt="OFFREP Athlete Standing" 
               fill 
-              sizes="45vw"
-              className="object-contain object-bottom drop-shadow-[0_30px_40px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_30px_40px_rgba(255,255,255,0.05)] opacity-95 transition-transform duration-1000 hover:scale-[1.02]" 
+              sizes="50vw"
+              className="object-contain object-bottom drop-shadow-[0_30px_50px_rgba(0,0,0,0.3)] opacity-95 transition-transform duration-1000 scale-[1.15]" 
               priority 
             />
           </div>
           {/* Right Model (Seated) */}
-          <div className="absolute bottom-0 right-0 xl:right-8 w-[45%] max-w-[650px] h-[105%]">
+          <div className="absolute bottom-0 -right-12 xl:right-0 w-[50%] max-w-[800px] h-[105%]">
             <Image 
               src="/hero-model-seated.png" 
               alt="OFFREP Athlete Seated" 
               fill 
-              sizes="45vw"
-              className="object-contain object-bottom drop-shadow-[0_35px_50px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_35px_50px_rgba(255,255,255,0.08)] transition-transform duration-1000 hover:scale-[1.02]" 
+              sizes="50vw"
+              className="object-contain object-bottom drop-shadow-[0_35px_50px_rgba(0,0,0,0.35)] transition-transform duration-1000 scale-[1.15]" 
               priority 
             />
           </div>
         </div>
 
-        {/* ---------------- MAIN CENTER CONTENT ---------------- */}
-        <div className="relative z-30 flex flex-col items-center flex-none w-full px-4 lg:pt-12">
+        {/* ---------------- MAIN CENTER CONTENT (Massive Text + CTA) ---------------- */}
+        <div className="relative z-30 flex flex-col items-center justify-start flex-1 w-full mt-4 lg:mt-8 px-4 pointer-events-none">
           
-          {/* Metallic Font (Big, Upper Center) */}
-          <div className="relative w-[92vw] sm:w-[80vw] md:w-[70vw] lg:max-w-[900px] aspect-[4/1] mb-8 lg:mb-12">
+          {/* HUGE Metallic Font */}
+          <div className="relative w-[140vw] sm:w-[100vw] lg:w-[90vw] max-w-[1400px] h-[220px] sm:h-[350px] lg:h-[450px] flex-shrink-0 -mb-8 sm:-mb-12 lg:-mb-16">
             <Image 
               src="/metallic.png" 
               alt="OFF-REP" 
               fill 
-              sizes="(max-width: 1024px) 90vw, 900px"
-              className="object-contain filter drop-shadow-2xl" 
+              sizes="100vw"
+              className="object-contain filter drop-shadow-[0_25px_25px_rgba(0,0,0,0.4)] dark:drop-shadow-[0_25px_25px_rgba(255,255,255,0.1)] scale-[1.3] lg:scale-100" 
               priority 
             />
           </div>
           
-          {/* Minimal Text Container */}
-          <div className="text-center mb-10 max-w-xl backdrop-blur-sm bg-white/30 dark:bg-zinc-950/30 p-6 rounded-3xl lg:bg-transparent lg:dark:bg-transparent lg:p-0 lg:backdrop-blur-none">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black uppercase tracking-[0.15em] text-zinc-900 dark:text-zinc-50 leading-tight">
+          {/* Minimal Text & Button Container */}
+          <div className="text-center z-40 relative flex flex-col items-center mt-2 sm:mt-6 lg:mt-8 pointer-events-auto">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-[0.1em] text-zinc-900 dark:text-zinc-50 leading-[1.1] drop-shadow-md">
               Built In Silence. <br className="lg:hidden"/> Reps Speak.
             </h2>
-            <p className="mt-4 text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-[0.25em]">
+            <p className="mt-4 mb-8 sm:mb-10 text-xs sm:text-sm lg:text-lg text-zinc-600 dark:text-zinc-400 font-bold uppercase tracking-[0.25em] lg:tracking-[0.3em]">
               Premium Engineered Sportswear
             </p>
+            
+            <Link
+              href="/shop"
+              className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-12 py-5 sm:px-14 sm:py-6 text-sm sm:text-base lg:text-lg font-black uppercase tracking-[0.25em] text-white shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+            >
+              Shop All
+              <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:translate-x-2" />
+            </Link>
           </div>
-          
-          {/* Shop All Button */}
-          <Link
-            href="/shop"
-            className="group flex items-center justify-center gap-3 rounded-full bg-zinc-900 px-12 py-5 text-sm lg:text-base font-black uppercase tracking-[0.25em] text-white shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 pointer-events-auto"
-          >
-            Shop All
-            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+
         </div>
 
-        {/* ---------------- MOBILE MODEL (Bottom Flex) ---------------- */}
-        {/* Visible only on mobile/tablet to utilize empty space at the bottom */}
-        <div className="relative z-10 w-full flex-1 min-h-[45vh] mt-12 lg:hidden pointer-events-none">
+        {/* ---------------- MOBILE MODEL (Huge at Bottom) ---------------- */}
+        <div className="relative z-10 w-[140%] -ml-[20%] flex-none h-[400px] sm:h-[500px] mt-auto lg:hidden pointer-events-none overflow-hidden">
           <Image 
             src="/hero-model-seated.png" 
             alt="OFFREP Athlete Seated" 
             fill 
             sizes="100vw"
-            className="object-contain object-bottom drop-shadow-[0_25px_35px_rgba(0,0,0,0.3)]" 
+            className="object-contain object-bottom drop-shadow-[0_30px_40px_rgba(0,0,0,0.4)] scale-125 origin-bottom" 
             priority 
           />
         </div>
