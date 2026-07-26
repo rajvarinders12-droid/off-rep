@@ -151,32 +151,32 @@ export default async function StorePage() {
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-4 sm:p-6 transition-all hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
+                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-4 transition-all hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
                 >
                   {category.imageUrl && (
-                    <div className="absolute inset-0 opacity-40 mix-blend-overlay transition-all duration-500 group-hover:opacity-70 group-hover:scale-105">
+                    <div className="absolute inset-0 pt-3 pr-3 pl-10 sm:pt-4 sm:pr-4 sm:pl-16 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105 pointer-events-none">
                       <Image
                         src={category.imageUrl}
                         alt={category.name || ""}
                         fill
                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                        className="object-cover grayscale"
+                        className="object-contain object-right-top"
                       />
                     </div>
                   )}
                   {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-80 transition-opacity group-hover:opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent opacity-90 transition-opacity pointer-events-none" />
                   
-                  <div className="relative pr-6 sm:pr-8 z-10">
-                    <h3 className="text-sm sm:text-base font-bold sm:font-semibold leading-tight text-white group-hover:text-zinc-50 transition-colors">
+                  <div className="relative pr-6 sm:pr-8 z-10 w-[80%]">
+                    <h3 className="text-[0.8rem] sm:text-[0.9rem] font-black leading-tight text-white transition-colors">
                       {category.name}
                     </h3>
-                    <p className="mt-1 sm:mt-2 text-xs text-zinc-400">
+                    <p className="mt-1 sm:mt-1.5 text-[0.65rem] sm:text-xs font-semibold text-zinc-400">
                       {category._count.products}{" "}
                       {category._count.products === 1 ? "product" : "products"}
                     </p>
                   </div>
-                  <ArrowRight className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 h-4 w-4 text-zinc-500 transition-all group-hover:translate-x-1 group-hover:text-white z-10" />
+                  <ArrowRight className="absolute bottom-4 right-4 h-4 w-4 text-zinc-500 transition-all group-hover:translate-x-1 group-hover:text-white z-10" />
                 </Link>
               ))}
             </div>
@@ -349,7 +349,7 @@ export default async function StorePage() {
         </div>
         
         <div className="relative flex w-full flex-nowrap items-center group">
-          <div className="flex animate-marquee items-center gap-6 whitespace-nowrap px-4 w-max hover:[animation-play-state:paused]">
+          <div className="flex animate-marquee items-center gap-6 whitespace-nowrap px-4 w-max">
             {[
               { name: "Gurpreet Singh", review: "The oversized tees are incredibly comfortable. Best pump cover I own." },
               { name: "Vikram Rathore", review: "Quality is unmatched. The ribbed tank perfectly complements my physique." },
