@@ -37,14 +37,14 @@ export default async function StorePage() {
       {/* Reference-Inspired Asymmetrical Hero */}
       <section className="relative w-full h-[calc(100svh-70px)] lg:h-[calc(100vh-80px)] overflow-hidden bg-[#E2E2E2] dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex flex-col">
         
-        {/* Top Metallic Logo */}
-        <div className="absolute top-6 lg:top-10 left-1/2 -translate-x-1/2 lg:left-12 lg:-translate-x-0 w-[60vw] sm:w-[300px] lg:w-[400px] h-[60px] lg:h-[80px] z-40 pointer-events-none">
+        {/* Mobile Metallic Logo (Huge) */}
+        <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[160vw] h-[150px] z-40 pointer-events-none lg:hidden">
           <Image 
             src="/metallic.png" 
             alt="OFF-REP" 
             fill 
-            sizes="(max-width: 1024px) 60vw, 400px"
-            className="object-contain lg:object-left object-center drop-shadow-xl" 
+            sizes="100vw"
+            className="object-contain object-top drop-shadow-xl scale-[1.5]" 
             priority 
           />
         </div>
@@ -69,24 +69,39 @@ export default async function StorePage() {
           </div>
 
           {/* Left Side: Text Content */}
-          <div className="relative z-20 w-full lg:w-[55%] h-full flex flex-col justify-center px-6 sm:px-12 lg:px-20 pt-32 lg:pt-0">
+          <div className="relative z-20 w-full lg:w-[55%] h-full flex flex-col justify-center px-6 sm:px-12 lg:px-20 pt-40 lg:pt-0">
             {/* Gradient under text */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/60 via-transparent to-transparent dark:from-zinc-800/40 hidden lg:block -z-10 blur-3xl pointer-events-none" />
             
-            <h1 className="text-[3.5rem] leading-[0.9] sm:text-7xl lg:text-[6rem] xl:text-[7.5rem] font-black uppercase tracking-tighter text-white lg:text-zinc-900 dark:text-white drop-shadow-lg lg:drop-shadow-none">
+            {/* Desktop Metallic Logo (Huge, positioned above the text) */}
+            <div className="hidden lg:block relative w-[120%] max-w-[800px] xl:max-w-[1000px] h-[120px] xl:h-[180px] mb-2 lg:-ml-6 xl:-ml-10 pointer-events-none">
+              <Image 
+                src="/metallic.png" 
+                alt="OFF-REP" 
+                fill 
+                sizes="60vw"
+                className="object-contain object-left-bottom drop-shadow-xl scale-125 xl:scale-150 origin-left" 
+                priority 
+              />
+            </div>
+            
+            {/* Shrunk Secondary Text */}
+            <h1 className="text-[2.2rem] leading-[1.0] sm:text-5xl lg:text-[3.5rem] xl:text-[4.5rem] font-black uppercase tracking-tighter text-white lg:text-zinc-900 dark:text-white drop-shadow-lg lg:drop-shadow-none">
               Built In <br/> Silence. <br/> <span className="text-zinc-300 lg:text-zinc-500 dark:text-zinc-400">Reps Speak.</span>
             </h1>
             
-            <p className="mt-6 text-xs sm:text-sm lg:text-base font-bold text-zinc-300 lg:text-zinc-600 dark:text-zinc-400 uppercase tracking-[0.2em] drop-shadow-md lg:drop-shadow-none">
+            <p className="mt-4 text-[0.65rem] sm:text-sm lg:text-sm font-bold text-zinc-300 lg:text-zinc-600 dark:text-zinc-400 uppercase tracking-[0.25em] drop-shadow-md lg:drop-shadow-none">
               Premium Engineered Sportswear
             </p>
             
+            {/* Premium Button */}
             <div className="mt-8 flex">
               <Link 
                 href="/shop" 
-                className="bg-black text-white dark:bg-white dark:text-black px-10 py-3.5 text-xs lg:text-sm font-bold uppercase tracking-[0.2em] shadow-xl hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors active:scale-95"
+                className="group flex items-center gap-3 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-8 py-4 lg:px-10 lg:py-5 text-xs lg:text-sm font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:bg-black dark:hover:bg-zinc-100 transition-all duration-300 active:scale-95 hover:shadow-zinc-900/50"
               >
                 Shop All
+                <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
