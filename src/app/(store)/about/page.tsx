@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-white">
             Redefining <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-500">The Standard</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-500">The Standards</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-zinc-300 font-medium tracking-wide max-w-2xl mx-auto">
             Built for the modern athlete. Designed to transition seamlessly from the squat rack to the streets.
