@@ -10,16 +10,27 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-white dark:bg-zinc-950">
-      {/* Hero Section (Starting Poster) */}
-      <section className="relative w-full h-[calc(100svh-70px)] lg:h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden bg-zinc-950">
+      {/* Hero Section */}
+      <section className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-zinc-900">
         <Image
-          src="/about1.png"
-          alt="About OFF-REP"
+          src="/hero-banner.png"
+          alt="OFF-REP Athletes"
           fill
           className="object-cover object-center"
           priority
         />
-        {/* Assuming the poster has its own text, we just let it display fully */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+        
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-white">
+            Redefining <br className="md:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-500">The Standard</span>
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-zinc-300 font-medium tracking-wide max-w-2xl mx-auto">
+            Built for the modern athlete. Designed to transition seamlessly from the squat rack to the streets.
+          </p>
+        </div>
       </section>
 
       {/* Our Story Section */}
@@ -97,31 +108,27 @@ export default function AboutPage() {
       </section>
 
       {/* Quote Section */}
-      {/* Quote Section (End Poster) */}
-      <section className="relative w-full h-[70vh] min-h-[600px] flex flex-col items-center justify-center overflow-hidden bg-white text-center px-6">
-        <div className="absolute inset-0 z-0">
+      <section className="relative py-32 px-4 flex flex-col items-center justify-center overflow-hidden bg-black text-center">
+        {/* Subtle background image for the quote section */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
           <Image
-            src="/about2.png"
-            alt="OFF-REP Motivation"
+            src="/hero-banner.png"
+            alt="Background Texture"
             fill
-            className="object-cover object-center"
+            className="object-cover grayscale"
           />
         </div>
-        {/* Subtle white overlay to guarantee black text readability */}
-        <div className="absolute inset-0 bg-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
         
-        <div className="relative z-10 max-w-5xl mx-auto space-y-8">
-          <svg className="mx-auto h-12 w-12 text-black mb-6 opacity-90 drop-shadow-md" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+        <div className="relative z-10 max-w-4xl mx-auto space-y-8">
+          <svg className="mx-auto h-12 w-12 text-zinc-600 mb-8 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
           </svg>
-          <blockquote className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black uppercase italic tracking-tighter text-black leading-[1.1] drop-shadow-lg">
-            "The real growth happens <br className="hidden md:block" /> when you push past the <br className="hidden md:block" /> prescribed limits."
+          <blockquote className="text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase italic tracking-tighter text-white leading-tight">
+            "The real growth happens when you push past the prescribed limits. Don't just count the reps. <br className="hidden md:block" /> Go <span className="text-zinc-500">OFF-REP</span>."
           </blockquote>
-          <p className="mt-8 text-sm sm:text-lg lg:text-xl font-bold uppercase tracking-[0.3em] text-zinc-900 drop-shadow-md">
-            Don't just count the reps. Go <span className="text-black font-black">OFF-REP</span>.
-          </p>
           <div className="pt-8">
-            <div className="w-20 h-1.5 bg-black mx-auto drop-shadow-md" />
+            <div className="w-16 h-1 bg-white mx-auto" />
           </div>
         </div>
       </section>

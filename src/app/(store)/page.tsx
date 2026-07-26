@@ -135,7 +135,7 @@ export default async function StorePage() {
                   Browse by
                 </p>
                 <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                  Categories
+                  Our Categories
                 </h2>
               </div>
               <Link
