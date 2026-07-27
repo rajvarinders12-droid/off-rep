@@ -56,7 +56,7 @@ export default async function StorePage() {
             alt="OFFREP Desktop Poster" 
             fill
             sizes="100vw"
-            style={{ objectFit: 'fill' }}
+            className="object-cover object-top"
             priority 
           />
         </div>
