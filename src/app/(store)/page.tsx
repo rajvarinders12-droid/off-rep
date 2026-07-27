@@ -157,10 +157,10 @@ export default async function StorePage() {
           </div>
 
           {/* Top Half: Typography */}
-          <div className="relative z-30 w-full flex-none pt-10 px-4 flex flex-col items-center text-center">
+          <div className="relative z-30 w-full flex-none pt-8 px-4 flex flex-col items-center text-center">
             
             {/* Metallic Logo */}
-            <div className="relative w-[280px] h-[70px] mb-4">
+            <div className="relative w-[200px] h-[50px] mb-2">
               <Image 
                 src="/metallic.png" 
                 alt="OFF-REP" 
@@ -171,15 +171,15 @@ export default async function StorePage() {
             </div>
 
             {/* Huge Text */}
-            <h1 className="text-[3rem] sm:text-[3.5rem] leading-[1.0] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-md">
+            <h1 className="text-[2.4rem] sm:text-[3rem] leading-[0.95] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-md">
               Built In <br/> Silence. <br/> <span className="text-zinc-500">Reps Speak.</span>
             </h1>
             
-            <p className="mt-3 text-[0.65rem] sm:text-xs font-bold text-zinc-600 uppercase tracking-[0.2em] drop-shadow-sm">
+            <p className="mt-3 text-[0.6rem] sm:text-xs font-bold text-zinc-600 uppercase tracking-[0.2em] drop-shadow-sm">
               Premium Engineered Sportswear
             </p>
             
-            <div className="mt-5">
+            <div className="mt-4">
               <Link 
                 href="/shop" 
                 className="inline-flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] shadow-lg active:scale-95"
@@ -194,15 +194,10 @@ export default async function StorePage() {
           <div className="relative flex-1 w-full mt-2 z-10 flex items-end justify-center pointer-events-none">
             
             {/* Glowing Background Ring */}
-            <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] rounded-full border border-white/40 bg-white/20 shadow-[0_0_60px_20px_rgba(255,255,255,0.8)] backdrop-blur-xl pointer-events-none"></div>
-            
-            {/* Translucent UI Box */}
-            <div className="absolute top-[10%] left-[5%] w-16 h-20 backdrop-blur-md bg-white/5 border border-white/20 rounded-lg shadow-xl z-30 pointer-events-none flex items-end p-2">
-              <span className="text-[8px] text-zinc-500 font-mono">76</span>
-            </div>
+            <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[90vw] h-[90vw] rounded-full border border-white/40 bg-white/20 shadow-[0_0_60px_20px_rgba(255,255,255,0.8)] backdrop-blur-xl pointer-events-none"></div>
 
             {/* Standing Model (Back) */}
-            <div className="absolute right-[-10%] bottom-0 w-[55%] h-[95%] z-10">
+            <div className="absolute right-[-10%] bottom-0 w-[65%] h-[130%] z-10">
               <Image 
                 src="/h1.png" 
                 alt="Model Standing" 
@@ -213,7 +208,7 @@ export default async function StorePage() {
             </div>
 
             {/* Seated Model */}
-            <div className="absolute left-[-8%] bottom-0 w-[75%] h-[85%] z-20">
+            <div className="absolute left-[-15%] bottom-0 w-[85%] h-[115%] z-20">
               <Image 
                 src="/hero-model-seated.png" 
                 alt="Model Seated" 
