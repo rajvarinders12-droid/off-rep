@@ -75,24 +75,24 @@ export default async function StorePage() {
             <div className="w-[50%] h-full flex flex-col justify-center pl-16 xl:pl-32 z-20">
               
               {/* Metallic Logo */}
-              <div className="relative w-[300px] h-[80px] xl:w-[400px] xl:h-[100px] mb-8 -ml-4">
+              <div className="relative w-[400px] h-[120px] xl:w-[600px] xl:h-[160px] mb-6 -ml-4">
                 <Image 
                   src="/metallic.png" 
                   alt="OFF-REP" 
                   fill 
-                  className="object-contain object-left drop-shadow-2xl" 
+                  className="object-contain object-left drop-shadow-2xl scale-125" 
                   priority 
                 />
               </div>
 
               {/* Huge Text */}
-              <h1 className="text-5xl lg:text-6xl xl:text-[5.5rem] leading-[1.0] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-xl mt-4">
+              <h1 className="text-4xl lg:text-5xl xl:text-[4.2rem] leading-[1.05] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-xl mt-4">
                 Built In <br/> Silence. <br/> <span className="text-zinc-500">Reps Speak.</span>
               </h1>
               
-              <div className="flex items-center gap-6 mt-12 mb-8">
-                <div className="h-[1px] w-24 bg-zinc-400"></div>
-                <p className="text-sm xl:text-base font-bold text-zinc-600 uppercase tracking-[0.3em] drop-shadow-md">
+              <div className="flex items-center gap-6 mt-10 mb-8">
+                <div className="h-[1px] w-20 bg-zinc-400"></div>
+                <p className="text-xs xl:text-sm font-bold text-zinc-600 uppercase tracking-[0.3em] drop-shadow-md">
                   Premium Engineered Sportswear
                 </p>
               </div>
@@ -100,10 +100,10 @@ export default async function StorePage() {
               <div className="mt-4">
                 <Link 
                   href="/shop" 
-                  className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-4 text-xs font-black uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:bg-black transition-all hover:scale-105"
+                  className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-10 py-5 text-sm font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:bg-black transition-all hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(0,0,0,0.4)]"
                 >
-                  Shop The Collection
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  Shop All
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
                 </Link>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default async function StorePage() {
               </div>
 
               {/* Standing Model (Back) */}
-              <div className="absolute right-[0%] bottom-[-5%] w-[55%] h-[115%] z-10 pointer-events-none">
+              <div className="absolute right-[2%] bottom-0 w-[40%] h-[95%] z-10 pointer-events-none">
                 <Image 
                   src="/h1.png" 
                   alt="Model Standing" 
@@ -137,7 +137,7 @@ export default async function StorePage() {
               </div>
 
               {/* Seated Model */}
-              <div className="absolute left-[-15%] bottom-[-5%] w-[65%] h-[110%] z-20 pointer-events-none">
+              <div className="absolute left-[0%] bottom-[0%] w-[50%] h-[90%] z-20 pointer-events-none">
                 <Image 
                   src="/hero-model-seated.png" 
                   alt="Model Seated" 
