@@ -35,7 +35,7 @@ export default async function StorePage() {
   return (
     <div className="min-h-screen">
       {/* Reference-Inspired Asymmetrical Hero */}
-      <section className="relative w-full h-[calc(100svh-70px)] lg:h-[calc(100vh-80px)] overflow-hidden bg-[#E2E2E2] dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex flex-col">
+      <section className="relative w-full h-[calc(100svh-70px)] lg:h-auto overflow-hidden bg-[#E2E2E2] dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 flex flex-col">
         
         {/* Mobile Metallic Logo (Huge) */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[160vw] h-[150px] z-40 pointer-events-none lg:hidden">
@@ -50,13 +50,13 @@ export default async function StorePage() {
         </div>
 
         {/* ======================= DESKTOP LAYOUT (Poster Image) ======================= */}
-        <div className="hidden lg:block w-full h-full relative z-10 overflow-hidden bg-white">
+        <div className="hidden lg:block w-full relative z-10 overflow-hidden bg-white">
           <Image 
             src="/Design.png" 
             alt="OFFREP Desktop Poster" 
-            fill 
-            sizes="100vw"
-            className="object-cover object-center w-full h-full" 
+            width={1920}
+            height={1080}
+            className="w-full h-auto object-contain" 
             priority 
           />
         </div>
