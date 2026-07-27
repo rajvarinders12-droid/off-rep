@@ -126,7 +126,7 @@ export default async function StorePage() {
               </div>
 
               {/* Standing Model (Back) */}
-              <div className="absolute right-[10%] bottom-0 w-[40%] h-[95%] z-10 pointer-events-none">
+              <div className="absolute right-[5%] bottom-0 w-[50%] h-[115%] z-10 pointer-events-none">
                 <Image 
                   src="/h1.png" 
                   alt="Model Standing" 
