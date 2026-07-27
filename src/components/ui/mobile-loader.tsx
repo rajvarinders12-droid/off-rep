@@ -22,19 +22,19 @@ export default function MobileLoader() {
     // Stage 2: Logo moves to top Navbar position (Background remains solid)
     const t2 = setTimeout(() => {
       setStage(2);
-    }, 1000); 
+    }, 1500); 
     
     // Stage 3: Logo reached top. Reveal the website quickly!
     const t3 = setTimeout(() => {
       setStage(3);
-    }, 1800);
+    }, 2400);
 
     // Stage 4: Unmount component completely
     const t4 = setTimeout(() => {
       setStage(4);
       sessionStorage.setItem("hasLoadedSplash", "true");
       document.body.style.overflow = "";
-    }, 2200);
+    }, 3000);
 
     return () => {
       clearTimeout(t1);
