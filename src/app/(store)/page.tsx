@@ -49,11 +49,23 @@ export default async function StorePage() {
           />
         </div>
 
-        {/* Main Content Layout */}
-        <div className="relative w-full h-full flex flex-col lg:flex-row max-w-[1800px] mx-auto z-10">
+        {/* ======================= DESKTOP LAYOUT (Poster Image) ======================= */}
+        <div className="hidden lg:block w-full h-full relative z-10 overflow-hidden bg-white">
+          <Image 
+            src="/Design.png" 
+            alt="OFFREP Desktop Poster" 
+            fill 
+            sizes="100vw"
+            className="object-contain object-center" 
+            priority 
+          />
+        </div>
+
+        {/* ======================= MOBILE LAYOUT (Coded Asymmetrical) ======================= */}
+        <div className="relative w-full h-full flex flex-col lg:hidden z-10">
           
-          {/* Mobile Background Model (Only visible on mobile, absolute positioned) */}
-          <div className="absolute inset-0 w-full h-full lg:hidden z-0 pointer-events-none">
+          {/* Mobile Background Model */}
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
              <div className="absolute bottom-0 w-full h-[85%]">
                <Image 
                  src="/hero-model-seated.png" 
@@ -68,58 +80,26 @@ export default async function StorePage() {
              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent dark:from-zinc-950/90 dark:via-zinc-950/40" />
           </div>
 
-          {/* Left Side: Text Content */}
-          <div className="relative z-20 w-full lg:w-[55%] h-full flex flex-col justify-center px-6 sm:px-12 lg:px-20 pt-40 lg:pt-0">
-            {/* Gradient under text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/60 via-transparent to-transparent dark:from-zinc-800/40 hidden lg:block -z-10 blur-3xl pointer-events-none" />
-            
-            {/* Desktop Metallic Logo (Huge, positioned above the text) */}
-            <div className="hidden lg:block relative w-[120%] max-w-[800px] xl:max-w-[1000px] h-[120px] xl:h-[180px] mb-2 lg:-ml-6 xl:-ml-10 pointer-events-none">
-              <Image 
-                src="/metallic.png" 
-                alt="OFF-REP" 
-                fill 
-                sizes="60vw"
-                className="object-contain object-left-bottom drop-shadow-xl scale-125 xl:scale-150 origin-left" 
-                priority 
-              />
-            </div>
-            
-            {/* Shrunk Secondary Text */}
-            <h1 className="text-[2.2rem] leading-[1.0] sm:text-5xl lg:text-[3.5rem] xl:text-[4.5rem] font-black uppercase tracking-tighter text-white lg:text-zinc-900 dark:text-white drop-shadow-lg lg:drop-shadow-none">
-              Built In <br/> Silence. <br/> <span className="text-zinc-300 lg:text-zinc-500 dark:text-zinc-400">Reps Speak.</span>
+          {/* Mobile Text Content */}
+          <div className="relative z-20 w-full h-full flex flex-col justify-center px-6 sm:px-12 pt-40">
+            <h1 className="text-[2.2rem] leading-[1.0] sm:text-5xl font-black uppercase tracking-tighter text-white drop-shadow-lg">
+              Built In <br/> Silence. <br/> <span className="text-zinc-300 dark:text-zinc-400">Reps Speak.</span>
             </h1>
             
-            <p className="mt-4 text-[0.65rem] sm:text-sm lg:text-sm font-bold text-zinc-300 lg:text-zinc-600 dark:text-zinc-400 uppercase tracking-[0.25em] drop-shadow-md lg:drop-shadow-none">
+            <p className="mt-4 text-[0.65rem] sm:text-sm font-bold text-zinc-300 dark:text-zinc-400 uppercase tracking-[0.25em] drop-shadow-md">
               Premium Engineered Sportswear
             </p>
             
-            {/* Premium Button */}
             <div className="mt-8 flex">
               <Link 
                 href="/shop" 
-                className="group flex items-center gap-3 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-8 py-4 lg:px-10 lg:py-5 text-xs lg:text-sm font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:bg-black dark:hover:bg-zinc-100 transition-all duration-300 active:scale-95 hover:shadow-zinc-900/50"
+                className="group flex items-center gap-3 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.4)] active:scale-95"
               >
                 Shop All
-                <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
-
-          {/* Right Side: Desktop Model */}
-          <div className="hidden lg:flex relative z-10 w-[45%] h-full items-end justify-center pointer-events-none">
-            <div className="absolute bottom-0 w-[140%] max-w-[900px] h-[95%] -right-10 xl:-right-20">
-              <Image 
-                src="/hero-model-seated.png" 
-                alt="Seated Model" 
-                fill 
-                sizes="50vw"
-                className="object-contain object-bottom drop-shadow-[0_40px_50px_rgba(0,0,0,0.3)] transition-transform duration-1000 hover:scale-[1.02]" 
-                priority 
-              />
-            </div>
-          </div>
-
         </div>
       </section>
 
