@@ -249,10 +249,10 @@ export default async function StorePage() {
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex aspect-square sm:aspect-auto sm:min-h-[160px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-4 transition-all hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
+                  className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.666rem)] xl:w-[calc(25%-0.75rem)] group relative flex min-h-[130px] sm:min-h-[160px] flex-col justify-center sm:justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-5 transition-all hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
                 >
                   {category.imageUrl && (
-                    <div className="absolute inset-0 pt-3 pr-3 pl-10 sm:pt-4 sm:pr-4 sm:pl-16 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105 pointer-events-none">
+                    <div className="absolute inset-0 pt-2 pr-2 pl-[40%] sm:pt-4 sm:pr-4 sm:pl-16 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-105 pointer-events-none">
                       <Image
                         src={category.imageUrl}
                         alt={category.name || ""}
@@ -265,11 +265,11 @@ export default async function StorePage() {
                   {/* Subtle Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent opacity-90 transition-opacity pointer-events-none" />
                   
-                  <div className="relative pr-6 sm:pr-8 z-10 w-[80%]">
-                    <h3 className="text-[0.8rem] sm:text-[0.9rem] font-black leading-tight text-white transition-colors">
+                  <div className="relative pr-6 sm:pr-8 z-10 w-[60%] sm:w-[80%]">
+                    <h3 className="text-[1rem] sm:text-[0.9rem] font-black leading-tight text-white transition-colors">
                       {category.name}
                     </h3>
-                    <p className="mt-1 sm:mt-1.5 text-[0.65rem] sm:text-xs font-semibold text-zinc-400">
+                    <p className="mt-1 sm:mt-1.5 text-[0.7rem] sm:text-xs font-semibold text-zinc-400">
                       {category._count.products}{" "}
                       {category._count.products === 1 ? "product" : "products"}
                     </p>
