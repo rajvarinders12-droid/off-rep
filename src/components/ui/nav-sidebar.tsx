@@ -59,64 +59,56 @@ export default function NavSidebar({ isOpen, onClose }: NavSidebarProps) {
 
       {/* Sidebar Drawer */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-full max-w-sm transform bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-500 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 w-full max-w-[85vw] sm:max-w-sm transform bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-[600ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex h-16 items-center justify-between border-b border-zinc-100 px-6 dark:border-zinc-800">
+          <div className="flex h-20 items-center justify-between px-6 pt-4">
             <Image 
               src="/logo.png" 
               alt="OFF-REP" 
-              width={72} 
-              height={24} 
-              className="object-contain dark:invert" 
+              width={80} 
+              height={30} 
+              className="object-contain dark:invert transition-transform hover:scale-105" 
             />
             <button
               onClick={onClose}
-              className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
+              className="group rounded-full bg-zinc-100 p-2.5 text-zinc-900 transition-all hover:scale-110 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-800"
               aria-label="Close menu"
             >
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
             </button>
           </div>
 
           {/* Nav Links */}
-          <div className="flex-1 overflow-y-auto px-4 py-8">
-            <nav className="flex flex-col gap-2">
-              {links.map((link) => {
+          <div className="flex-1 overflow-y-auto px-8 py-12">
+            <nav className="flex flex-col gap-8">
+              {links.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
                     onClick={onClose}
-                    className={`group flex items-center justify-between rounded-xl px-4 py-4 transition-all ${
-                      isActive
-                        ? "bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900"
-                        : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+                    style={{ transitionDelay: isOpen ? `${i * 100 + 100}ms` : "0ms" }}
+                    className={`group flex items-center justify-between transition-all duration-700 ease-out transform ${
+                      isOpen ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <link.icon
-                        className={`h-5 w-5 ${
-                          isActive
-                            ? "text-white dark:text-zinc-900"
-                            : "text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300"
-                        }`}
-                      />
-                      <span className="text-base font-semibold tracking-wide">
+                    <div className="flex items-center gap-6">
+                      <div className={`p-3 rounded-2xl transition-colors duration-300 ${isActive ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900' : 'bg-zinc-50 text-zinc-400 group-hover:bg-zinc-100 group-hover:text-zinc-900 dark:bg-zinc-900/50 dark:group-hover:bg-zinc-800 dark:group-hover:text-white'}`}>
+                        <link.icon className="h-6 w-6" strokeWidth={2.5} />
+                      </div>
+                      <span className={`text-3xl font-black uppercase tracking-tighter transition-colors duration-300 ${
+                        isActive 
+                          ? "text-zinc-900 dark:text-white" 
+                          : "text-zinc-400 group-hover:text-zinc-900 dark:text-zinc-500 dark:group-hover:text-white"
+                      }`}>
                         {link.name}
                       </span>
                     </div>
-                    <ChevronRight
-                      className={`h-4 w-4 transition-transform group-hover:translate-x-1 ${
-                        isActive
-                          ? "text-white/70 dark:text-zinc-900/70"
-                          : "text-zinc-300 dark:text-zinc-600"
-                      }`}
-                    />
                   </Link>
                 );
               })}
@@ -124,19 +116,24 @@ export default function NavSidebar({ isOpen, onClose }: NavSidebarProps) {
           </div>
 
           {/* Footer Info */}
-          <div className="border-t border-zinc-100 p-6 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-            <div className="flex flex-col gap-4">
-              <a href="mailto:contact@offrep.in" className="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors">
+          <div 
+            style={{ transitionDelay: isOpen ? "500ms" : "0ms" }}
+            className={`p-8 pb-10 transition-all duration-700 ease-out transform ${
+              isOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
+          >
+            <div className="flex flex-col gap-6">
+              <a href="mailto:contact@offrep.in" className="text-sm font-bold tracking-widest uppercase text-zinc-900 hover:text-zinc-500 dark:text-zinc-50 dark:hover:text-zinc-400 transition-colors">
                 contact@offrep.in
               </a>
-              <div className="flex items-center gap-4">
-                <a href="https://www.instagram.com/offrep.in?igsh=Yzh3cTJibWd0b2V6" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 dark:text-zinc-400 dark:hover:text-zinc-50 dark:hover:bg-zinc-700 transition-all">
+              <div className="flex items-center gap-3">
+                <a href="https://www.instagram.com/offrep.in?igsh=Yzh3cTJibWd0b2V6" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-900 hover:scale-110 hover:bg-zinc-200 dark:text-zinc-50 dark:hover:bg-zinc-800 transition-all">
                   <InstagramIcon className="w-5 h-5" />
                 </a>
-                <a href="https://www.facebook.com/share/1Bv8jg9doi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 dark:text-zinc-400 dark:hover:text-zinc-50 dark:hover:bg-zinc-700 transition-all">
+                <a href="https://www.facebook.com/share/1Bv8jg9doi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-900 hover:scale-110 hover:bg-zinc-200 dark:text-zinc-50 dark:hover:bg-zinc-800 transition-all">
                   <FacebookIcon className="w-5 h-5" />
                 </a>
-                <a href="https://wa.me/919056506403" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 dark:text-zinc-400 dark:hover:text-zinc-50 dark:hover:bg-zinc-700 transition-all">
+                <a href="https://wa.me/919056506403" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-900 hover:scale-110 hover:bg-zinc-200 dark:text-zinc-50 dark:hover:bg-zinc-800 transition-all">
                   <MessageCircle className="w-5 h-5" />
                 </a>
               </div>
