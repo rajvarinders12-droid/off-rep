@@ -249,32 +249,32 @@ export default async function StorePage() {
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="w-[calc(50%-0.375rem)] lg:w-[calc(33.333%-1rem)] group relative flex aspect-[4/5] sm:aspect-auto sm:h-[450px] flex-col justify-end overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex min-h-[160px] sm:min-h-[220px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-2 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
                 >
-                  <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105 pointer-events-none">
+                  <div className="absolute inset-0 pt-2 pr-[-10%] pl-[35%] sm:pt-4 sm:pr-0 sm:pl-[45%] opacity-90 transition-transform duration-700 group-hover:scale-110 pointer-events-none">
                     <Image
                       src={`/cat${index + 1}.png`}
                       alt={category.name || ""}
                       fill
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                      className="object-cover"
-                      priority
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      className="object-contain object-bottom sm:object-right-bottom drop-shadow-2xl"
                     />
                   </div>
 
-                  {/* Subtle Gradient Overlay for Text */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                  {/* Text readability gradients */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-90 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent opacity-90 pointer-events-none" />
                   
-                  <div className="relative p-4 sm:p-8 z-10 w-full text-center flex flex-col items-center transition-transform duration-500 group-hover:-translate-y-1">
-                    <h3 className="text-sm sm:text-2xl font-black uppercase tracking-tight text-white transition-colors">
+                  <div className="relative pr-2 sm:pr-8 z-10 w-full sm:w-[85%] transition-transform duration-500 group-hover:-translate-y-1">
+                    <h3 className="text-[0.75rem] sm:text-[1.1rem] font-black leading-tight text-white uppercase tracking-tight">
                       {category.name}
                     </h3>
-                    <div className="mt-1.5 sm:mt-3 flex items-center gap-2">
-                      <p className="text-[9px] sm:text-xs font-bold text-zinc-300 uppercase tracking-widest">
+                    <div className="mt-1.5 sm:mt-2 flex items-center gap-1.5 sm:gap-2">
+                      <p className="text-[0.6rem] sm:text-xs font-bold text-zinc-400 uppercase tracking-widest">
                         {category._count.products}{" "}
                         {category._count.products === 1 ? "product" : "products"}
                       </p>
-                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 text-zinc-300 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="h-2.5 w-2.5 sm:h-3.5 sm:w-3.5 text-zinc-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white" />
                     </div>
                   </div>
                 </Link>
