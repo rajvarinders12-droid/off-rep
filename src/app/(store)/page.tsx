@@ -37,17 +37,7 @@ export default async function StorePage() {
       {/* Reference-Inspired Asymmetrical Hero */}
       <section className="relative w-full h-[calc(100svh-70px)] lg:h-[calc(100vh-80px)] overflow-hidden bg-white border-b border-zinc-200 dark:border-zinc-800 flex flex-col">
         
-        {/* Mobile Metallic Logo (Huge) */}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[160vw] h-[150px] z-40 pointer-events-none lg:hidden">
-          <Image 
-            src="/metallic.png" 
-            alt="OFF-REP" 
-            fill 
-            sizes="100vw"
-            className="object-contain object-top drop-shadow-xl scale-[1.5]" 
-            priority 
-          />
-        </div>
+
 
         {/* ======================= DESKTOP LAYOUT (Coded Poster) ======================= */}
         <div className="hidden lg:block w-full h-full relative z-10 overflow-hidden bg-[#e6e6e6]">
@@ -151,43 +141,86 @@ export default async function StorePage() {
           </div>
         </div>
 
-        {/* ======================= MOBILE LAYOUT (Coded Asymmetrical) ======================= */}
-        <div className="relative w-full h-full flex flex-col lg:hidden z-10">
+        {/* ======================= MOBILE LAYOUT (Coded Poster) ======================= */}
+        <div className="relative w-full h-full flex flex-col lg:hidden z-10 overflow-hidden bg-[#e6e6e6]">
           
-          {/* Mobile Background Model */}
-          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-             <div className="absolute bottom-0 w-full h-[85%]">
-               <Image 
-                 src="/hero-model-seated.png" 
-                 alt="Model" 
-                 fill 
-                 sizes="100vw"
-                 className="object-contain object-bottom scale-110 origin-bottom drop-shadow-2xl opacity-90"
-                 priority
-               />
-             </div>
-             {/* Mobile Gradient Overlay for text readability */}
-             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent dark:from-zinc-950/90 dark:via-zinc-950/40" />
+          {/* Background Grid & Atmosphere */}
+          <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#e6e6e6_100%)]" />
+
+          {/* Crosshairs */}
+          <div className="absolute top-4 left-4 text-zinc-400 font-light pointer-events-none scale-75">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M2 12h20"/></svg>
+          </div>
+          <div className="absolute top-4 right-4 text-zinc-400 font-light pointer-events-none scale-75">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M2 12h20"/></svg>
           </div>
 
-          {/* Mobile Text Content */}
-          <div className="relative z-20 w-full h-full flex flex-col justify-center px-6 sm:px-12 pt-40">
-            <h1 className="text-[2.2rem] leading-[1.0] sm:text-5xl font-black uppercase tracking-tighter text-white drop-shadow-lg">
-              Built In <br/> Silence. <br/> <span className="text-zinc-300 dark:text-zinc-400">Reps Speak.</span>
+          {/* Top Half: Typography */}
+          <div className="relative z-30 w-full flex-none pt-10 px-4 flex flex-col items-center text-center">
+            
+            {/* Metallic Logo */}
+            <div className="relative w-[280px] h-[70px] mb-4">
+              <Image 
+                src="/metallic.png" 
+                alt="OFF-REP" 
+                fill 
+                className="object-contain object-center drop-shadow-xl" 
+                priority 
+              />
+            </div>
+
+            {/* Huge Text */}
+            <h1 className="text-[3rem] sm:text-[3.5rem] leading-[1.0] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-md">
+              Built In <br/> Silence. <br/> <span className="text-zinc-500">Reps Speak.</span>
             </h1>
             
-            <p className="mt-4 text-[0.65rem] sm:text-sm font-bold text-zinc-300 dark:text-zinc-400 uppercase tracking-[0.25em] drop-shadow-md">
+            <p className="mt-3 text-[0.65rem] sm:text-xs font-bold text-zinc-600 uppercase tracking-[0.2em] drop-shadow-sm">
               Premium Engineered Sportswear
             </p>
             
-            <div className="mt-8 flex">
+            <div className="mt-5">
               <Link 
                 href="/shop" 
-                className="group flex items-center gap-3 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-8 py-4 text-xs font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.4)] active:scale-95"
+                className="inline-flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] shadow-lg active:scale-95"
               >
                 Shop All
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3 w-3" />
               </Link>
+            </div>
+          </div>
+
+          {/* Bottom Half: Athletes */}
+          <div className="relative flex-1 w-full mt-2 z-10 flex items-end justify-center pointer-events-none">
+            
+            {/* Glowing Background Ring */}
+            <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] rounded-full border border-white/40 bg-white/20 shadow-[0_0_60px_20px_rgba(255,255,255,0.8)] backdrop-blur-xl pointer-events-none"></div>
+            
+            {/* Translucent UI Box */}
+            <div className="absolute top-[10%] left-[5%] w-16 h-20 backdrop-blur-md bg-white/5 border border-white/20 rounded-lg shadow-xl z-30 pointer-events-none flex items-end p-2">
+              <span className="text-[8px] text-zinc-500 font-mono">76</span>
+            </div>
+
+            {/* Standing Model (Back) */}
+            <div className="absolute right-[-10%] bottom-0 w-[55%] h-[95%] z-10">
+              <Image 
+                src="/h1.png" 
+                alt="Model Standing" 
+                fill 
+                className="object-contain object-bottom drop-shadow-xl" 
+                priority 
+              />
+            </div>
+
+            {/* Seated Model */}
+            <div className="absolute left-[-8%] bottom-0 w-[75%] h-[85%] z-20">
+              <Image 
+                src="/hero-model-seated.png" 
+                alt="Model Seated" 
+                fill 
+                className="object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" 
+                priority 
+              />
             </div>
           </div>
         </div>
