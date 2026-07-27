@@ -10,35 +10,40 @@ export default function MobileLoader() {
     // Disable scrolling while loader is active
     document.body.style.overflow = "hidden";
 
-    // Stage 0: Initial state (immediately transition to 1)
-    // Stage 1: Logo fades in and slightly scales up (centered)
+    // Stage 1: Logo scales up (centered)
     const t1 = setTimeout(() => setStage(1), 50); 
     
-    // Stage 2: Background fades out, Logo shrinks and moves to top Navbar position
+    // Stage 2: Logo moves to top Navbar position (Background remains solid)
     const t2 = setTimeout(() => {
       setStage(2);
-    }, 1200); 
+    }, 1000); 
     
-    // Stage 3: Unmount component completely
+    // Stage 3: Logo reached top. Reveal the website quickly!
     const t3 = setTimeout(() => {
       setStage(3);
+    }, 1800);
+
+    // Stage 4: Unmount component completely
+    const t4 = setTimeout(() => {
+      setStage(4);
       document.body.style.overflow = "";
-    }, 2000);
+    }, 2200);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
+      clearTimeout(t4);
       document.body.style.overflow = "";
     };
   }, []);
 
-  if (stage === 3) return null;
+  if (stage === 4) return null;
 
   return (
     <div 
-      className={`fixed inset-0 z-[100] flex flex-col md:hidden transition-colors duration-700 ease-in-out ${
-        stage === 2 ? "bg-white/0 dark:bg-zinc-950/0 pointer-events-none" : "bg-white dark:bg-zinc-950 pointer-events-auto"
+      className={`fixed inset-0 z-[100] flex flex-col md:hidden transition-colors duration-[400ms] ease-in-out ${
+        stage >= 3 ? "bg-white/0 dark:bg-zinc-950/0 pointer-events-none" : "bg-white dark:bg-zinc-950 pointer-events-auto"
       }`}
     >
       <div 
@@ -47,6 +52,8 @@ export default function MobileLoader() {
             ? "top-1/2 -translate-y-1/2 opacity-100 scale-90 blur-[2px]" 
             : stage === 1 
             ? "top-1/2 -translate-y-1/2 opacity-100 scale-[1.15] blur-0" 
+            : stage === 2 
+            ? "top-[30px] -translate-y-1/2 opacity-100 scale-[0.54] blur-0"
             : "top-[30px] -translate-y-1/2 opacity-0 scale-[0.54] blur-0" 
         }`}
       >
