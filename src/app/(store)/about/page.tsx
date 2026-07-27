@@ -12,22 +12,36 @@ export default function AboutPage() {
     <div className="bg-white dark:bg-zinc-950">
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-zinc-900">
-        <Image
-          src="/hero-banner.png"
-          alt="OFF-REP Athletes"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+        {/* Desktop Image */}
+        <div className="hidden md:block absolute inset-0">
+          <Image
+            src="/about main desk.png"
+            alt="OFF-REP Athletes Desktop"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+        {/* Mobile Image */}
+        <div className="block md:hidden absolute inset-0">
+          <Image
+            src="/ABOUT-mobile.png"
+            alt="OFF-REP Athletes Mobile"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-white">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-white drop-shadow-xl">
             Redefining <br className="md:hidden" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 to-zinc-500">The Standards</span>
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-zinc-300 font-medium tracking-wide max-w-2xl mx-auto">
+          <p className="mt-6 text-lg md:text-xl text-zinc-200 font-medium tracking-wide max-w-2xl mx-auto drop-shadow-md">
             Built for the modern athlete. Designed to transition seamlessly from the squat rack to the streets.
           </p>
         </div>
@@ -108,27 +122,18 @@ export default function AboutPage() {
       </section>
 
       {/* Quote Section */}
-      <section className="relative py-32 px-4 flex flex-col items-center justify-center overflow-hidden bg-black text-center">
-        {/* Subtle background image for the quote section */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <Image
-            src="/hero-banner.png"
-            alt="Background Texture"
-            fill
-            className="object-cover grayscale"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
-        
-        <div className="relative z-10 max-w-4xl mx-auto space-y-8">
-          <svg className="mx-auto h-12 w-12 text-zinc-600 mb-8 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+      <section className="relative py-32 px-4 flex flex-col items-center justify-center overflow-hidden bg-zinc-950 text-center border-t border-zinc-900">
+        <div className="relative z-10 max-w-4xl mx-auto space-y-10">
+          <svg className="mx-auto h-16 w-16 text-zinc-800" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
           </svg>
-          <blockquote className="text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase italic tracking-tighter text-white leading-tight">
-            "The real growth happens when you push past the prescribed limits. Don't just count the reps. <br className="hidden md:block" /> Go <span className="text-zinc-500">OFF-REP</span>."
+          
+          <blockquote className="text-3xl md:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter text-white leading-[1.1] drop-shadow-2xl">
+            "The real growth happens when you push past the prescribed limits.<br className="hidden md:block" /> Don't just count the reps. <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600">Go OFF-REP.</span>"
           </blockquote>
+          
           <div className="pt-8">
-            <div className="w-16 h-1 bg-white mx-auto" />
+            <div className="w-24 h-1.5 bg-zinc-800 mx-auto rounded-full" />
           </div>
         </div>
       </section>
