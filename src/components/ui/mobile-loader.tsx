@@ -49,12 +49,12 @@ export default function MobileLoader() {
       <div 
         className={`absolute left-1/2 -translate-x-1/2 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
           stage === 0 
-            ? "top-1/2 -translate-y-1/2 opacity-100 scale-90 blur-[2px]" 
+            ? "top-1/2 -translate-y-1/2 opacity-100 scale-100 blur-[2px]" 
             : stage === 1 
-            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[1.15] blur-0" 
+            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[1.25] blur-0" 
             : stage === 2 
-            ? "top-[30px] -translate-y-1/2 opacity-100 scale-[0.54] blur-0"
-            : "top-[30px] -translate-y-1/2 opacity-0 scale-[0.54] blur-0" 
+            ? "top-[36px] -translate-y-1/2 opacity-100 scale-100 blur-0"
+            : "top-[36px] -translate-y-1/2 opacity-0 scale-100 blur-0" 
         }`}
       >
         {/* On stage 2, opacity goes to 0 as it hits the top because the real navbar logo is underneath it. It creates a seamless handoff. */}
