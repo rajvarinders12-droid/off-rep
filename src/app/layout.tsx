@@ -15,6 +15,7 @@ const inter = Inter({
 });
 
 import { CartProvider } from "@/context/cart-context";
+import MobileLoader from "@/components/ui/mobile-loader";
 
 export const metadata: Metadata = {
   title: "Aesthetic E-commerce Store",
@@ -32,6 +33,7 @@ export default function RootLayout({
       className={`${eurostile.variable} ${inter.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <MobileLoader />
         <CartProvider>{children}</CartProvider>
       </body>
     </html>
