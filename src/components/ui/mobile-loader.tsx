@@ -48,22 +48,32 @@ export default function MobileLoader() {
   if (stage === 4) return null;
 
   return (
-    <div 
-      className={`fixed inset-0 z-[100] flex flex-col md:hidden transition-colors duration-[400ms] ease-in-out ${
-        stage >= 3 ? "bg-white/0 dark:bg-zinc-950/0 pointer-events-none" : "bg-white dark:bg-zinc-950 pointer-events-auto"
-      }`}
-    >
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            if (sessionStorage.getItem("hasLoadedSplash")) {
+              document.documentElement.classList.add("skip-splash");
+            }
+          `,
+        }}
+      />
       <div 
-        className={`absolute left-1/2 -translate-x-1/2 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
-          stage === 0 
-            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2] blur-[2px]" 
-            : stage === 1 
-            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2.5] blur-0" 
-            : stage === 2 
-            ? "top-[36px] -translate-y-1/2 opacity-100 scale-100 blur-0"
-            : "top-[36px] -translate-y-1/2 opacity-0 scale-100 blur-0" 
+        className={`fixed inset-0 z-[100] flex flex-col md:hidden transition-colors duration-[400ms] ease-in-out [.skip-splash_&]:!hidden ${
+          stage >= 3 ? "bg-white/0 dark:bg-zinc-950/0 pointer-events-none" : "bg-white dark:bg-zinc-950 pointer-events-auto"
         }`}
       >
+        <div 
+          className={`absolute left-1/2 -translate-x-1/2 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
+            stage === 0 
+              ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2] blur-[2px]" 
+              : stage === 1 
+              ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2.5] blur-0" 
+              : stage === 2 
+              ? "top-[36px] -translate-y-1/2 opacity-100 scale-100 blur-0"
+              : "top-[36px] -translate-y-1/2 opacity-100 scale-100 blur-0" 
+          }`}
+        >
         <Image
           src="/logo.png"
           alt="OFF-REP Logo"
@@ -74,5 +84,6 @@ export default function MobileLoader() {
         />
       </div>
     </div>
+    </>
   );
 }
