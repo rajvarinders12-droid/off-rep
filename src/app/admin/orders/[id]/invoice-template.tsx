@@ -12,8 +12,6 @@ export default function InvoiceTemplate({ order }: { order: any }) {
         <div>
           <h2 className="font-bold text-lg mb-2">Sold By :</h2>
           <p className="font-bold">OFF-REP</p>
-          <p>Sector 17, Chandigarh</p>
-          <p>India, 160017</p>
           <div className="mt-4">
             <p><span className="font-bold">Order Number:</span> {order.id}</p>
             <p><span className="font-bold">Order Date:</span> {new Date(order.createdAt).toLocaleDateString("en-IN")}</p>

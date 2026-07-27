@@ -84,7 +84,7 @@ export default function NavSidebar({ isOpen, onClose }: NavSidebarProps) {
 
           {/* Nav Links */}
           <div className="flex-1 overflow-y-auto px-8 py-12">
-            <nav className="flex flex-col gap-8">
+            <nav className="flex flex-col gap-6">
               {links.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
@@ -97,11 +97,11 @@ export default function NavSidebar({ isOpen, onClose }: NavSidebarProps) {
                       isOpen ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
                     }`}
                   >
-                    <div className="flex items-center gap-6">
-                      <div className={`p-3 rounded-2xl transition-colors duration-300 ${isActive ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900' : 'bg-zinc-50 text-zinc-400 group-hover:bg-zinc-100 group-hover:text-zinc-900 dark:bg-zinc-900/50 dark:group-hover:bg-zinc-800 dark:group-hover:text-white'}`}>
-                        <link.icon className="h-6 w-6" strokeWidth={2.5} />
+                    <div className="flex items-center gap-5">
+                      <div className={`p-2.5 rounded-xl transition-colors duration-300 ${isActive ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900' : 'bg-zinc-50 text-zinc-400 group-hover:bg-zinc-100 group-hover:text-zinc-900 dark:bg-zinc-900/50 dark:group-hover:bg-zinc-800 dark:group-hover:text-white'}`}>
+                        <link.icon className="h-5 w-5" strokeWidth={2.5} />
                       </div>
-                      <span className={`text-3xl font-black uppercase tracking-tighter transition-colors duration-300 ${
+                      <span className={`text-2xl font-black uppercase tracking-tighter transition-colors duration-300 ${
                         isActive 
                           ? "text-zinc-900 dark:text-white" 
                           : "text-zinc-400 group-hover:text-zinc-900 dark:text-zinc-500 dark:group-hover:text-white"
