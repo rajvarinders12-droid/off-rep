@@ -100,10 +100,10 @@ export default async function StorePage() {
               <div className="mt-4">
                 <Link 
                   href="/shop" 
-                  className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-10 py-5 text-sm font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:bg-black transition-all hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(0,0,0,0.4)]"
+                  className="group inline-flex items-center gap-3 bg-zinc-900 text-white px-6 py-3 text-xs font-black uppercase tracking-[0.25em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:bg-black transition-all hover:-translate-y-1 hover:shadow-[0_25px_50px_rgba(0,0,0,0.4)]"
                 >
                   Shop All
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
                 </Link>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default async function StorePage() {
               </div>
 
               {/* Translucent UI Box 2 */}
-              <div className="absolute bottom-[20%] right-[15%] w-32 h-40 backdrop-blur-md bg-white/5 border border-white/20 rounded-lg shadow-2xl z-30 pointer-events-none flex flex-col justify-end p-4">
+              <div className="absolute bottom-[20%] right-[15%] w-20 h-28 backdrop-blur-md bg-white/5 border border-white/20 rounded-lg shadow-2xl z-30 pointer-events-none flex flex-col justify-end p-3">
                  <div className="w-full h-[1px] bg-white/30 mb-2"></div>
                  <div className="w-full h-[1px] bg-white/30"></div>
               </div>
