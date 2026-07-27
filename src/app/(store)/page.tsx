@@ -86,7 +86,7 @@ export default async function StorePage() {
               </div>
 
               {/* Huge Text */}
-              <h1 className="text-[5rem] xl:text-[7rem] leading-[0.9] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-xl">
+              <h1 className="text-5xl lg:text-6xl xl:text-[5.5rem] leading-[1.0] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-xl mt-4">
                 Built In <br/> Silence. <br/> <span className="text-zinc-500">Reps Speak.</span>
               </h1>
               
@@ -128,7 +128,7 @@ export default async function StorePage() {
               {/* Standing Model (Back) */}
               <div className="absolute right-[0%] bottom-[-5%] w-[55%] h-[115%] z-10 pointer-events-none">
                 <Image 
-                  src="/hero-model-back.png" 
+                  src="/h1.png" 
                   alt="Model Standing" 
                   fill 
                   className="object-contain object-bottom drop-shadow-2xl" 
