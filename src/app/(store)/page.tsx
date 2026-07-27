@@ -49,16 +49,106 @@ export default async function StorePage() {
           />
         </div>
 
-        {/* ======================= DESKTOP LAYOUT (Poster Image) ======================= */}
-        <div className="hidden lg:block w-full h-full relative z-10 overflow-hidden bg-white">
-          <Image 
-            src="/Design.png" 
-            alt="OFFREP Desktop Poster" 
-            fill
-            sizes="100vw"
-            className="object-cover object-top"
-            priority 
-          />
+        {/* ======================= DESKTOP LAYOUT (Coded Poster) ======================= */}
+        <div className="hidden lg:block w-full h-full relative z-10 overflow-hidden bg-[#e6e6e6]">
+          {/* Background Grid & Atmosphere */}
+          <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#e6e6e6_100%)]" />
+          
+          {/* Crosshairs */}
+          <div className="absolute top-8 left-8 text-zinc-400 font-light pointer-events-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M2 12h20"/></svg>
+          </div>
+          <div className="absolute top-8 right-8 text-zinc-400 font-light pointer-events-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M2 12h20"/></svg>
+          </div>
+          <div className="absolute bottom-8 left-8 text-zinc-400 font-light pointer-events-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M2 12h20"/></svg>
+          </div>
+          <div className="absolute bottom-8 right-8 text-zinc-400 font-light pointer-events-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M2 12h20"/></svg>
+          </div>
+
+          <div className="relative w-full h-full max-w-[1920px] mx-auto flex items-center">
+            
+            {/* Left Side: Typography */}
+            <div className="w-[50%] h-full flex flex-col justify-center pl-16 xl:pl-32 z-20">
+              
+              {/* Metallic Logo */}
+              <div className="relative w-[300px] h-[80px] xl:w-[400px] xl:h-[100px] mb-8 -ml-4">
+                <Image 
+                  src="/metallic.png" 
+                  alt="OFF-REP" 
+                  fill 
+                  className="object-contain object-left drop-shadow-2xl" 
+                  priority 
+                />
+              </div>
+
+              {/* Huge Text */}
+              <h1 className="text-[5rem] xl:text-[7rem] leading-[0.9] font-black uppercase tracking-tighter text-zinc-900 drop-shadow-xl">
+                Built In <br/> Silence. <br/> <span className="text-zinc-500">Reps Speak.</span>
+              </h1>
+              
+              <div className="flex items-center gap-6 mt-12 mb-8">
+                <div className="h-[1px] w-24 bg-zinc-400"></div>
+                <p className="text-sm xl:text-base font-bold text-zinc-600 uppercase tracking-[0.3em] drop-shadow-md">
+                  Premium Engineered Sportswear
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <Link 
+                  href="/shop" 
+                  className="group inline-flex items-center gap-4 bg-zinc-900 text-white px-8 py-4 text-xs font-black uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:bg-black transition-all hover:scale-105"
+                >
+                  Shop The Collection
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Side: Athletes */}
+            <div className="absolute right-0 top-0 bottom-0 w-[55%] h-full z-10 flex items-center justify-center">
+              
+              {/* Glowing Background Ring */}
+              <div className="absolute top-1/2 left-[45%] -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[60vh] rounded-full border border-white/40 bg-white/20 shadow-[0_0_100px_40px_rgba(255,255,255,0.8)] backdrop-blur-3xl pointer-events-none"></div>
+              
+              {/* Translucent UI Box 1 */}
+              <div className="absolute top-[30%] left-[20%] w-24 h-32 backdrop-blur-md bg-white/5 border border-white/20 rounded-lg shadow-2xl z-20 pointer-events-none flex items-end p-3">
+                <span className="text-[10px] text-zinc-500 font-mono">76</span>
+              </div>
+
+              {/* Translucent UI Box 2 */}
+              <div className="absolute bottom-[20%] right-[15%] w-32 h-40 backdrop-blur-md bg-white/5 border border-white/20 rounded-lg shadow-2xl z-30 pointer-events-none flex flex-col justify-end p-4">
+                 <div className="w-full h-[1px] bg-white/30 mb-2"></div>
+                 <div className="w-full h-[1px] bg-white/30"></div>
+              </div>
+
+              {/* Standing Model (Back) */}
+              <div className="absolute right-[0%] bottom-[-5%] w-[55%] h-[115%] z-10 pointer-events-none">
+                <Image 
+                  src="/hero-model-back.png" 
+                  alt="Model Standing" 
+                  fill 
+                  className="object-contain object-bottom drop-shadow-2xl" 
+                  priority 
+                />
+              </div>
+
+              {/* Seated Model */}
+              <div className="absolute left-[-15%] bottom-[-5%] w-[65%] h-[110%] z-20 pointer-events-none">
+                <Image 
+                  src="/hero-model-seated.png" 
+                  alt="Model Seated" 
+                  fill 
+                  className="object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.5)]" 
+                  priority 
+                />
+              </div>
+
+            </div>
+          </div>
         </div>
 
         {/* ======================= MOBILE LAYOUT (Coded Asymmetrical) ======================= */}
