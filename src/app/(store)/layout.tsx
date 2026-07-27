@@ -104,9 +104,9 @@ export default async function StoreLayout({
                   </span>
                 </li>
                 <li>
-                  <span className="text-sm text-zinc-500 dark:text-zinc-400 cursor-not-allowed">
+                  <Link href="/faq" className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">
                     FAQs
-                  </span>
+                  </Link>
                 </li>
               </ul>
             </div>

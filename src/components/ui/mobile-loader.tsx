@@ -7,6 +7,12 @@ export default function MobileLoader() {
   const [stage, setStage] = useState(0);
 
   useEffect(() => {
+    // Only animate once per session
+    if (sessionStorage.getItem("hasLoadedSplash")) {
+      setStage(4);
+      return;
+    }
+
     // Disable scrolling while loader is active
     document.body.style.overflow = "hidden";
 
@@ -26,6 +32,7 @@ export default function MobileLoader() {
     // Stage 4: Unmount component completely
     const t4 = setTimeout(() => {
       setStage(4);
+      sessionStorage.setItem("hasLoadedSplash", "true");
       document.body.style.overflow = "";
     }, 2200);
 
@@ -49,21 +56,20 @@ export default function MobileLoader() {
       <div 
         className={`absolute left-1/2 -translate-x-1/2 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
           stage === 0 
-            ? "top-1/2 -translate-y-1/2 opacity-100 scale-100 blur-[2px]" 
+            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2] blur-[2px]" 
             : stage === 1 
-            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[1.25] blur-0" 
+            ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2.5] blur-0" 
             : stage === 2 
             ? "top-[36px] -translate-y-1/2 opacity-100 scale-100 blur-0"
             : "top-[36px] -translate-y-1/2 opacity-0 scale-100 blur-0" 
         }`}
       >
-        {/* On stage 2, opacity goes to 0 as it hits the top because the real navbar logo is underneath it. It creates a seamless handoff. */}
         <Image
           src="/logo.png"
           alt="OFF-REP Logo"
-          width={120}
-          height={50}
-          className="h-auto w-[120px] dark:invert"
+          width={200}
+          height={80}
+          className="h-12 w-auto object-contain dark:invert"
           priority
         />
       </div>
