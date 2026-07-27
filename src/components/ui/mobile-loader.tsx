@@ -66,7 +66,7 @@ export default function MobileLoader() {
         <div 
           className={`absolute left-1/2 -translate-x-1/2 transition-all duration-[800ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
             stage === 0 
-              ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2] blur-[2px]" 
+              ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2] blur-0" 
               : stage === 1 
               ? "top-1/2 -translate-y-1/2 opacity-100 scale-[2.5] blur-0" 
               : stage === 2 
