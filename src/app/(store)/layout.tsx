@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/ui/navbar";
-import { createClient } from "@/utils/supabase/server";
 
 const FacebookIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -18,21 +17,16 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export default async function StoreLayout({
+export default function StoreLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   return (
     <div className="flex min-h-screen flex-col">
 
       {/* Main Navbar */}
-      <Navbar user={user} />
+      <Navbar />
 
       {/* Page Content */}
       <main className="flex-1">{children}</main>

@@ -7,15 +7,23 @@ import { Search, User } from "lucide-react";
 import NavbarCart from "@/app/(store)/navbar-cart";
 import NavSidebar from "./nav-sidebar";
 import SearchModal from "./search-modal";
+import { createClient } from "@/utils/supabase/client";
 
-interface NavbarProps {
-  user: any;
-}
-
-export default function Navbar({ user }: NavbarProps) {
+export default function Navbar() {
+  const [user, setUser] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Fetch user client-side so layout can be static
+  useEffect(() => {
+    const fetchUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    fetchUser();
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
