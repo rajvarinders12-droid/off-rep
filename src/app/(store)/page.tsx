@@ -249,31 +249,32 @@ export default async function StorePage() {
                 <Link
                   key={category.id}
                   href={`/shop?category=${category.slug}`}
-                  className="w-[calc(50%-0.375rem)] lg:w-[calc(33.333%-1rem)] group relative flex aspect-[3/4] sm:aspect-[4/5] lg:aspect-auto lg:h-[420px] flex-col justify-end overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 transition-all hover:-translate-y-2 hover:shadow-2xl"
+                  className="w-[calc(50%-0.375rem)] sm:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] group relative flex min-h-[140px] sm:min-h-[180px] flex-col justify-end overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 p-3 sm:p-4 transition-all hover:-translate-y-1 hover:border-zinc-700 hover:shadow-2xl hover:shadow-zinc-800/50"
                 >
-                  {/* Model Image - Using h1.png (transparent) as requested */}
-                  <div className="absolute inset-0 pt-6 px-2 sm:pt-10 sm:px-6 transition-transform duration-700 group-hover:scale-110 pointer-events-none">
+                  <div className="absolute inset-0 pt-2 pr-[-10%] pl-[40%] sm:pt-4 sm:pr-2 sm:pl-[40%] opacity-90 transition-all duration-700 group-hover:opacity-100 group-hover:scale-110 pointer-events-none">
                     <Image
                       src="/h1.png"
                       alt={category.name || ""}
                       fill
-                      sizes="(max-width: 768px) 50vw, 33vw"
-                      className="object-contain object-bottom drop-shadow-2xl"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      className="object-contain object-bottom sm:object-right-bottom drop-shadow-2xl"
                     />
                   </div>
+
+                  {/* Text readability gradients */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent opacity-90 transition-opacity pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/50 to-transparent opacity-80 pointer-events-none" />
                   
-                  {/* Subtle Gradient Overlay for Text */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
-                  
-                  <div className="relative p-4 sm:p-8 z-10 w-full text-center">
-                    <h3 className="text-sm sm:text-xl font-black uppercase tracking-tight text-white transition-colors">
+                  <div className="relative pr-2 sm:pr-8 z-10 w-full sm:w-[85%]">
+                    <h3 className="text-[0.7rem] sm:text-[0.95rem] font-black leading-tight text-white transition-colors">
                       {category.name}
                     </h3>
-                    <p className="mt-1.5 sm:mt-2 text-[9px] sm:text-xs font-bold text-zinc-400 uppercase tracking-widest">
+                    <p className="mt-1 sm:mt-1.5 text-[0.55rem] sm:text-xs font-semibold text-zinc-400">
                       {category._count.products}{" "}
                       {category._count.products === 1 ? "product" : "products"}
                     </p>
                   </div>
+                  <ArrowRight className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 h-3 w-3 sm:h-4 sm:w-4 text-zinc-500 transition-all group-hover:translate-x-1 group-hover:text-white z-10" />
                 </Link>
               ))}
             </div>
