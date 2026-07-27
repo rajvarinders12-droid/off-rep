@@ -75,12 +75,12 @@ export default async function StorePage() {
             <div className="w-[50%] h-full flex flex-col justify-center pl-16 xl:pl-32 z-20">
               
               {/* Metallic Logo */}
-              <div className="relative w-[400px] h-[120px] xl:w-[600px] xl:h-[160px] mb-6 -ml-4">
+              <div className="relative w-[450px] h-[140px] xl:w-[650px] xl:h-[180px] mb-4">
                 <Image 
                   src="/metallic.png" 
                   alt="OFF-REP" 
                   fill 
-                  className="object-contain object-left drop-shadow-2xl scale-125" 
+                  className="object-contain object-left drop-shadow-2xl" 
                   priority 
                 />
               </div>
@@ -126,7 +126,7 @@ export default async function StorePage() {
               </div>
 
               {/* Standing Model (Back) */}
-              <div className="absolute right-[2%] bottom-0 w-[40%] h-[95%] z-10 pointer-events-none">
+              <div className="absolute right-[8%] bottom-0 w-[45%] h-[105%] z-10 pointer-events-none">
                 <Image 
                   src="/h1.png" 
                   alt="Model Standing" 
@@ -137,7 +137,7 @@ export default async function StorePage() {
               </div>
 
               {/* Seated Model */}
-              <div className="absolute left-[0%] bottom-[0%] w-[50%] h-[90%] z-20 pointer-events-none">
+              <div className="absolute left-[0%] bottom-[0%] w-[55%] h-[95%] z-20 pointer-events-none">
                 <Image 
                   src="/hero-model-seated.png" 
                   alt="Model Seated" 
