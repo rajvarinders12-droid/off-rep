@@ -52,11 +52,11 @@ export default async function StorePage() {
         {/* ======================= DESKTOP LAYOUT (Poster Image) ======================= */}
         <div className="hidden lg:block w-full h-full relative z-10 overflow-hidden bg-white">
           <Image 
-            src="/generated-poster.jpg" 
+            src="/Design.png" 
             alt="OFFREP Desktop Poster" 
             fill 
             sizes="100vw"
-            className="object-contain object-center" 
+            className="object-cover object-center w-full h-full" 
             priority 
           />
         </div>
