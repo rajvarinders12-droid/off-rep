@@ -175,14 +175,14 @@ export default async function StorePage() {
               Built In <br/> Silence. <br/> <span className="text-zinc-500">Reps Speak.</span>
             </h1>
             
-            <p className="mt-3 text-[0.6rem] sm:text-xs font-bold text-zinc-600 uppercase tracking-[0.2em] drop-shadow-sm">
+            <p className="mt-2 text-[0.6rem] sm:text-xs font-bold text-zinc-600 uppercase tracking-[0.2em] drop-shadow-sm">
               Premium Engineered Sportswear
             </p>
             
-            <div className="mt-4">
+            <div className="mt-3 relative z-40">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 text-[10px] font-black uppercase tracking-[0.2em] shadow-lg active:scale-95"
+                className="inline-flex items-center gap-2 bg-zinc-900 text-white px-5 py-2.5 text-[9px] font-black uppercase tracking-[0.2em] shadow-lg active:scale-95 transition-transform"
               >
                 Shop All
                 <ArrowRight className="h-3 w-3" />
