@@ -182,7 +182,7 @@ export default async function StorePage() {
             <div className="mt-3 relative z-40">
               <Link 
                 href="/shop" 
-                className="inline-flex items-center gap-2 bg-zinc-900 text-white px-5 py-2.5 text-[9px] font-black uppercase tracking-[0.2em] shadow-lg active:scale-95 transition-transform"
+                className="inline-flex items-center gap-2 bg-zinc-900 text-white px-4 py-2.5 text-[9px] font-black uppercase tracking-[0.2em] shadow-lg active:scale-95 transition-transform"
               >
                 Shop All
                 <ArrowRight className="h-3 w-3" />
